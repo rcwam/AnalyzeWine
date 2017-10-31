@@ -22,11 +22,13 @@
 
   <ItemGroup>
     <None Remove="ClientApp\components\BlindTasting.tsx" />
+    <None Remove="ClientApp\components\eye\WineType.tsx" />
     <None Remove="ClientApp\store\Blind.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\components\BlindTasting.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\eye\WineType.tsx" />
     <TypeScriptCompile Include="ClientApp\store\Blind.ts" />
   </ItemGroup>
 

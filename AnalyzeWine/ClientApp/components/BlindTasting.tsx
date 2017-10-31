@@ -18,10 +18,15 @@ class Blind extends React.Component<BlindProps, {}> {
 
                    <p>Current count: <strong>{this.props.notes.eye.wineType}</strong></p>
 
-                   <button onClick={() => { this.props.white() }}>Increment</button>
+                   <button onClick={() => { this.props.setWineType("Rose") }}>Increment</button>
                </div>;
     }
 }
+
+
+
+
+
 
 // Wire up the React component to the Redux store
 export default connect(

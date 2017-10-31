@@ -24,7 +24,7 @@ var Blind = (function (_super) {
             React.createElement("p", null,
                 "Current count: ",
                 React.createElement("strong", null, this.props.notes.eye.wineType)),
-            React.createElement("button", { onClick: function () { _this.props.white(); } }, "Increment"));
+            React.createElement("button", { onClick: function () { _this.props.setWineType("Rose"); } }, "Increment"));
     };
     return Blind;
 }(React.Component));
