@@ -10,7 +10,23 @@ type BlindProps =
     & RouteComponentProps<{}>;
 
 class Blind extends React.Component<BlindProps, {}> {
+    constructor() {
+        super();
+        this.changeWineType = this.changeWineType.bind(this);
+
+    }
+
+    changeWineType(e: any) {
+        const selectValue = e.target.value;
+        alert("I got a " + selectValue);
+          this.props.setWineType(selectValue);
+    }
+
     public render() {
+
+
+
+
         return <div>
                    <h1>Counter</h1>
 
@@ -19,7 +35,30 @@ class Blind extends React.Component<BlindProps, {}> {
                    <p>Current count: <strong>{this.props.notes.eye.wineType}</strong></p>
 
                    <button onClick={() => { this.props.setWineType("Rose") }}>Increment</button>
+
+            {this.selectTypeList()}
+
+                <p>What type of wine are you analyzing? </p>
+                <select name="WineTypeSelector" value={this.props.notes.eye.wineType}  onChange={this.changeWineType}>
+                    <option value="Red">Red</option>
+                    <option value="White">White</option>
+                    <option value="Rose">Rose</option>
+                </select>
+
+
+
                </div>;
+    }
+
+    selectTypeList() {
+        return (
+
+            <select name="WineTypeSelector" value={this.props.notes.eye.wineType}  onChange={this.changeWineType}>
+                <option value="Red">Red</option>
+                <option value="White">White</option>
+                <option value="Rose">Rose</option>
+            </select>
+        );
     }
 }
 

@@ -14,8 +14,15 @@ import * as BlindStore from '../store/Blind';
 var Blind = (function (_super) {
     __extends(Blind, _super);
     function Blind() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this) || this;
+        _this.changeWineType = _this.changeWineType.bind(_this);
+        return _this;
     }
+    Blind.prototype.changeWineType = function (e) {
+        var selectValue = e.target.value;
+        alert("I got a " + selectValue);
+        this.props.setWineType(selectValue);
+    };
     Blind.prototype.render = function () {
         var _this = this;
         return React.createElement("div", null,
@@ -24,7 +31,19 @@ var Blind = (function (_super) {
             React.createElement("p", null,
                 "Current count: ",
                 React.createElement("strong", null, this.props.notes.eye.wineType)),
-            React.createElement("button", { onClick: function () { _this.props.setWineType("Rose"); } }, "Increment"));
+            React.createElement("button", { onClick: function () { _this.props.setWineType("Rose"); } }, "Increment"),
+            this.selectTypeList(),
+            React.createElement("p", null, "What type of wine are you analyzing? "),
+            React.createElement("select", { name: "WineTypeSelector", value: this.props.notes.eye.wineType, onChange: this.changeWineType },
+                React.createElement("option", { value: "Red" }, "Red"),
+                React.createElement("option", { value: "White" }, "White"),
+                React.createElement("option", { value: "Rose" }, "Rose")));
+    };
+    Blind.prototype.selectTypeList = function () {
+        return (React.createElement("select", { name: "WineTypeSelector", value: this.props.notes.eye.wineType, onChange: this.changeWineType },
+            React.createElement("option", { value: "Red" }, "Red"),
+            React.createElement("option", { value: "White" }, "White"),
+            React.createElement("option", { value: "Rose" }, "Rose")));
     };
     return Blind;
 }(React.Component));
