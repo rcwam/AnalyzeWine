@@ -16,13 +16,11 @@ var Blind = (function (_super) {
     function Blind() {
         var _this = _super.call(this) || this;
         _this.changeWineType = _this.changeWineType.bind(_this);
+        _this.changeColor = _this.changeColor.bind(_this);
         return _this;
     }
-    Blind.prototype.changeWineType = function (e) {
-        var selectValue = e.target.value;
-        alert("I got a " + selectValue);
-        this.props.setWineType(selectValue);
-    };
+    Blind.prototype.changeWineType = function (e) { this.props.setWineType(e.target.value); };
+    Blind.prototype.changeColor = function (e) { this.props.setColor(e.target.value); };
     Blind.prototype.render = function () {
         var _this = this;
         return React.createElement("div", null,
@@ -33,11 +31,7 @@ var Blind = (function (_super) {
                 React.createElement("strong", null, this.props.notes.eye.wineType)),
             React.createElement("button", { onClick: function () { _this.props.setWineType("Rose"); } }, "Increment"),
             this.selectTypeList(),
-            React.createElement("p", null, "What type of wine are you analyzing? "),
-            React.createElement("select", { name: "WineTypeSelector", value: this.props.notes.eye.wineType, onChange: this.changeWineType },
-                React.createElement("option", { value: "Red" }, "Red"),
-                React.createElement("option", { value: "White" }, "White"),
-                React.createElement("option", { value: "Rose" }, "Rose")));
+            this.pickList(this.props.notes.eye.wineType));
     };
     Blind.prototype.selectTypeList = function () {
         return (React.createElement("select", { name: "WineTypeSelector", value: this.props.notes.eye.wineType, onChange: this.changeWineType },
@@ -45,10 +39,43 @@ var Blind = (function (_super) {
             React.createElement("option", { value: "White" }, "White"),
             React.createElement("option", { value: "Rose" }, "Rose")));
     };
+    Blind.prototype.pickList = function (thisWineType) {
+        switch (thisWineType) {
+            case "Red":
+                return this.redColorList();
+            case "White":
+                return this.whiteColorList();
+            case "Rose":
+                return this.roseColorList();
+            default:
+                return this.redColorList();
+        }
+    };
+    Blind.prototype.redColorList = function () {
+        return (React.createElement("select", { value: this.props.notes.eye.color, onChange: this.changeColor },
+            React.createElement("option", { value: "Purple" }, "Purple"),
+            React.createElement("option", { value: "Ruby" }, "Ruby"),
+            React.createElement("option", { value: "Red" }, "Red"),
+            React.createElement("option", { value: "Garnet" }, "Garnet"),
+            React.createElement("option", { value: "Brick" }, "Brick"),
+            React.createElement("option", { value: "Brown" }, "Brown")));
+    };
+    Blind.prototype.whiteColorList = function () {
+        return (React.createElement("select", { value: this.props.notes.eye.color, onChange: this.changeColor },
+            React.createElement("option", { value: "Greenish" }, "Greenish"),
+            React.createElement("option", { value: "Yellow" }, "Yellow"),
+            React.createElement("option", { value: "Straw" }, "Straw"),
+            React.createElement("option", { value: "Golden" }, "Golden"),
+            React.createElement("option", { value: "Amber" }, "Amber")));
+    };
+    Blind.prototype.roseColorList = function () {
+        return (React.createElement("select", { value: this.props.notes.eye.color, onChange: this.changeColor },
+            React.createElement("option", { value: "Pink" }, "Pink"),
+            React.createElement("option", { value: "Salmon" }, "Salmon"),
+            React.createElement("option", { value: "Orange" }, "Orange"),
+            React.createElement("option", { value: "Copper" }, "Copper")));
+    };
     return Blind;
 }(React.Component));
-// Wire up the React component to the Redux store
-export default connect(function (state) { return state.blind; }, // Selects which state properties are merged into the component's props
-BlindStore.actionCreators // Selects which action creators are merged into the component's props
-)(Blind);
+export default connect(function (state) { return state.blind; }, BlindStore.actionCreators)(Blind);
 //# sourceMappingURL=BlindTasting.js.map
