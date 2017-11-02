@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as BlindStore from '../store/Blind';
 
+
 type BlindProps =
     BlindStore.BlindTastingState
     & typeof BlindStore.actionCreators
@@ -14,18 +15,16 @@ class Blind extends React.Component<BlindProps, {}> {
         this.props.setWineType(e.target.value);
     }
 
+    // Change Sight State
     changeColor(e: any) {
         this.props.setColor(e.target.value);
     }
-
     changeDepth(e: any) {
         this.props.setDepth(e.target.value);
     }
-
     changeClarity(e: any) {
         this.props.setClarity(e.target.value);
     }
-
     changeSediment(e: any) {
         this.props.setSediment(e.target.value);
     }
@@ -36,39 +35,113 @@ class Blind extends React.Component<BlindProps, {}> {
         this.props.setCarbonation(e.target.value);
     }
 
+    // Change Smell State
+    changeSmellIntensity(e: any) {
+        this.props.setSmellIntensity(e.target.value);
+    }
+    changeSmellComplexity(e: any) {
+        this.props.setSmellComplexity(e.target.value);
+    }
+    changeSmellAlcohol(e: any) {
+        this.props.setSmellAlcohol(e.target.value);
+    }
+
+    // Change Taste State
+    changeTasteIntensity(e: any) {
+        this.props.setTasteIntensity(e.target.value);
+    }
+    changeTasteComplexity(e: any) {
+        this.props.setTasteComplexity(e.target.value);
+    }
+    changeBody(e: any) {
+        this.props.setBody(e.target.value);
+    }
+    changeSweetness(e: any) {
+        this.props.setSweetness(e.target.value);
+    }
+    changeAcidity(e: any) {
+        this.props.setAcidity(e.target.value);
+    }
+    changeTannins(e: any) {
+        this.props.setTannins(e.target.value);
+    }
+    changeTasteAlcohol(e: any) {
+        this.props.setTasteAlcohol(e.target.value);
+    }
+    changeFinish(e: any) {
+        this.props.setFinish(e.target.value);
+    }
+
+
+
     constructor() {
         super();
         this.changeWineType = this.changeWineType.bind(this);
+
+        // Sight Constructors
         this.changeColor = this.changeColor.bind(this);
         this.changeDepth = this.changeDepth.bind(this);
         this.changeClarity = this.changeClarity.bind(this);
         this.changeSediment = this.changeSediment.bind(this);
         this.changeViscosity = this.changeViscosity.bind(this);
         this.changeCarbonation = this.changeCarbonation.bind(this);
+
+        // Smell Constructors
+        this.changeSmellIntensity = this.changeSmellIntensity.bind(this);
+        this.changeSmellComplexity = this.changeSmellComplexity.bind(this);
+        this.changeSmellAlcohol = this.changeSmellAlcohol.bind(this);
+
+        // Taste Constructors
+        this.changeTasteIntensity = this.changeTasteIntensity.bind(this);
+        this.changeTasteComplexity = this.changeTasteComplexity.bind(this);
+        this.changeBody = this.changeBody.bind(this);
+        this.changeSweetness = this.changeSweetness.bind(this);
+        this.changeAcidity = this.changeAcidity.bind(this);
+        this.changeTannins = this.changeTannins.bind(this);
+        this.changeTasteAlcohol = this.changeTasteAlcohol.bind(this);
+        this.changeFinish = this.changeFinish.bind(this);
     }
 
 
     public render() {
         return <div>
-            <h1>Counter</h1>
-
-            <p>This is a simple example of a React component.</p>
-
-            <p>Current count: <strong>{this.props.notes.eye.wineType}</strong></p>
-
-            <button onClick={() => {
-                this.props.setWineType("Rose")
-            }}>Increment
-            </button>
-
-
+            <h3>Choose Type</h3>
             <p>What type of wine are you analyzing? {this.selectTypeList()} </p>
+
+            <h3>Analyze by Sight</h3>
             <p>What color is the wine? {this.pickColorList(this.props.notes.eye.wineType)}</p>
             <p>How deep is the wine's color (rim)? {this.selectDepth()}</p>
             <p>How clear is the wine? {this.selectClarity()}</p>
             <p>Does the wine have sediment? {this.selectSediment()}</p>
             <p>How viscose is the wine (legs)? {this.selectViscosity()}</p>
             <p>Is the wine carbonated (bubble size, effervescence)? {this.selectCarbonation()}</p>
+
+            <h3>Analyze by Smell</h3>
+            <p>How intense is the aroma? {this.selectSmellIntensity()}</p>
+            <p>How complex is the aroma? {this.selectSmellComplexity()}</p>
+            <p>What can you tell about alcohol content? {this.selectSmellAlcohol()}</p>
+            <b>Aroma Profile</b>
+
+            <h3>Analyze by Taste</h3>
+            <p>Intensity? {this.selectTasteIntensity()}</p>
+            <p>Complexity? {this.selectTasteComplexity()}</p>
+            <p>Body (mouth feel)? {this.selectBody()}</p>
+            <p>Sweetness? {this.selectSweetness()}</p>
+            <p>Acidity? {this.selectAcidity()}</p>
+            <p>Tannins? {this.selectTannins()}</p>
+            <p>Alcohol? {this.selectTasteAlcohol()}</p>
+            <p>Finish? {this.selectFinish()}</p>
+            <b>Flavor Profile</b>
+
+            <h3>Summary</h3>
+            <p>Age? {}</p>
+            <p>Climate? {}</p>
+            <p>Balance (alcohol, acid, tannin, sugar)? {}</p>
+            <p>Origin List {}</p>
+            <p>Style? {}</p>
+            <p>Varietal List {}</p>
+            <p>Quality/Rating {}</p>
+
         </div>;
     }
 
@@ -95,6 +168,8 @@ class Blind extends React.Component<BlindProps, {}> {
                 return this.redColorList();
         }
     }
+
+    // Sight Selections
 
     redColorList() {
         return (
@@ -188,6 +263,128 @@ class Blind extends React.Component<BlindProps, {}> {
             </select>
         );
     }
+
+    // Smell Selections
+    selectSmellIntensity() {
+        return (
+            <select value={this.props.notes.nose.smellIntensity} onChange={this.changeSmellIntensity}>
+                <option value="None">None</option>
+                <option value="Weak">Weak</option>
+                <option value="Medium">Medium</option>
+                <option value="Strong">Strong</option>
+                <option value="Powerful">Powerful</option>
+            </select>
+        );
+    }
+
+    selectSmellComplexity() {
+        return (
+            <select value={this.props.notes.nose.smellComplexity} onChange={this.changeSmellComplexity}>
+                <option value="Simple">Simple</option>
+                <option value="Medium">Medium</option>
+                <option value="Complex">Complex</option>
+            </select>
+        );
+    }
+
+    selectSmellAlcohol() {
+        return (
+            <select value={this.props.notes.nose.smellAlcohol} onChange={this.changeSmellAlcohol}>
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        );
+    }
+
+    // Taste Selections
+    selectTasteIntensity() {
+        return (
+            <select value={this.props.notes.palate.tasteIntensity} onChange={this.changeTasteIntensity}>
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        );
+    }
+    selectTasteComplexity() {
+        return (
+            <select value={this.props.notes.palate.tasteComplexity} onChange={this.changeTasteComplexity}>
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        );
+    }
+    selectBody() {
+        return (
+            <select value={this.props.notes.palate.body} onChange={this.changeBody}>
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        );
+    }
+    selectSweetness() {
+        return (
+            <select value={this.props.notes.palate.sweetness} onChange={this.changeSweetness}>
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        );
+    }
+    selectAcidity() {
+        return (
+            <select value={this.props.notes.palate.acidity} onChange={this.changeAcidity}>
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        );
+    }
+    selectTannins() {
+        return (
+            <select value={this.props.notes.palate.tannins} onChange={this.changeTannins}>
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        );
+    }
+    selectTasteAlcohol() {
+        return (
+            <select value={this.props.notes.palate.tasteAlcohol} onChange={this.changeTasteAlcohol}>
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        );
+    }
+    selectFinish() {
+        return (
+            <select value={this.props.notes.palate.finish} onChange={this.changeFinish}>
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        );
+    }
+
+
+
+
+
+
 }
 
 export default connect((state: ApplicationState) => state.blind, BlindStore.actionCreators)(Blind) as typeof Blind;

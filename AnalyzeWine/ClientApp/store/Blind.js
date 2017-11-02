@@ -8,17 +8,46 @@ var initialBlindTastingState = {
             sediment: "None",
             viscosity: "Medium",
             carbonation: "None"
+        },
+        nose: {
+            smellIntensity: "Medium",
+            smellComplexity: "Medium",
+            smellAlcohol: "Medium"
+        },
+        palate: {
+            tasteIntensity: "Medium",
+            tasteComplexity: "Medium",
+            body: "Medium",
+            sweetness: "Medium",
+            acidity: "Medium",
+            tannins: "Medium",
+            tasteAlcohol: "Medium",
+            finish: "Medium"
         }
     }
 };
 export var actionCreators = {
     setWineType: function (selectWineType) { return ({ type: 'SET_WINE_TYPE', selectWineType: selectWineType }); },
+    // Sight Actions
     setColor: function (selectColor) { return ({ type: 'SET_COLOR', selectColor: selectColor }); },
     setDepth: function (selectDepth) { return ({ type: 'SET_DEPTH', selectDepth: selectDepth }); },
     setClarity: function (selectClarity) { return ({ type: 'SET_CLARITY', selectClarity: selectClarity }); },
     setSediment: function (selectSediment) { return ({ type: 'SET_SEDIMENT', selectSediment: selectSediment }); },
     setViscosity: function (selectViscosity) { return ({ type: 'SET_VISCOSITY', selectViscosity: selectViscosity }); },
-    setCarbonation: function (selectCarbonation) { return ({ type: 'SET_CARBONATION', selectCarbonation: selectCarbonation }); }
+    setCarbonation: function (selectCarbonation) { return ({ type: 'SET_CARBONATION', selectCarbonation: selectCarbonation }); },
+    // Smell Actions
+    setSmellIntensity: function (selectSmellIntensity) { return ({ type: 'SET_SMELL_INTENSITY', selectSmellIntensity: selectSmellIntensity }); },
+    setSmellComplexity: function (selectSmellComplexity) { return ({ type: 'SET_SMELL_COMPLEXITY', selectSmellComplexity: selectSmellComplexity }); },
+    setSmellAlcohol: function (selectSmellAlcohol) { return ({ type: 'SET_SMELL_ALCOHOL', selectSmellAlcohol: selectSmellAlcohol }); },
+    // Taste Actions
+    setTasteIntensity: function (selectTasteIntensity) { return ({ type: 'SET_TASTE_INTENSITY', selectTasteIntensity: selectTasteIntensity }); },
+    setTasteComplexity: function (selectTasteComplexity) { return ({ type: 'SET_TASTE_COMPLEXITY', selectTasteComplexity: selectTasteComplexity }); },
+    setBody: function (selectBody) { return ({ type: 'SET_BODY', selectBody: selectBody }); },
+    setSweetness: function (selectSweetness) { return ({ type: 'SET_SWEETNESS', selectSweetness: selectSweetness }); },
+    setAcidity: function (selectAcidity) { return ({ type: 'SET_ACIDITY', selectAcidity: selectAcidity }); },
+    setTannins: function (selectTannins) { return ({ type: 'SET_TANNINS', selectTannins: selectTannins }); },
+    setTasteAlcohol: function (selectTasteAlcohol) { return ({ type: 'SET_TASTE_ALCOHOL', selectTasteAlcohol: selectTasteAlcohol }); },
+    setFinish: function (selectFinish) { return ({ type: 'SET_FINISH', selectFinish: selectFinish }); }
 };
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export var reducer = function (state, action) {
@@ -32,7 +61,22 @@ export var reducer = function (state, action) {
                 clarity: state.notes.eye.clarity,
                 sediment: state.notes.eye.sediment,
                 viscosity: state.notes.eye.viscosity,
-                carbonation: state.notes.eye.carbonation
+                carbonation: state.notes.eye.carbonation,
+            },
+            nose: {
+                smellIntensity: state.notes.nose.smellIntensity,
+                smellComplexity: state.notes.nose.smellComplexity,
+                smellAlcohol: state.notes.nose.smellAlcohol
+            },
+            palate: {
+                tasteIntensity: state.notes.palate.tasteIntensity,
+                tasteComplexity: state.notes.palate.tasteComplexity,
+                body: state.notes.palate.body,
+                sweetness: state.notes.palate.sweetness,
+                acidity: state.notes.palate.acidity,
+                tannins: state.notes.palate.tannins,
+                tasteAlcohol: state.notes.palate.tasteAlcohol,
+                finish: state.notes.palate.finish
             }
         }
     };
@@ -40,6 +84,7 @@ export var reducer = function (state, action) {
         case 'SET_WINE_TYPE':
             tempState.notes.eye.wineType = action.selectWineType;
             return Object.assign({}, tempState);
+        // Sight Cases
         case 'SET_COLOR':
             tempState.notes.eye.color = action.selectColor;
             return Object.assign({}, tempState);
@@ -57,6 +102,41 @@ export var reducer = function (state, action) {
             return Object.assign({}, tempState);
         case 'SET_CARBONATION':
             tempState.notes.eye.carbonation = action.selectCarbonation;
+            return Object.assign({}, tempState);
+        // Smell Cases
+        case 'SET_SMELL_INTENSITY':
+            tempState.notes.nose.smellIntensity = action.selectSmellIntensity;
+            return Object.assign({}, tempState);
+        case 'SET_SMELL_COMPLEXITY':
+            tempState.notes.nose.smellComplexity = action.selectSmellComplexity;
+            return Object.assign({}, tempState);
+        case 'SET_SMELL_ALCOHOL':
+            tempState.notes.nose.smellAlcohol = action.selectSmellAlcohol;
+            return Object.assign({}, tempState);
+        // Taste Cases
+        case 'SET_TASTE_INTENSITY':
+            tempState.notes.palate.tasteIntensity = action.selectTasteIntensity;
+            return Object.assign({}, tempState);
+        case 'SET_TASTE_COMPLEXITY':
+            tempState.notes.palate.tasteComplexity = action.selectTasteComplexity;
+            return Object.assign({}, tempState);
+        case 'SET_BODY':
+            tempState.notes.palate.body = action.selectBody;
+            return Object.assign({}, tempState);
+        case 'SET_SWEETNESS':
+            tempState.notes.palate.sweetness = action.selectSweetness;
+            return Object.assign({}, tempState);
+        case 'SET_ACIDITY':
+            tempState.notes.palate.acidity = action.selectAcidity;
+            return Object.assign({}, tempState);
+        case 'SET_TANNINS':
+            tempState.notes.palate.tannins = action.selectTannins;
+            return Object.assign({}, tempState);
+        case 'SET_TASTE_ALCOHOL':
+            tempState.notes.palate.tasteAlcohol = action.selectTasteAlcohol;
+            return Object.assign({}, tempState);
+        case 'SET_FINISH':
+            tempState.notes.palate.finish = action.selectFinish;
             return Object.assign({}, tempState);
         default:
             var exhaustiveCheck = action;
