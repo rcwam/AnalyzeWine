@@ -1,6 +1,9 @@
 ﻿import * as React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
+//import  Select  from 'react-select';
+//import {Collapse} from 'react-collapse';
+//import Collapsible from 'react-collapsible';
 import { ApplicationState } from '../store';
 import * as BlindStore from '../store/Blind';
 
@@ -108,19 +111,76 @@ class Blind extends React.Component<BlindProps, {}> {
             <h3>Choose Type</h3>
             <p>What type of wine are you analyzing? {this.selectTypeList()} </p>
 
+            <hr/>
+
             <h3>Analyze by Sight</h3>
             <p>What color is the wine? {this.pickColorList(this.props.notes.eye.wineType)}</p>
-            <p>How deep is the wine's color (rim)? {this.selectDepth()}</p>
+            <p>How deep is the wine's color? {this.selectDepth()}</p>
             <p>How clear is the wine? {this.selectClarity()}</p>
             <p>Does the wine have sediment? {this.selectSediment()}</p>
-            <p>How viscose is the wine (legs)? {this.selectViscosity()}</p>
+            <p>How viscous is the wine (legs)? {this.selectViscosity()}</p>
             <p>Is the wine carbonated (bubble size, effervescence)? {this.selectCarbonation()}</p>
+
+
+
+
+
+
+
+            <hr/>
 
             <h3>Analyze by Smell</h3>
             <p>How intense is the aroma? {this.selectSmellIntensity()}</p>
             <p>How complex is the aroma? {this.selectSmellComplexity()}</p>
             <p>What can you tell about alcohol content? {this.selectSmellAlcohol()}</p>
-            <b>Aroma Profile</b>
+
+            <button className="btn" type="button" data-toggle="collapse" data-target="#collapseAromaProfile" aria-expanded="true" aria-controls="collapseAromaProfile">
+                Aroma Profile
+            </button>
+            <div className="collapse" id="collapseAromaProfile">
+                <div className="well">
+
+
+
+            <p/>
+            <p><i>Fruit &amp; Floral</i> : <b>Lemon : Raspberry : Carrot</b>  <button>Clear</button></p>
+
+            <select value="Citrus"><option value="Citrus">Citrus</option></select>
+            <select value="Tree Fruit"><option value="Tree Fruit">Tree Fruit</option></select>
+            <select value="Berries"><option value="Berries">Berries</option></select>
+            <select value="Tropical Fruit"><option value="Tropical Fruit">Tropical Fruit</option></select>
+            <select value="Dried Fruit"><option value="Dried Fruit">Dried Fruit</option></select>
+            <select value="Artificial"><option value="Artificial">Artificial</option></select>
+            <select value="Floral"><option value="Floral">Floral</option></select>
+
+            <p/>
+            <p><i>Earth &amp; Mineral</i> : <b>Dirt</b>  <button>Clear</button></p>
+
+            <select value="Earthy"><option value="Earthy">Earthy</option></select>
+            <select value="Mineral"><option value="Mineral">Mineral</option></select>
+            <select value="Plant Matter"><option value="Plant Matter">Plant Matter</option></select>
+            <select value="Herbal"><option value="Herbal">Herbal</option></select>
+            <select value="Vegetable"><option value="Vegetable">Vegetable</option></select>
+
+            <p/>
+            <p><i>Wood &amp; Spice</i> : <b>Smoke : Toast : Hazelnut</b>  <button>Clear</button></p>
+
+            <select value="Wood"><option value="Wood">Wood</option></select>
+            <select value="Roasted"><option value="Roasted">Roasted</option></select>
+            <select value="Smokey"><option value="Smokey">Smokey</option></select>
+            <select value="Spice"><option value="Spice">Spice</option></select>
+            <select value="Oxidation"><option value="Oxidation">Oxidation</option></select>
+
+            <p/>
+            <p><i>Biological &amp; Chemical</i> : <b>Bacon : Chlorine</b>  <button>Clear</button></p>
+
+            <select value="Biological"><option value="Biological">Biological</option></select>
+            <select value="Chemical"><option value="Chemical">Chemical</option></select>
+
+                </div>
+            </div>
+
+            <hr/>
 
             <h3>Analyze by Taste</h3>
             <p>Intensity? {this.selectTasteIntensity()}</p>
@@ -131,7 +191,50 @@ class Blind extends React.Component<BlindProps, {}> {
             <p>Tannins? {this.selectTannins()}</p>
             <p>Alcohol? {this.selectTasteAlcohol()}</p>
             <p>Finish? {this.selectFinish()}</p>
-            <b>Flavor Profile</b>
+
+            <button className="btn" type="button" data-toggle="collapse" data-target="#collapseFlavorProfile" aria-expanded="true" aria-controls="collapseFlavorProfile">
+                Flavor Profile
+            </button>
+            <div className="collapse" id="collapseFlavorProfile">
+                <div className="well">
+
+            <p/>
+            <p><i>Fruit &amp; Floral</i> : <b>Lemon : Raspberry : Carrot</b>  <button>Clear</button></p>
+
+            <select value="Citrus"><option value="Citrus">Citrus</option></select>
+            <select value="Tree Fruit"><option value="Tree Fruit">Tree Fruit</option></select>
+            <select value="Berries"><option value="Berries">Berries</option></select>
+            <select value="Tropical Fruit"><option value="Tropical Fruit">Tropical Fruit</option></select>
+            <select value="Dried Fruit"><option value="Dried Fruit">Dried Fruit</option></select>
+            <select value="Artificial"><option value="Artificial">Artificial</option></select>
+            <select value="Floral"><option value="Floral">Floral</option></select>
+
+            <p/>
+            <p><i>Earth &amp; Mineral</i> : <b>Dirt</b>  <button>Clear</button></p>
+
+            <select value="Earthy"><option value="Earthy">Earthy</option></select>
+            <select value="Mineral"><option value="Mineral">Mineral</option></select>
+            <select value="Plant Matter"><option value="Plant Matter">Plant Matter</option></select>
+            <select value="Herbal"><option value="Herbal">Herbal</option></select>
+            <select value="Vegetable"><option value="Vegetable">Vegetable</option></select>
+
+            <p/>
+            <p><i>Wood &amp; Spice</i> : <b>Smoke : Toast : Hazelnut</b>  <button>Clear</button></p>
+
+            <select value="Wood"><option value="Wood">Wood</option></select>
+            <select value="Roasted"><option value="Roasted">Roasted</option></select>
+            <select value="Smokey"><option value="Smokey">Smokey</option></select>
+            <select value="Spice"><option value="Spice">Spice</option></select>
+            <select value="Oxidation"><option value="Oxidation">Oxidation</option></select>
+
+            <p/>
+            <p><i>Biological &amp; Chemical</i> : <b>Bacon : Chlorine</b>  <button>Clear</button></p>
+
+            <select value="Biological"><option value="Biological">Biological</option></select>
+            <select value="Chemical"><option value="Chemical">Chemical</option></select>
+                </div>
+            </div>
+            <hr/>
 
             <h3>Summary</h3>
             <p>Age? {}</p>
@@ -332,10 +435,10 @@ class Blind extends React.Component<BlindProps, {}> {
     selectSweetness() {
         return (
             <select value={this.props.notes.palate.sweetness} onChange={this.changeSweetness}>
-                <option value="None">None</option>
-                <option value="Low">Low</option>
+                <option value="Dry">Dry</option>
                 <option value="Medium">Medium</option>
-                <option value="High">High</option>
+                <option value="Sweet">Sweet</option>
+                <option value="Dessert">Dessert</option>
             </select>
         );
     }
@@ -373,9 +476,10 @@ class Blind extends React.Component<BlindProps, {}> {
         return (
             <select value={this.props.notes.palate.finish} onChange={this.changeFinish}>
                 <option value="None">None</option>
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
+                <option value="Short">Short (&lt;3 sec)</option>
+                <option value="Medium">Medium (4-5 sec)</option>
+                <option value="Long">Long (5-7 sec)</option>
+                <option value="Very Long">Very Long (>8 sec)</option>
             </select>
         );
     }

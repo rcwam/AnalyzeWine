@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "react": "^16.0.0",
+    "react-collapse": "^4.0.3",
+    "react-motion": "^0.5.2",
+    "react-select": "^1.0.0-rc.10",
     "redux-actions": "^2.2.1"
   }
 }

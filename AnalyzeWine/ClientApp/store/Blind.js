@@ -83,6 +83,23 @@ export var reducer = function (state, action) {
     switch (action.type) {
         case 'SET_WINE_TYPE':
             tempState.notes.eye.wineType = action.selectWineType;
+            switch (action.selectWineType) {
+                case 'Red':
+                    tempState.notes.eye.color = "Red";
+                    tempState.notes.eye.carbonation = "None";
+                    tempState.notes.palate.tannins = "Medium";
+                    return tempState;
+                case 'White':
+                    tempState.notes.eye.color = "Yellow";
+                    tempState.notes.eye.sediment = "None";
+                    tempState.notes.palate.tannins = "None";
+                    return tempState;
+                case 'Rose':
+                    tempState.notes.eye.color = "Pink";
+                    tempState.notes.eye.sediment = "None";
+                    tempState.notes.palate.tannins = "None";
+                    return tempState;
+            }
             return Object.assign({}, tempState);
         // Sight Cases
         case 'SET_COLOR':
