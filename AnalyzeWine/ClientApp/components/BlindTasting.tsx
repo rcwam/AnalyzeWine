@@ -48,6 +48,13 @@ class Blind extends React.Component<BlindProps, {}> {
     changeSmellAlcohol(e: any) {
         this.props.setSmellAlcohol(e.target.value);
     }
+    addAromaFruitFloral(e: any) {
+        this.props.addAroma(e.target.value,"fruitFloral");
+    }
+
+    clearAroma(aromaCategory: string) {
+        this.props.clearAroma(aromaCategory);
+    }
 
     // Change Taste State
     changeTasteIntensity(e: any) {
@@ -93,6 +100,8 @@ class Blind extends React.Component<BlindProps, {}> {
         this.changeSmellIntensity = this.changeSmellIntensity.bind(this);
         this.changeSmellComplexity = this.changeSmellComplexity.bind(this);
         this.changeSmellAlcohol = this.changeSmellAlcohol.bind(this);
+        this.addAromaFruitFloral = this.addAromaFruitFloral.bind(this);
+        this.clearAroma = this.clearAroma.bind(this);
 
         // Taste Constructors
         this.changeTasteIntensity = this.changeTasteIntensity.bind(this);
@@ -122,11 +131,6 @@ class Blind extends React.Component<BlindProps, {}> {
             <p>Is the wine carbonated (bubble size, effervescence)? {this.selectCarbonation()}</p>
 
 
-
-
-
-
-
             <hr/>
 
             <h3>Analyze by Smell</h3>
@@ -134,48 +138,92 @@ class Blind extends React.Component<BlindProps, {}> {
             <p>How complex is the aroma? {this.selectSmellComplexity()}</p>
             <p>What can you tell about alcohol content? {this.selectSmellAlcohol()}</p>
 
-            <button className="btn" type="button" data-toggle="collapse" data-target="#collapseAromaProfile" aria-expanded="true" aria-controls="collapseAromaProfile">
+            <button className="btn" type="button" data-toggle="collapse" data-target="#collapseAromaProfile"
+                    aria-expanded="true" aria-controls="collapseAromaProfile">
                 Aroma Profile
             </button>
             <div className="collapse" id="collapseAromaProfile">
                 <div className="well">
 
 
+                    <p/>
+                    <p><i>Fruit &amp; Floral</i> : <b>{this.props.notes.nose.smellProfile.fruitFloral.toString()}</b>
+                        <button onClick={() => this.clearAroma("fruitFloral")}>Clear</button>
+                    </p>
 
-            <p/>
-            <p><i>Fruit &amp; Floral</i> : <b>Lemon : Raspberry : Carrot</b>  <button>Clear</button></p>
+                    {this.addFruitFloral()}
+                    <select value="Tree Fruit">
+                        <option value="Tree Fruit">Tree Fruit</option>
+                    </select>
+                    <select value="Berries">
+                        <option value="Berries">Berries</option>
+                    </select>
+                    <select value="Tropical Fruit">
+                        <option value="Tropical Fruit">Tropical Fruit</option>
+                    </select>
+                    <select value="Dried Fruit">
+                        <option value="Dried Fruit">Dried Fruit</option>
+                    </select>
+                    <select value="Artificial">
+                        <option value="Artificial">Artificial</option>
+                    </select>
+                    <select value="Floral">
+                        <option value="Floral">Floral</option>
+                    </select>
 
-            <select value="Citrus"><option value="Citrus">Citrus</option></select>
-            <select value="Tree Fruit"><option value="Tree Fruit">Tree Fruit</option></select>
-            <select value="Berries"><option value="Berries">Berries</option></select>
-            <select value="Tropical Fruit"><option value="Tropical Fruit">Tropical Fruit</option></select>
-            <select value="Dried Fruit"><option value="Dried Fruit">Dried Fruit</option></select>
-            <select value="Artificial"><option value="Artificial">Artificial</option></select>
-            <select value="Floral"><option value="Floral">Floral</option></select>
+                    <p/>
+                    <p><i>Earth &amp; Mineral</i> : <b>Dirt</b>
+                        <button>Clear</button>
+                    </p>
 
-            <p/>
-            <p><i>Earth &amp; Mineral</i> : <b>Dirt</b>  <button>Clear</button></p>
+                    <select value="Earthy">
+                        <option value="Earthy">Earthy</option>
+                    </select>
+                    <select value="Mineral">
+                        <option value="Mineral">Mineral</option>
+                    </select>
+                    <select value="Plant Matter">
+                        <option value="Plant Matter">Plant Matter</option>
+                    </select>
+                    <select value="Herbal">
+                        <option value="Herbal">Herbal</option>
+                    </select>
+                    <select value="Vegetable">
+                        <option value="Vegetable">Vegetable</option>
+                    </select>
 
-            <select value="Earthy"><option value="Earthy">Earthy</option></select>
-            <select value="Mineral"><option value="Mineral">Mineral</option></select>
-            <select value="Plant Matter"><option value="Plant Matter">Plant Matter</option></select>
-            <select value="Herbal"><option value="Herbal">Herbal</option></select>
-            <select value="Vegetable"><option value="Vegetable">Vegetable</option></select>
+                    <p/>
+                    <p><i>Wood &amp; Spice</i> : <b>Smoke : Toast : Hazelnut</b>
+                        <button>Clear</button>
+                    </p>
 
-            <p/>
-            <p><i>Wood &amp; Spice</i> : <b>Smoke : Toast : Hazelnut</b>  <button>Clear</button></p>
+                    <select value="Wood">
+                        <option value="Wood">Wood</option>
+                    </select>
+                    <select value="Roasted">
+                        <option value="Roasted">Roasted</option>
+                    </select>
+                    <select value="Smokey">
+                        <option value="Smokey">Smokey</option>
+                    </select>
+                    <select value="Spice">
+                        <option value="Spice">Spice</option>
+                    </select>
+                    <select value="Oxidation">
+                        <option value="Oxidation">Oxidation</option>
+                    </select>
 
-            <select value="Wood"><option value="Wood">Wood</option></select>
-            <select value="Roasted"><option value="Roasted">Roasted</option></select>
-            <select value="Smokey"><option value="Smokey">Smokey</option></select>
-            <select value="Spice"><option value="Spice">Spice</option></select>
-            <select value="Oxidation"><option value="Oxidation">Oxidation</option></select>
+                    <p/>
+                    <p><i>Biological &amp; Chemical</i> : <b>Bacon : Chlorine</b>
+                        <button>Clear</button>
+                    </p>
 
-            <p/>
-            <p><i>Biological &amp; Chemical</i> : <b>Bacon : Chlorine</b>  <button>Clear</button></p>
-
-            <select value="Biological"><option value="Biological">Biological</option></select>
-            <select value="Chemical"><option value="Chemical">Chemical</option></select>
+                    <select value="Biological">
+                        <option value="Biological">Biological</option>
+                    </select>
+                    <select value="Chemical">
+                        <option value="Chemical">Chemical</option>
+                    </select>
 
                 </div>
             </div>
@@ -192,46 +240,93 @@ class Blind extends React.Component<BlindProps, {}> {
             <p>Alcohol? {this.selectTasteAlcohol()}</p>
             <p>Finish? {this.selectFinish()}</p>
 
-            <button className="btn" type="button" data-toggle="collapse" data-target="#collapseFlavorProfile" aria-expanded="true" aria-controls="collapseFlavorProfile">
+            <button className="btn" type="button" data-toggle="collapse" data-target="#collapseFlavorProfile"
+                    aria-expanded="true" aria-controls="collapseFlavorProfile">
                 Flavor Profile
             </button>
             <div className="collapse" id="collapseFlavorProfile">
                 <div className="well">
 
-            <p/>
-            <p><i>Fruit &amp; Floral</i> : <b>Lemon : Raspberry : Carrot</b>  <button>Clear</button></p>
+                    <p/>
+                    <p><i>Fruit &amp; Floral</i> : <b>Lemon : Raspberry : Carrot</b>
+                        <button>Clear</button>
+                    </p>
 
-            <select value="Citrus"><option value="Citrus">Citrus</option></select>
-            <select value="Tree Fruit"><option value="Tree Fruit">Tree Fruit</option></select>
-            <select value="Berries"><option value="Berries">Berries</option></select>
-            <select value="Tropical Fruit"><option value="Tropical Fruit">Tropical Fruit</option></select>
-            <select value="Dried Fruit"><option value="Dried Fruit">Dried Fruit</option></select>
-            <select value="Artificial"><option value="Artificial">Artificial</option></select>
-            <select value="Floral"><option value="Floral">Floral</option></select>
+                    <select value="Citrus">
+                        <option value="Citrus">Citrus</option>
+                    </select>
+                    <select value="Tree Fruit">
+                        <option value="Tree Fruit">Tree Fruit</option>
+                    </select>
+                    <select value="Berries">
+                        <option value="Berries">Berries</option>
+                    </select>
+                    <select value="Tropical Fruit">
+                        <option value="Tropical Fruit">Tropical Fruit</option>
+                    </select>
+                    <select value="Dried Fruit">
+                        <option value="Dried Fruit">Dried Fruit</option>
+                    </select>
+                    <select value="Artificial">
+                        <option value="Artificial">Artificial</option>
+                    </select>
+                    <select value="Floral">
+                        <option value="Floral">Floral</option>
+                    </select>
 
-            <p/>
-            <p><i>Earth &amp; Mineral</i> : <b>Dirt</b>  <button>Clear</button></p>
+                    <p/>
+                    <p><i>Earth &amp; Mineral</i> : <b>Dirt</b>
+                        <button>Clear</button>
+                    </p>
 
-            <select value="Earthy"><option value="Earthy">Earthy</option></select>
-            <select value="Mineral"><option value="Mineral">Mineral</option></select>
-            <select value="Plant Matter"><option value="Plant Matter">Plant Matter</option></select>
-            <select value="Herbal"><option value="Herbal">Herbal</option></select>
-            <select value="Vegetable"><option value="Vegetable">Vegetable</option></select>
+                    <select value="Earthy">
+                        <option value="Earthy">Earthy</option>
+                    </select>
+                    <select value="Mineral">
+                        <option value="Mineral">Mineral</option>
+                    </select>
+                    <select value="Plant Matter">
+                        <option value="Plant Matter">Plant Matter</option>
+                    </select>
+                    <select value="Herbal">
+                        <option value="Herbal">Herbal</option>
+                    </select>
+                    <select value="Vegetable">
+                        <option value="Vegetable">Vegetable</option>
+                    </select>
 
-            <p/>
-            <p><i>Wood &amp; Spice</i> : <b>Smoke : Toast : Hazelnut</b>  <button>Clear</button></p>
+                    <p/>
+                    <p><i>Wood &amp; Spice</i> : <b>Smoke : Toast : Hazelnut</b>
+                        <button>Clear</button>
+                    </p>
 
-            <select value="Wood"><option value="Wood">Wood</option></select>
-            <select value="Roasted"><option value="Roasted">Roasted</option></select>
-            <select value="Smokey"><option value="Smokey">Smokey</option></select>
-            <select value="Spice"><option value="Spice">Spice</option></select>
-            <select value="Oxidation"><option value="Oxidation">Oxidation</option></select>
+                    <select value="Wood">
+                        <option value="Wood">Wood</option>
+                    </select>
+                    <select value="Roasted">
+                        <option value="Roasted">Roasted</option>
+                    </select>
+                    <select value="Smokey">
+                        <option value="Smokey">Smokey</option>
+                    </select>
+                    <select value="Spice">
+                        <option value="Spice">Spice</option>
+                    </select>
+                    <select value="Oxidation">
+                        <option value="Oxidation">Oxidation</option>
+                    </select>
 
-            <p/>
-            <p><i>Biological &amp; Chemical</i> : <b>Bacon : Chlorine</b>  <button>Clear</button></p>
+                    <p/>
+                    <p><i>Biological &amp; Chemical</i> : <b>Bacon : Chlorine</b>
+                        <button>Clear</button>
+                    </p>
 
-            <select value="Biological"><option value="Biological">Biological</option></select>
-            <select value="Chemical"><option value="Chemical">Chemical</option></select>
+                    <select value="Biological">
+                        <option value="Biological">Biological</option>
+                    </select>
+                    <select value="Chemical">
+                        <option value="Chemical">Chemical</option>
+                    </select>
                 </div>
             </div>
             <hr/>
@@ -483,7 +578,18 @@ class Blind extends React.Component<BlindProps, {}> {
             </select>
         );
     }
-
+addFruitFloral(){
+        return (
+            <select value="Citrus"  onChange={this.addAromaFruitFloral}>
+                <option value="Citrus">Citrus</option>
+                <option value="Grapefruit">Grapefruit</option>
+                <option value="Lemon" >Lemon</option>
+                <option value="Lime" >Lime</option>
+                <option value="Orange">Orange</option>
+                <option value="Tangerine" >Tangerine</option>
+            </select>
+        )
+}
 
 
 

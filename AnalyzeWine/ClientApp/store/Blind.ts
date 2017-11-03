@@ -16,6 +16,12 @@ export interface BlindTastingState {
             smellIntensity: string,
             smellComplexity: string,
             smellAlcohol: string,
+            smellProfile:{
+                fruitFloral: string[],
+                earthMineral: string[],
+                woodSpice: string[],
+                biologicalChemical: string[]
+            }
         },
         palate: {
             tasteIntensity: string,
@@ -44,7 +50,13 @@ const initialBlindTastingState: BlindTastingState = {
         nose: {
             smellIntensity: "Medium",
             smellComplexity: "Medium",
-            smellAlcohol: "Medium"
+            smellAlcohol: "Medium",
+            smellProfile:{
+                fruitFloral: [],
+                earthMineral: [],
+                woodSpice: [],
+                biologicalChemical: []
+            }
         },
         palate: {
             tasteIntensity: "Medium",
@@ -73,6 +85,8 @@ interface SetCarbonation {type: 'SET_CARBONATION', selectCarbonation: string}
 interface SetSmellIntensity {type: 'SET_SMELL_INTENSITY', selectSmellIntensity: string}
 interface SetSmellComplexity {type: 'SET_SMELL_COMPLEXITY', selectSmellComplexity: string}
 interface SetSmellAlcohol {type: 'SET_SMELL_ALCOHOL', selectSmellAlcohol: string}
+interface AddAroma{type: 'ADD_AROMA', aromaCategory: string, aroma: string}
+interface ClearAroma{type: 'CLEAR_AROMA', aromaCategory: string}
 
 // Palate Interfaces
 interface SetTasteIntensity {type: 'SET_TASTE_INTENSITY', selectTasteIntensity: string}
@@ -86,7 +100,7 @@ interface SetFinish {type: 'SET_FINISH', selectFinish: string}
 
 
 type KnownAction = SetWineType | SetColor | SetDepth | SetClarity | SetSediment | SetViscosity | SetCarbonation
-    | SetSmellIntensity | SetSmellComplexity | SetSmellAlcohol
+    | SetSmellIntensity | SetSmellComplexity | SetSmellAlcohol | AddAroma | ClearAroma
     | SetTasteIntensity | SetTasteComplexity | SetBody | SetSweetness | SetAcidity | SetTannins | SetTasteAlcohol | SetFinish;
 
 export const  actionCreators  = {
@@ -104,6 +118,8 @@ export const  actionCreators  = {
     setSmellIntensity: (selectSmellIntensity: string) => <SetSmellIntensity>{type: 'SET_SMELL_INTENSITY', selectSmellIntensity: selectSmellIntensity},
     setSmellComplexity: (selectSmellComplexity: string) => <SetSmellComplexity>{type: 'SET_SMELL_COMPLEXITY', selectSmellComplexity: selectSmellComplexity},
     setSmellAlcohol: (selectSmellAlcohol: string) => <SetSmellAlcohol>{type: 'SET_SMELL_ALCOHOL', selectSmellAlcohol: selectSmellAlcohol},
+    addAroma: (aroma: string, aromaCategory: string) => <AddAroma>{type: 'ADD_AROMA', aroma: aroma, aromaCategory: aromaCategory},
+    clearAroma: (aromaCategory: string) => <ClearAroma>{type: 'CLEAR_AROMA', aromaCategory: aromaCategory},
 
     // Taste Actions
     setTasteIntensity: (selectTasteIntensity: string) => <SetTasteIntensity>{type: 'SET_TASTE_INTENSITY', selectTasteIntensity: selectTasteIntensity},
@@ -119,6 +135,8 @@ export const  actionCreators  = {
 
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export const reducer: any = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
+    const tempState2 = { ...state };
+
     let tempState: BlindTastingState = {
         notes: {
             eye: {
@@ -133,7 +151,13 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
             nose: {
                 smellIntensity: state.notes.nose.smellIntensity,
                 smellComplexity: state.notes.nose.smellComplexity,
-                smellAlcohol: state.notes.nose.smellAlcohol
+                smellAlcohol: state.notes.nose.smellAlcohol,
+                smellProfile : {
+                    fruitFloral: state.notes.nose.smellProfile.fruitFloral,
+                    earthMineral: state.notes.nose.smellProfile.earthMineral,
+                    woodSpice: state.notes.nose.smellProfile.woodSpice,
+                    biologicalChemical: state.notes.nose.smellProfile.biologicalChemical
+                }
             },
             palate: {
                 tasteIntensity: state.notes.palate.tasteIntensity,
@@ -195,10 +219,55 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
             return Object.assign({}, tempState);
         case 'SET_SMELL_COMPLEXITY':
             tempState.notes.nose.smellComplexity = action.selectSmellComplexity;
+
             return Object.assign({}, tempState);
         case 'SET_SMELL_ALCOHOL':
             tempState.notes.nose.smellAlcohol = action.selectSmellAlcohol;
             return Object.assign({}, tempState);
+        case 'ADD_AROMA':
+            switch (action.aromaCategory){
+                case 'fruitFloral':
+                    if(tempState.notes.nose.smellProfile.fruitFloral.indexOf(action.aroma)==-1) {
+                        tempState.notes.nose.smellProfile.fruitFloral = tempState.notes.nose.smellProfile.fruitFloral.concat(action.aroma);
+                    }
+                   return tempState;
+                case 'earthMineral':
+                    if(tempState.notes.nose.smellProfile.earthMineral.indexOf(action.aroma)==-1) {
+                        tempState.notes.nose.smellProfile.earthMineral = tempState.notes.nose.smellProfile.earthMineral.concat(action.aroma);
+                    }
+                    return tempState;
+                case 'woodSpice':
+                    if(tempState.notes.nose.smellProfile.woodSpice.indexOf(action.aroma)==-1) {
+                        tempState.notes.nose.smellProfile.woodSpice = tempState.notes.nose.smellProfile.woodSpice.concat(action.aroma);
+                    }
+                    return tempState;
+                case 'biologicalChemical':
+                    if(tempState.notes.nose.smellProfile.biologicalChemical.indexOf(action.aroma)==-1) {
+                        tempState.notes.nose.smellProfile.biologicalChemical = tempState.notes.nose.smellProfile.biologicalChemical.concat(action.aroma);
+                    }
+                    return tempState;
+                default:
+                    return tempState;
+            }
+
+
+        case 'CLEAR_AROMA':
+            switch (action.aromaCategory){
+                case 'fruitFloral':
+                    tempState.notes.nose.smellProfile.fruitFloral = [];
+                    return tempState;
+                case 'earthMineral':
+                    tempState.notes.nose.smellProfile.earthMineral = [];
+                    return tempState;
+                case 'woodSpice':
+                    tempState.notes.nose.smellProfile.woodSpice = [];
+                    return tempState;
+                case 'biologicalChemical':
+                    tempState.notes.nose.smellProfile.biologicalChemical = [];
+                    return tempState;
+                default:
+                    return tempState;
+            }
 
         // Taste Cases
         case 'SET_TASTE_INTENSITY':

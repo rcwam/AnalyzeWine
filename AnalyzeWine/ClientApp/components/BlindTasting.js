@@ -27,6 +27,8 @@ var Blind = (function (_super) {
         _this.changeSmellIntensity = _this.changeSmellIntensity.bind(_this);
         _this.changeSmellComplexity = _this.changeSmellComplexity.bind(_this);
         _this.changeSmellAlcohol = _this.changeSmellAlcohol.bind(_this);
+        _this.addAromaFruitFloral = _this.addAromaFruitFloral.bind(_this);
+        _this.clearAroma = _this.clearAroma.bind(_this);
         // Taste Constructors
         _this.changeTasteIntensity = _this.changeTasteIntensity.bind(_this);
         _this.changeTasteComplexity = _this.changeTasteComplexity.bind(_this);
@@ -70,6 +72,12 @@ var Blind = (function (_super) {
     Blind.prototype.changeSmellAlcohol = function (e) {
         this.props.setSmellAlcohol(e.target.value);
     };
+    Blind.prototype.addAromaFruitFloral = function (e) {
+        this.props.addAroma(e.target.value, "fruitFloral");
+    };
+    Blind.prototype.clearAroma = function (aromaCategory) {
+        this.props.clearAroma(aromaCategory);
+    };
     // Change Taste State
     Blind.prototype.changeTasteIntensity = function (e) {
         this.props.setTasteIntensity(e.target.value);
@@ -96,6 +104,7 @@ var Blind = (function (_super) {
         this.props.setFinish(e.target.value);
     };
     Blind.prototype.render = function () {
+        var _this = this;
         return React.createElement("div", null,
             React.createElement("h3", null, "Choose Type"),
             React.createElement("p", null,
@@ -140,11 +149,9 @@ var Blind = (function (_super) {
                     React.createElement("p", null,
                         React.createElement("i", null, "Fruit & Floral"),
                         " : ",
-                        React.createElement("b", null, "Lemon : Raspberry : Carrot"),
-                        "  ",
-                        React.createElement("button", null, "Clear")),
-                    React.createElement("select", { value: "Citrus" },
-                        React.createElement("option", { value: "Citrus" }, "Citrus")),
+                        React.createElement("b", null, this.props.notes.nose.smellProfile.fruitFloral.toString()),
+                        React.createElement("button", { onClick: function () { return _this.clearAroma("fruitFloral"); } }, "Clear")),
+                    this.addFruitFloral(),
                     React.createElement("select", { value: "Tree Fruit" },
                         React.createElement("option", { value: "Tree Fruit" }, "Tree Fruit")),
                     React.createElement("select", { value: "Berries" },
@@ -162,7 +169,6 @@ var Blind = (function (_super) {
                         React.createElement("i", null, "Earth & Mineral"),
                         " : ",
                         React.createElement("b", null, "Dirt"),
-                        "  ",
                         React.createElement("button", null, "Clear")),
                     React.createElement("select", { value: "Earthy" },
                         React.createElement("option", { value: "Earthy" }, "Earthy")),
@@ -179,7 +185,6 @@ var Blind = (function (_super) {
                         React.createElement("i", null, "Wood & Spice"),
                         " : ",
                         React.createElement("b", null, "Smoke : Toast : Hazelnut"),
-                        "  ",
                         React.createElement("button", null, "Clear")),
                     React.createElement("select", { value: "Wood" },
                         React.createElement("option", { value: "Wood" }, "Wood")),
@@ -196,7 +201,6 @@ var Blind = (function (_super) {
                         React.createElement("i", null, "Biological & Chemical"),
                         " : ",
                         React.createElement("b", null, "Bacon : Chlorine"),
-                        "  ",
                         React.createElement("button", null, "Clear")),
                     React.createElement("select", { value: "Biological" },
                         React.createElement("option", { value: "Biological" }, "Biological")),
@@ -236,7 +240,6 @@ var Blind = (function (_super) {
                         React.createElement("i", null, "Fruit & Floral"),
                         " : ",
                         React.createElement("b", null, "Lemon : Raspberry : Carrot"),
-                        "  ",
                         React.createElement("button", null, "Clear")),
                     React.createElement("select", { value: "Citrus" },
                         React.createElement("option", { value: "Citrus" }, "Citrus")),
@@ -257,7 +260,6 @@ var Blind = (function (_super) {
                         React.createElement("i", null, "Earth & Mineral"),
                         " : ",
                         React.createElement("b", null, "Dirt"),
-                        "  ",
                         React.createElement("button", null, "Clear")),
                     React.createElement("select", { value: "Earthy" },
                         React.createElement("option", { value: "Earthy" }, "Earthy")),
@@ -274,7 +276,6 @@ var Blind = (function (_super) {
                         React.createElement("i", null, "Wood & Spice"),
                         " : ",
                         React.createElement("b", null, "Smoke : Toast : Hazelnut"),
-                        "  ",
                         React.createElement("button", null, "Clear")),
                     React.createElement("select", { value: "Wood" },
                         React.createElement("option", { value: "Wood" }, "Wood")),
@@ -291,7 +292,6 @@ var Blind = (function (_super) {
                         React.createElement("i", null, "Biological & Chemical"),
                         " : ",
                         React.createElement("b", null, "Bacon : Chlorine"),
-                        "  ",
                         React.createElement("button", null, "Clear")),
                     React.createElement("select", { value: "Biological" },
                         React.createElement("option", { value: "Biological" }, "Biological")),
@@ -465,6 +465,15 @@ var Blind = (function (_super) {
             React.createElement("option", { value: "Medium" }, "Medium (4-5 sec)"),
             React.createElement("option", { value: "Long" }, "Long (5-7 sec)"),
             React.createElement("option", { value: "Very Long" }, "Very Long (>8 sec)")));
+    };
+    Blind.prototype.addFruitFloral = function () {
+        return (React.createElement("select", { value: "Citrus", onChange: this.addAromaFruitFloral },
+            React.createElement("option", { value: "Citrus" }, "Citrus"),
+            React.createElement("option", { value: "Grapefruit" }, "Grapefruit"),
+            React.createElement("option", { value: "Lemon" }, "Lemon"),
+            React.createElement("option", { value: "Lime" }, "Lime"),
+            React.createElement("option", { value: "Orange" }, "Orange"),
+            React.createElement("option", { value: "Tangerine" }, "Tangerine")));
     };
     return Blind;
 }(React.Component));
