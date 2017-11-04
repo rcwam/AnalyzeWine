@@ -32,6 +32,12 @@ export interface BlindTastingState {
             tannins: string,
             tasteAlcohol: string,
             finish: string
+            flavorProfile:{
+                fruitFloral: string[],
+                earthMineral: string[],
+                woodSpice: string[],
+                biologicalChemical: string[]
+            }
         }
     }
 }
@@ -66,7 +72,13 @@ const initialBlindTastingState: BlindTastingState = {
             acidity: "Medium",
             tannins: "Medium",
             tasteAlcohol: "Medium",
-            finish: "Medium"
+            finish: "Medium",
+            flavorProfile:{
+                fruitFloral: [],
+                earthMineral: [],
+                woodSpice: [],
+                biologicalChemical: []
+            }
         }
     }
 };
@@ -97,11 +109,13 @@ interface SetAcidity {type: 'SET_ACIDITY', selectAcidity: string}
 interface SetTannins {type: 'SET_TANNINS', selectTannins: string}
 interface SetTasteAlcohol {type: 'SET_TASTE_ALCOHOL', selectTasteAlcohol: string}
 interface SetFinish {type: 'SET_FINISH', selectFinish: string}
+interface AddFlavor{type: 'ADD_FLAVOR', flavorCategory: string, flavor: string}
+interface ClearFlavor{type: 'CLEAR_FLAVOR', flavorCategory: string}
 
 
 type KnownAction = SetWineType | SetColor | SetDepth | SetClarity | SetSediment | SetViscosity | SetCarbonation
     | SetSmellIntensity | SetSmellComplexity | SetSmellAlcohol | AddAroma | ClearAroma
-    | SetTasteIntensity | SetTasteComplexity | SetBody | SetSweetness | SetAcidity | SetTannins | SetTasteAlcohol | SetFinish;
+    | SetTasteIntensity | SetTasteComplexity | SetBody | SetSweetness | SetAcidity | SetTannins | SetTasteAlcohol | SetFinish | AddFlavor | ClearFlavor;
 
 export const  actionCreators  = {
     setWineType: (selectWineType: string) => <SetWineType>{type: 'SET_WINE_TYPE', selectWineType: selectWineType},
@@ -129,8 +143,9 @@ export const  actionCreators  = {
     setAcidity: (selectAcidity: string) => <SetAcidity>{type: 'SET_ACIDITY', selectAcidity: selectAcidity},
     setTannins: (selectTannins: string) => <SetTannins>{type: 'SET_TANNINS', selectTannins: selectTannins},
     setTasteAlcohol: (selectTasteAlcohol: string) => <SetTasteAlcohol>{type: 'SET_TASTE_ALCOHOL', selectTasteAlcohol: selectTasteAlcohol},
-    setFinish: (selectFinish: string) => <SetFinish>{type: 'SET_FINISH', selectFinish: selectFinish}
-
+    setFinish: (selectFinish: string) => <SetFinish>{type: 'SET_FINISH', selectFinish: selectFinish},
+    addFlavor: (flavor: string, flavorCategory: string) => <AddFlavor>{type: 'ADD_FLAVOR', flavor: flavor, flavorCategory: flavorCategory},
+    clearFlavor: (flavorCategory: string) => <ClearFlavor>{type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory}
 };
 
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
@@ -167,7 +182,13 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                 acidity: state.notes.palate.acidity,
                 tannins: state.notes.palate.tannins,
                 tasteAlcohol: state.notes.palate.tasteAlcohol,
-                finish: state.notes.palate.finish
+                finish: state.notes.palate.finish,
+                flavorProfile : {
+                    fruitFloral: state.notes.palate.flavorProfile.fruitFloral,
+                    earthMineral: state.notes.palate.flavorProfile.earthMineral,
+                    woodSpice: state.notes.palate.flavorProfile.woodSpice,
+                    biologicalChemical: state.notes.palate.flavorProfile.biologicalChemical
+                }
             }
         }
     };
@@ -294,6 +315,50 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
         case 'SET_FINISH':
             tempState.notes.palate.finish = action.selectFinish;
             return Object.assign({}, tempState);
+        case 'ADD_FLAVOR':
+            switch (action.flavorCategory){
+                case 'fruitFloral':
+                    if(tempState.notes.palate.flavorProfile.fruitFloral.indexOf(action.flavor)==-1) {
+                        tempState.notes.palate.flavorProfile.fruitFloral = tempState.notes.palate.flavorProfile.fruitFloral.concat(action.flavor);
+                    }
+                    return tempState;
+                case 'earthMineral':
+                    if(tempState.notes.palate.flavorProfile.earthMineral.indexOf(action.flavor)==-1) {
+                        tempState.notes.palate.flavorProfile.earthMineral = tempState.notes.palate.flavorProfile.earthMineral.concat(action.flavor);
+                    }
+                    return tempState;
+                case 'woodSpice':
+                    if(tempState.notes.palate.flavorProfile.woodSpice.indexOf(action.flavor)==-1) {
+                        tempState.notes.palate.flavorProfile.woodSpice = tempState.notes.palate.flavorProfile.woodSpice.concat(action.flavor);
+                    }
+                    return tempState;
+                case 'biologicalChemical':
+                    if(tempState.notes.palate.flavorProfile.biologicalChemical.indexOf(action.flavor)==-1) {
+                        tempState.notes.palate.flavorProfile.biologicalChemical = tempState.notes.palate.flavorProfile.biologicalChemical.concat(action.flavor);
+                    }
+                    return tempState;
+                default:
+                    return tempState;
+            }
+
+
+        case 'CLEAR_FLAVOR':
+            switch (action.flavorCategory){
+                case 'fruitFloral':
+                    tempState.notes.palate.flavorProfile.fruitFloral = [];
+                    return tempState;
+                case 'earthMineral':
+                    tempState.notes.palate.flavorProfile.earthMineral = [];
+                    return tempState;
+                case 'woodSpice':
+                    tempState.notes.palate.flavorProfile.woodSpice = [];
+                    return tempState;
+                case 'biologicalChemical':
+                    tempState.notes.palate.flavorProfile.biologicalChemical = [];
+                    return tempState;
+                default:
+                    return tempState;
+            }
 
         default:
             const exhaustiveCheck: never = action;

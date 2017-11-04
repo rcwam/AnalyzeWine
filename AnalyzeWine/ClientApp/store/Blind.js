@@ -36,7 +36,13 @@ var initialBlindTastingState = {
             acidity: "Medium",
             tannins: "Medium",
             tasteAlcohol: "Medium",
-            finish: "Medium"
+            finish: "Medium",
+            flavorProfile: {
+                fruitFloral: [],
+                earthMineral: [],
+                woodSpice: [],
+                biologicalChemical: []
+            }
         }
     }
 };
@@ -63,7 +69,9 @@ export var actionCreators = {
     setAcidity: function (selectAcidity) { return ({ type: 'SET_ACIDITY', selectAcidity: selectAcidity }); },
     setTannins: function (selectTannins) { return ({ type: 'SET_TANNINS', selectTannins: selectTannins }); },
     setTasteAlcohol: function (selectTasteAlcohol) { return ({ type: 'SET_TASTE_ALCOHOL', selectTasteAlcohol: selectTasteAlcohol }); },
-    setFinish: function (selectFinish) { return ({ type: 'SET_FINISH', selectFinish: selectFinish }); }
+    setFinish: function (selectFinish) { return ({ type: 'SET_FINISH', selectFinish: selectFinish }); },
+    addFlavor: function (flavor, flavorCategory) { return ({ type: 'ADD_FLAVOR', flavor: flavor, flavorCategory: flavorCategory }); },
+    clearFlavor: function (flavorCategory) { return ({ type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory }); }
 };
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export var reducer = function (state, action) {
@@ -99,7 +107,13 @@ export var reducer = function (state, action) {
                 acidity: state.notes.palate.acidity,
                 tannins: state.notes.palate.tannins,
                 tasteAlcohol: state.notes.palate.tasteAlcohol,
-                finish: state.notes.palate.finish
+                finish: state.notes.palate.finish,
+                flavorProfile: {
+                    fruitFloral: state.notes.palate.flavorProfile.fruitFloral,
+                    earthMineral: state.notes.palate.flavorProfile.earthMineral,
+                    woodSpice: state.notes.palate.flavorProfile.woodSpice,
+                    biologicalChemical: state.notes.palate.flavorProfile.biologicalChemical
+                }
             }
         }
     };
@@ -220,6 +234,48 @@ export var reducer = function (state, action) {
         case 'SET_FINISH':
             tempState.notes.palate.finish = action.selectFinish;
             return Object.assign({}, tempState);
+        case 'ADD_FLAVOR':
+            switch (action.flavorCategory) {
+                case 'fruitFloral':
+                    if (tempState.notes.palate.flavorProfile.fruitFloral.indexOf(action.flavor) == -1) {
+                        tempState.notes.palate.flavorProfile.fruitFloral = tempState.notes.palate.flavorProfile.fruitFloral.concat(action.flavor);
+                    }
+                    return tempState;
+                case 'earthMineral':
+                    if (tempState.notes.palate.flavorProfile.earthMineral.indexOf(action.flavor) == -1) {
+                        tempState.notes.palate.flavorProfile.earthMineral = tempState.notes.palate.flavorProfile.earthMineral.concat(action.flavor);
+                    }
+                    return tempState;
+                case 'woodSpice':
+                    if (tempState.notes.palate.flavorProfile.woodSpice.indexOf(action.flavor) == -1) {
+                        tempState.notes.palate.flavorProfile.woodSpice = tempState.notes.palate.flavorProfile.woodSpice.concat(action.flavor);
+                    }
+                    return tempState;
+                case 'biologicalChemical':
+                    if (tempState.notes.palate.flavorProfile.biologicalChemical.indexOf(action.flavor) == -1) {
+                        tempState.notes.palate.flavorProfile.biologicalChemical = tempState.notes.palate.flavorProfile.biologicalChemical.concat(action.flavor);
+                    }
+                    return tempState;
+                default:
+                    return tempState;
+            }
+        case 'CLEAR_FLAVOR':
+            switch (action.flavorCategory) {
+                case 'fruitFloral':
+                    tempState.notes.palate.flavorProfile.fruitFloral = [];
+                    return tempState;
+                case 'earthMineral':
+                    tempState.notes.palate.flavorProfile.earthMineral = [];
+                    return tempState;
+                case 'woodSpice':
+                    tempState.notes.palate.flavorProfile.woodSpice = [];
+                    return tempState;
+                case 'biologicalChemical':
+                    tempState.notes.palate.flavorProfile.biologicalChemical = [];
+                    return tempState;
+                default:
+                    return tempState;
+            }
         default:
             var exhaustiveCheck = action;
     }

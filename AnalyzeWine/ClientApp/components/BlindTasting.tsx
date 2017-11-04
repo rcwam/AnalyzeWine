@@ -86,7 +86,21 @@ class Blind extends React.Component<BlindProps, {}> {
     changeFinish(e: any) {
         this.props.setFinish(e.target.value);
     }
-
+    addFlavorFruitFloral(e: any) {
+        this.props.addFlavor(e.target.value,"fruitFloral");
+    }
+    addFlavorEarthMineral(e: any) {
+        this.props.addFlavor(e.target.value,"earthMineral");
+    }
+    addFlavorWoodSpice(e: any) {
+        this.props.addFlavor(e.target.value,"woodSpice");
+    }
+    addFlavorBiologicalChemical(e: any) {
+        this.props.addFlavor(e.target.value,"biologicalChemical");
+    }
+    clearFlavor(flavorCategory: string) {
+        this.props.clearFlavor(flavorCategory);
+    }
 
 
     constructor() {
@@ -120,6 +134,11 @@ class Blind extends React.Component<BlindProps, {}> {
         this.changeTannins = this.changeTannins.bind(this);
         this.changeTasteAlcohol = this.changeTasteAlcohol.bind(this);
         this.changeFinish = this.changeFinish.bind(this);
+        this.addFlavorFruitFloral = this.addFlavorFruitFloral.bind(this);
+        this.addFlavorEarthMineral = this.addFlavorEarthMineral.bind(this);
+        this.addFlavorWoodSpice = this.addFlavorWoodSpice.bind(this);
+        this.addFlavorBiologicalChemical = this.addFlavorBiologicalChemical.bind(this);
+        this.clearFlavor = this.clearFlavor.bind(this);
     }
 
 
@@ -159,35 +178,35 @@ class Blind extends React.Component<BlindProps, {}> {
                         <button onClick={() => this.clearAroma("fruitFloral")}>Clear</button>
                     </p>
 
-                    {this.addCitrus()}
-                    {this.addTreeFruit()}
-                    {this.addBerries()}
-                    {this.addTropicalFruit()}
-                    {this.addDriedFruit()}
-                    {this.addArtificial()}
-                    {this.addFloral()}
+                    {this.addCitrusSmell()}
+                    {this.addTreeFruitSmell()}
+                    {this.addBerriesSmell()}
+                    {this.addTropicalFruitSmell()}
+                    {this.addDriedFruitSmell()}
+                    {this.addArtificialSmell()}
+                    {this.addFloralSmell()}
 
                     <p/>
                     <p><i>Earth &amp; Mineral</i> : <b>{this.props.notes.nose.smellProfile.earthMineral.toString()}</b>
                         <button onClick={() => this.clearAroma("earthMineral")}>Clear</button>
                     </p>
 
-                    {this.addEarth()}
-                    {this.addMineral()}
-                    {this.addPlantMatter()}
-                    {this.addHerbal()}
-                    {this.addVegetable()}
+                    {this.addEarthSmell()}
+                    {this.addMineralSmell()}
+                    {this.addPlantMatterSmell()}
+                    {this.addHerbalSmell()}
+                    {this.addVegetableSmell()}
 
                     <p/>
                     <p><i>Wood &amp; Spice</i> : <b>{this.props.notes.nose.smellProfile.woodSpice.toString()}</b>
                         <button onClick={() => this.clearAroma("woodSpice")}>Clear</button>
                     </p>
 
-                    {this.addWood()}
-                    {this.addRoasted()}
-                    {this.addSmokey()}
-                    {this.addSpice()}
-                    {this.addOxidation()}
+                    {this.addWoodSmell()}
+                    {this.addRoastedSmell()}
+                    {this.addSmokeySmell()}
+                    {this.addSpiceSmell()}
+                    {this.addOxidationSmell()}
 
 
 
@@ -197,8 +216,8 @@ class Blind extends React.Component<BlindProps, {}> {
                     </p>
 
 
-                    {this.addBiological()}
-                    {this.addChemical()}
+                    {this.addBiologicalSmell()}
+                    {this.addChemicalSmell()}
 
                 </div>
             </div>
@@ -223,85 +242,50 @@ class Blind extends React.Component<BlindProps, {}> {
                 <div className="well">
 
                     <p/>
-                    <p><i>Fruit &amp; Floral</i> : <b>Lemon : Raspberry : Carrot</b>
-                        <button>Clear</button>
+                    <p><i>Fruit &amp; Floral</i> : <b>{this.props.notes.palate.flavorProfile.fruitFloral.toString()}</b>
+                        <button onClick={() => this.clearFlavor("fruitFloral")}>Clear</button>
                     </p>
 
-                    <select value="Citrus">
-                        <option value="Citrus">Citrus</option>
-                    </select>
-                    <select value="Tree Fruit">
-                        <option value="Tree Fruit">Tree Fruit</option>
-                    </select>
-                    <select value="Berries">
-                        <option value="Berries">Berries</option>
-                    </select>
-                    <select value="Tropical Fruit">
-                        <option value="Tropical Fruit">Tropical Fruit</option>
-                    </select>
-                    <select value="Dried Fruit">
-                        <option value="Dried Fruit">Dried Fruit</option>
-                    </select>
-                    <select value="Artificial">
-                        <option value="Artificial">Artificial</option>
-                    </select>
-                    <select value="Floral">
-                        <option value="Floral">Floral</option>
-                    </select>
+                    {this.addCitrusFlavor()}
+                    {this.addTreeFruitFlavor()}
+                    {this.addBerriesFlavor()}
+                    {this.addTropicalFruitFlavor()}
+                    {this.addDriedFruitFlavor()}
+                    {this.addArtificialFlavor()}
+                    {this.addFloralFlavor()}
 
                     <p/>
-                    <p><i>Earth &amp; Mineral</i> : <b>Dirt</b>
-                        <button>Clear</button>
+                    <p><i>Earth &amp; Mineral</i> : <b>{this.props.notes.palate.flavorProfile.earthMineral.toString()}</b>
+                        <button onClick={() => this.clearFlavor("earthMineral")}>Clear</button>
                     </p>
 
-                    <select value="Earthy">
-                        <option value="Earthy">Earthy</option>
-                    </select>
-                    <select value="Mineral">
-                        <option value="Mineral">Mineral</option>
-                    </select>
-                    <select value="Plant Matter">
-                        <option value="Plant Matter">Plant Matter</option>
-                    </select>
-                    <select value="Herbal">
-                        <option value="Herbal">Herbal</option>
-                    </select>
-                    <select value="Vegetable">
-                        <option value="Vegetable">Vegetable</option>
-                    </select>
+                    {this.addEarthFlavor()}
+                    {this.addMineralFlavor()}
+                    {this.addPlantMatterFlavor()}
+                    {this.addHerbalFlavor()}
+                    {this.addVegetableFlavor()}
 
                     <p/>
-                    <p><i>Wood &amp; Spice</i> : <b>Smoke : Toast : Hazelnut</b>
-                        <button>Clear</button>
+                    <p><i>Wood &amp; Spice</i> : <b>{this.props.notes.palate.flavorProfile.woodSpice.toString()}</b>
+                        <button onClick={() => this.clearFlavor("woodSpice")}>Clear</button>
                     </p>
 
-                    <select value="Wood">
-                        <option value="Wood">Wood</option>
-                    </select>
-                    <select value="Roasted">
-                        <option value="Roasted">Roasted</option>
-                    </select>
-                    <select value="Smokey">
-                        <option value="Smokey">Smokey</option>
-                    </select>
-                    <select value="Spice">
-                        <option value="Spice">Spice</option>
-                    </select>
-                    <select value="Oxidation">
-                        <option value="Oxidation">Oxidation</option>
-                    </select>
+                    {this.addWoodFlavor()}
+                    {this.addRoastedFlavor()}
+                    {this.addSmokeyFlavor()}
+                    {this.addSpiceFlavor()}
+                    {this.addOxidationFlavor()}
+
+
 
                     <p/>
-                    <p><i>Biological &amp; Chemical</i> : <b>Bacon : Chlorine</b>
-                        <button>Clear</button>
+                    <p><i>Biological &amp; Chemical</i> : <b>{this.props.notes.palate.flavorProfile.biologicalChemical.toString()}</b>
+                        <button onClick={() => this.clearFlavor("biologicalChemical")}>Clear</button>
                     </p>
 
-                    <select value="Biological">
-                        <option value="Biological">Biological</option>
-                    </select>
-                    <select value="Chemical">
-                        <option value="Chemical">Chemical</option>
-                    </select>
+
+                    {this.addBiologicalFlavor()}
+                    {this.addChemicalFlavor()}
                 </div>
             </div>
             <hr/>
@@ -553,7 +537,13 @@ class Blind extends React.Component<BlindProps, {}> {
             </select>
         );
     }
-addCitrus(){
+
+
+
+
+
+
+addCitrusSmell(){
         return (
             <select value="Top"  onChange={this.addAromaFruitFloral}>
                 <option value="Top">Citrus</option>
@@ -566,7 +556,7 @@ addCitrus(){
             </select>
         )
 }
-addTreeFruit(){
+addTreeFruitSmell(){
     return (
         <select value="Top"  onChange={this.addAromaFruitFloral}>
             <option value="Top">Tree Fruit</option>
@@ -582,7 +572,7 @@ addTreeFruit(){
         </select>
     )
 }
-    addBerries(){
+    addBerriesSmell(){
         return (
             <select value="Top"  onChange={this.addAromaFruitFloral}>
                 <option value="Top">Berries</option>
@@ -599,7 +589,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addTropicalFruit(){
+    addTropicalFruitSmell(){
         return (
             <select value="Top"  onChange={this.addAromaFruitFloral}>
                 <option value="Top">Tropical Fruit</option>
@@ -619,7 +609,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addDriedFruit(){
+    addDriedFruitSmell(){
         return (
             <select value="Top"  onChange={this.addAromaFruitFloral}>
                 <option value="Top">Dried Fruit</option>
@@ -633,7 +623,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addArtificial(){
+    addArtificialSmell(){
         return (
             <select value="Top"  onChange={this.addAromaFruitFloral}>
                 <option value="Top">Artificial</option>
@@ -647,7 +637,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addFloral(){
+    addFloralSmell(){
         return ( // onClick={() => this.clearAroma("fruitFloral")
             <select value="Top"  onChange={this.addAromaFruitFloral}>
                 <option value="Top">Floral</option>
@@ -667,7 +657,7 @@ addTreeFruit(){
     }
 
 
-    addEarth(){
+    addEarthSmell(){
         return (
             <select value="Top" onChange={this.addAromaEarthMineral}>
                 <option value="Top">Earth</option>
@@ -683,7 +673,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addMineral(){
+    addMineralSmell(){
         return (
             <select value="Top" onChange={this.addAromaEarthMineral}>
                 <option value="Top">Mineral</option>
@@ -702,7 +692,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addPlantMatter(){
+    addPlantMatterSmell(){
         return (
             <select value="Top" onChange={this.addAromaEarthMineral}>
                 <option value="Top">Plant Matter</option>
@@ -719,7 +709,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addHerbal(){
+    addHerbalSmell(){
         return (
             <select value="Top" onChange={this.addAromaEarthMineral}>
                 <option value="Top">Herbal</option>
@@ -735,7 +725,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addVegetable(){
+    addVegetableSmell(){
         return (
             <select value="Top" onChange={this.addAromaEarthMineral}>
                 <option value="Top">Vegetable</option>
@@ -750,7 +740,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addWood(){
+    addWoodSmell(){
         return (
             <select value="Top" onChange={this.addAromaWoodSpice}>
                 <option value="Top">Wood</option>
@@ -764,7 +754,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addRoasted(){
+    addRoastedSmell(){
         return (
             <select value="Top" onChange={this.addAromaWoodSpice}>
                 <option value="Top">Roasted</option>
@@ -781,7 +771,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addSmokey(){
+    addSmokeySmell(){
         return (
             <select value="Top" onChange={this.addAromaWoodSpice}>
                 <option value="Top">Smokey</option>
@@ -793,7 +783,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addSpice(){
+    addSpiceSmell(){
         return (
             <select value="Top" onChange={this.addAromaWoodSpice}>
                 <option value="Top">Spice</option>
@@ -810,7 +800,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addOxidation(){
+    addOxidationSmell(){
         return (
             <select value="Top" onChange={this.addAromaWoodSpice}>
                 <option value="Top">Oxidation</option>
@@ -827,7 +817,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addBiological(){
+    addBiologicalSmell(){
         return (
             <select value="Top" onChange={this.addAromaBiologicalChemical}>
                 <option value="Top">Biological</option>
@@ -852,7 +842,7 @@ addTreeFruit(){
             </select>
         )
     }
-    addChemical(){
+    addChemicalSmell(){
         return (
             <select value="Top" onChange={this.addAromaBiologicalChemical}>
                 <option value="Top">Chemical</option>
@@ -866,7 +856,349 @@ addTreeFruit(){
                 <option value="Hospital">Hospital</option>
                 <option value="Kerosene">Kerosene</option>
                 <option value="Band-aid">Band-aid</option>
-                <option value="Medicinal">Medicinal</option>
+                <option value="Medicine">Medicine</option>
+                <option value="Mothballs">Mothballs</option>
+                <option value="Nail Polish Remover">Nail Polish Remover</option>
+                <option value="Plastic">Plastic</option>
+                <option value="Rubber Cement">Rubber Cement</option>
+                <option value="Rubbing Alcohol">Rubbing Alcohol</option>
+                <option value="Shoe Polish">Shoe Polish</option>
+                <option value="Soapy">Soapy</option>
+                <option value="Sulphur">Sulphur</option>
+                <option value="Wet Newspaper">Wet Newspaper</option>
+            </select>
+        )
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    addCitrusFlavor(){
+        return (
+            <select value="Top"  onChange={this.addFlavorFruitFloral}>
+                <option value="Top">Citrus</option>
+                <option value="Citrus">CITRUS</option>
+                <option value="Grapefruit">Grapefruit</option>
+                <option value="Lemon">Lemon</option>
+                <option value="Lime">Lime</option>
+                <option value="Orange">Orange</option>
+                <option value="Tangerine">Tangerine</option>
+            </select>
+        )
+    }
+    addTreeFruitFlavor(){
+        return (
+            <select value="Top"  onChange={this.addFlavorFruitFloral}>
+                <option value="Top">Tree Fruit</option>
+                <option value="Tree Fruit">TREE FRUIT</option>
+                <option value="Apple">Apple</option>
+                <option value="Apricot">Apricot</option>
+                <option value="Cherry">Cherry</option>
+                <option value="Nectarine">Nectarine</option>
+                <option value="Peach">Peach</option>
+                <option value="Pear">Pear</option>
+                <option value="Persimmon">Persimmon</option>
+                <option value="Plum">Plum</option>
+            </select>
+        )
+    }
+    addBerriesFlavor(){
+        return (
+            <select value="Top"  onChange={this.addFlavorFruitFloral}>
+                <option value="Top">Berries</option>
+                <option value="Berries">BERRIES</option>
+                <option value="Blackberry">Blackberry</option>
+                <option value="Blueberry">Blueberry</option>
+                <option value="Cranberry">Cranberry</option>
+                <option value="Currant">Currant</option>
+                <option value="Gooseberry">Gooseberry</option>
+                <option value="Grape">Grape</option>
+                <option value="Loganberry">Loganberry</option>
+                <option value="Raspberry">Raspberry</option>
+                <option value="Strawberry">Strawberry</option>
+            </select>
+        )
+    }
+    addTropicalFruitFlavor(){
+        return (
+            <select value="Top"  onChange={this.addFlavorFruitFloral}>
+                <option value="Top">Tropical Fruit</option>
+                <option value="Tropical Fruit">TROPICAL FRUIT</option>
+                <option value="Asian Pear">Asian Pear</option>
+                <option value="Banana">Banana</option>
+                <option value="Guava">Guava</option>
+                <option value="Kiwi">Kiwi</option>
+                <option value="Lychee">Lychee</option>
+                <option value="Mango">Mango</option>
+                <option value="Melon">Melon</option>
+                <option value="Papaya">Papaya</option>
+                <option value="Passionfruit">Passionfruit</option>
+                <option value="Pineapple">Pineapple</option>
+                <option value="Plantain">Plantain</option>
+                <option value="Star Fruit">Star Fruit</option>
+            </select>
+        )
+    }
+    addDriedFruitFlavor(){
+        return (
+            <select value="Top"  onChange={this.addFlavorFruitFloral}>
+                <option value="Top">Dried Fruit</option>
+                <option value="Dried Fruit">DRIED FRUIT</option>
+                <option value="Date">Date</option>
+                <option value="Fig">Fig</option>
+                <option value="Golden Raisin">Golden Raisin</option>
+                <option value="Jam & Jelly">Jam &amp; Jelly</option>
+                <option value="Prune">Prune</option>
+                <option value="Raisin">Raisin</option>
+            </select>
+        )
+    }
+    addArtificialFlavor(){
+        return (
+            <select value="Top"  onChange={this.addFlavorFruitFloral}>
+                <option value="Top">Artificial</option>
+                <option value="Artificial">ARTIFICIAL</option>
+                <option value="Fruit Cocktail">Fruit Cocktail</option>
+                <option value="Froot Loop">Froot Loop</option>
+                <option value="Fruit Punch">Fruit Punch</option>
+                <option value="Grape Soda">Grape Soda</option>
+                <option value="Hard Candy">Hard Candy</option>
+                <option value="Red Licorice">Red Licorice</option>
+            </select>
+        )
+    }
+    addFloralFlavor(){
+        return ( // onClick={() => this.clearAroma("fruitFloral")
+            <select value="Top"  onChange={this.addFlavorFruitFloral}>
+                <option value="Top">Floral</option>
+                <option value="Floral">FLORAL</option>
+                <option value="Acadia">Acadia</option>
+                <option value="Apple Blossom" >Apple Blossom</option>
+                <option value="Gardenia">Gardenia</option>
+                <option value="Geranium">Geranium </option>
+                <option value="Honeysuckle">Honeysuckle</option>
+                <option value="Lavender">Lavender</option>
+                <option value="Orange Blossom">Orange Blossom</option>
+                <option value="Perfume">Perfume</option>
+                <option value="Rose">Rose</option>
+                <option value="Violet">Violet</option>
+            </select>
+        )
+    }
+
+
+    addEarthFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorEarthMineral}>
+                <option value="Top">Earth</option>
+                <option value="Earth">EARTH</option>
+                <option value="Clay">Clay</option>
+                <option value="Dirt">Dirt</option>
+                <option value="Dusty">Dusty</option>
+                <option value="Leather">Leather</option>
+                <option value="Gamey">Gamey</option>
+                <option value="Moss">Moss</option>
+                <option value="Mushroom">Mushroom</option>
+
+            </select>
+        )
+    }
+    addMineralFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorEarthMineral}>
+                <option value="Top">Mineral</option>
+                <option value="Mineral">MINERAL</option>
+                <option value="Chalk">Chalk</option>
+                <option value="Concrete Drying">Concrete Drying</option>
+                <option value="Drywall">Drywall</option>
+                <option value="Flint">Flint</option>
+                <option value="Metallic">Metallic</option>
+                <option value="Petrichor">Petrichor</option>
+                <option value="Sheetrock">Sheetrock</option>
+                <option value="Slate">Slate</option>
+                <option value="Vitamin Jar">Vitamin Jar</option>
+                <option value="Wet Granite">Wet Granite</option>
+                <option value="Wet Sand">Wet Sand</option>
+            </select>
+        )
+    }
+    addPlantMatterFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorEarthMineral}>
+                <option value="Top">Plant Matter</option>
+                <option value="Plant Matter">PLANT MATTER</option>
+                <option value="Alfalfa">Alfalfa</option>
+                <option value="Cut Grass">Cut Grass</option>
+                <option value="Hay">Hay</option>
+                <option value="Pine Sap">Pine Sap</option>
+                <option value="Resin">Resin</option>
+                <option value="Steamy">Steamy</option>
+                <option value="Straw">Straw</option>
+                <option value="Tea Leaves">Tea Leaves</option>
+                <option value="Tobacco">Tobacco</option>
+            </select>
+        )
+    }
+    addHerbalFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorEarthMineral}>
+                <option value="Top">Herbal</option>
+                <option value="Herbal">HERBAL</option>
+                <option value="Basil">Basil</option>
+                <option value="Dill">Dill</option>
+                <option value="Eucalyptus">Eucalyptus</option>
+                <option value="Herbal Tea">Herbal Tea</option>
+                <option value="Menthol">Menthol</option>
+                <option value="Mint">Mint</option>
+                <option value="Rosemary">Rosemary</option>
+                <option value="Tarragon">Tarragon</option>
+            </select>
+        )
+    }
+    addVegetableFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorEarthMineral}>
+                <option value="Top">Vegetable</option>
+                <option value="Vegetable">VEGETABLE</option>
+                <option value="Artichoke">Artichoke</option>
+                <option value="Asparagus">Asparagus</option>
+                <option value="Black Olive">Black Olive</option>
+                <option value="Fennel">Fennel</option>
+                <option value="Green Bean">Green Bean</option>
+                <option value="Green Olive">Green Olive</option>
+                <option value="Pepper">Pepper</option>
+            </select>
+        )
+    }
+    addWoodFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorWoodSpice}>
+                <option value="Top">Wood</option>
+                <option value="Wood">WOOD</option>
+                <option value="Cedar">Cedar</option>
+                <option value="Decomposing Log">Decomposing Log</option>
+                <option value="Oak">Oak</option>
+                <option value="Pencil Shavings">Pencil Shavings</option>
+                <option value="Sawdust">Sawdust</option>
+                <option value="Tree Bark">Tree Bark</option>
+            </select>
+        )
+    }
+    addRoastedFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorWoodSpice}>
+                <option value="Top">Roasted</option>
+                <option value="Roasted">ROASTED</option>
+                <option value="Burnt Toast">Burnt Toast</option>
+                <option value="Chocolate">Chocolate</option>
+                <option value="Cocoa Powder">Cocoa Powder</option>
+                <option value="Coffee">Coffee</option>
+                <option value="Biscuits">Biscuits</option>
+                <option value="Mocha">Mocha</option>
+                <option value="Roasted Nuts">Roasted Nuts</option>
+                <option value="Toast">Toast</option>
+                <option value="Toasted Coconut">Toasted Coconut</option>
+            </select>
+        )
+    }
+    addSmokeyFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorWoodSpice}>
+                <option value="Top">Smokey</option>
+                <option value="Smokey">SMOKEY</option>
+                <option value="Campfire">Campfire</option>
+                <option value="Toasted Wood">Toasted Wood</option>
+                <option value="Bacon">Bacon</option>
+                <option value="Peat">Peat</option>
+            </select>
+        )
+    }
+    addSpiceFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorWoodSpice}>
+                <option value="Top">Spice</option>
+                <option value="Spice">SPICE</option>
+                <option value="Black Licorice">Black Licorice</option>
+                <option value="Chinese Five Spice">Chinese Five Spice</option>
+                <option value="Cinnamon">Cinnamon</option>
+                <option value="Clove">Clove</option>
+                <option value="Dill">Dill</option>
+                <option value="Nutmeg">Nutmeg</option>
+                <option value="Black Pepper">Black Pepper</option>
+                <option value="Star Anise">Star Anise</option>
+                <option value="Vanilla">Vanilla</option>
+            </select>
+        )
+    }
+    addOxidationFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorWoodSpice}>
+                <option value="Top">Oxidation</option>
+                <option value="Oxidation">OXIDATION</option>
+                <option value="Brown Sugar">Brown Sugar</option>
+                <option value="Burnt Sugar">Burnt Sugar</option>
+                <option value="Butterscotch">Butterscotch</option>
+                <option value="Carmel">Carmel</option>
+                <option value="Caramelized Sugar">Caramelized Sugar</option>
+                <option value="Crem Brulee">Crem Brulee</option>
+                <option value="Honey">Honey</option>
+                <option value="Molasses">Molasses</option>
+                <option value="Soy Sauce">Soy Sauce</option>
+            </select>
+        )
+    }
+    addBiologicalFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorBiologicalChemical}>
+                <option value="Top">Biological</option>
+                <option value="Biological">BIOLOGICAL</option>
+                <option value="Barnyard">Barnyard</option>
+                <option value="Butter">Butter</option>
+                <option value="Cat Urine">Cat Urine</option>
+                <option value="Horse Stable">Horse Stable</option>
+                <option value="Manure">Manure</option>
+                <option value="Mildew">Mildew</option>
+                <option value="Moldy">Moldy</option>
+                <option value="Mousey">Mousey</option>
+                <option value="Rotting Meat">Rotting Meat</option>
+                <option value="Skunk">Skunk</option>
+                <option value="Spoiled Fruit">Spoiled Fruit</option>
+                <option value="Sweaty">Sweaty</option>
+                <option value="Vinegar">Vinegar</option>
+                <option value="Wet Basement">Wet Basement</option>
+                <option value="Wet Dog">Wet Dog</option>
+                <option value="Wet Wool">Wet Wool</option>
+                <option value="Yeast">Yeast</option>
+            </select>
+        )
+    }
+    addChemicalFlavor(){
+        return (
+            <select value="Top" onChange={this.addFlavorBiologicalChemical}>
+                <option value="Top">Chemical</option>
+                <option value="Chemical">CHEMICAL</option>
+                <option value="Acrid">Acrid</option>
+                <option value="Ammonia">Ammonia</option>
+                <option value="Asphault">Asphault</option>
+                <option value="Cloth">Cloth</option>
+                <option value="Disinfectant">Disinfectant</option>
+                <option value="Gasoline">Gasoline</option>
+                <option value="Hospital">Hospital</option>
+                <option value="Kerosene">Kerosene</option>
+                <option value="Band-aid">Band-aid</option>
+                <option value="Medicine">Medicine</option>
                 <option value="Mothballs">Mothballs</option>
                 <option value="Nail Polish Remover">Nail Polish Remover</option>
                 <option value="Plastic">Plastic</option>
