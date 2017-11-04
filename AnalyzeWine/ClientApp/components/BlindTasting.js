@@ -28,6 +28,9 @@ var Blind = (function (_super) {
         _this.changeSmellComplexity = _this.changeSmellComplexity.bind(_this);
         _this.changeSmellAlcohol = _this.changeSmellAlcohol.bind(_this);
         _this.addAromaFruitFloral = _this.addAromaFruitFloral.bind(_this);
+        _this.addAromaEarthMineral = _this.addAromaEarthMineral.bind(_this);
+        _this.addAromaWoodSpice = _this.addAromaWoodSpice.bind(_this);
+        _this.addAromaBiologicalChemical = _this.addAromaBiologicalChemical.bind(_this);
         _this.clearAroma = _this.clearAroma.bind(_this);
         // Taste Constructors
         _this.changeTasteIntensity = _this.changeTasteIntensity.bind(_this);
@@ -74,6 +77,15 @@ var Blind = (function (_super) {
     };
     Blind.prototype.addAromaFruitFloral = function (e) {
         this.props.addAroma(e.target.value, "fruitFloral");
+    };
+    Blind.prototype.addAromaEarthMineral = function (e) {
+        this.props.addAroma(e.target.value, "earthMineral");
+    };
+    Blind.prototype.addAromaWoodSpice = function (e) {
+        this.props.addAroma(e.target.value, "woodSpice");
+    };
+    Blind.prototype.addAromaBiologicalChemical = function (e) {
+        this.props.addAroma(e.target.value, "biologicalChemical");
     };
     Blind.prototype.clearAroma = function (aromaCategory) {
         this.props.clearAroma(aromaCategory);
@@ -151,61 +163,43 @@ var Blind = (function (_super) {
                         " : ",
                         React.createElement("b", null, this.props.notes.nose.smellProfile.fruitFloral.toString()),
                         React.createElement("button", { onClick: function () { return _this.clearAroma("fruitFloral"); } }, "Clear")),
-                    this.addFruitFloral(),
-                    React.createElement("select", { value: "Tree Fruit" },
-                        React.createElement("option", { value: "Tree Fruit" }, "Tree Fruit")),
-                    React.createElement("select", { value: "Berries" },
-                        React.createElement("option", { value: "Berries" }, "Berries")),
-                    React.createElement("select", { value: "Tropical Fruit" },
-                        React.createElement("option", { value: "Tropical Fruit" }, "Tropical Fruit")),
-                    React.createElement("select", { value: "Dried Fruit" },
-                        React.createElement("option", { value: "Dried Fruit" }, "Dried Fruit")),
-                    React.createElement("select", { value: "Artificial" },
-                        React.createElement("option", { value: "Artificial" }, "Artificial")),
-                    React.createElement("select", { value: "Floral" },
-                        React.createElement("option", { value: "Floral" }, "Floral")),
+                    this.addCitrus(),
+                    this.addTreeFruit(),
+                    this.addBerries(),
+                    this.addTropicalFruit(),
+                    this.addDriedFruit(),
+                    this.addArtificial(),
+                    this.addFloral(),
                     React.createElement("p", null),
                     React.createElement("p", null,
                         React.createElement("i", null, "Earth & Mineral"),
                         " : ",
-                        React.createElement("b", null, "Dirt"),
-                        React.createElement("button", null, "Clear")),
-                    React.createElement("select", { value: "Earthy" },
-                        React.createElement("option", { value: "Earthy" }, "Earthy")),
-                    React.createElement("select", { value: "Mineral" },
-                        React.createElement("option", { value: "Mineral" }, "Mineral")),
-                    React.createElement("select", { value: "Plant Matter" },
-                        React.createElement("option", { value: "Plant Matter" }, "Plant Matter")),
-                    React.createElement("select", { value: "Herbal" },
-                        React.createElement("option", { value: "Herbal" }, "Herbal")),
-                    React.createElement("select", { value: "Vegetable" },
-                        React.createElement("option", { value: "Vegetable" }, "Vegetable")),
+                        React.createElement("b", null, this.props.notes.nose.smellProfile.earthMineral.toString()),
+                        React.createElement("button", { onClick: function () { return _this.clearAroma("earthMineral"); } }, "Clear")),
+                    this.addEarth(),
+                    this.addMineral(),
+                    this.addPlantMatter(),
+                    this.addHerbal(),
+                    this.addVegetable(),
                     React.createElement("p", null),
                     React.createElement("p", null,
                         React.createElement("i", null, "Wood & Spice"),
                         " : ",
-                        React.createElement("b", null, "Smoke : Toast : Hazelnut"),
-                        React.createElement("button", null, "Clear")),
-                    React.createElement("select", { value: "Wood" },
-                        React.createElement("option", { value: "Wood" }, "Wood")),
-                    React.createElement("select", { value: "Roasted" },
-                        React.createElement("option", { value: "Roasted" }, "Roasted")),
-                    React.createElement("select", { value: "Smokey" },
-                        React.createElement("option", { value: "Smokey" }, "Smokey")),
-                    React.createElement("select", { value: "Spice" },
-                        React.createElement("option", { value: "Spice" }, "Spice")),
-                    React.createElement("select", { value: "Oxidation" },
-                        React.createElement("option", { value: "Oxidation" }, "Oxidation")),
+                        React.createElement("b", null, this.props.notes.nose.smellProfile.woodSpice.toString()),
+                        React.createElement("button", { onClick: function () { return _this.clearAroma("woodSpice"); } }, "Clear")),
+                    this.addWood(),
+                    this.addRoasted(),
+                    this.addSmokey(),
+                    this.addSpice(),
+                    this.addOxidation(),
                     React.createElement("p", null),
                     React.createElement("p", null,
                         React.createElement("i", null, "Biological & Chemical"),
                         " : ",
-                        React.createElement("b", null, "Bacon : Chlorine"),
-                        React.createElement("button", null, "Clear")),
-                    React.createElement("select", { value: "Biological" },
-                        React.createElement("option", { value: "Biological" }, "Biological")),
-                    React.createElement("select", { value: "Chemical" },
-                        React.createElement("option", { value: "Chemical" }, "Chemical")))),
+                        React.createElement("b", null, this.props.notes.nose.smellProfile.biologicalChemical.toString()),
+                        React.createElement("button", { onClick: function () { return _this.clearAroma("biologicalChemical"); } }, "Clear")),
+                    this.addBiological(),
+                    this.addChemical())),
             React.createElement("hr", null),
             React.createElement("h3", null, "Analyze by Taste"),
             React.createElement("p", null,
@@ -466,14 +460,271 @@ var Blind = (function (_super) {
             React.createElement("option", { value: "Long" }, "Long (5-7 sec)"),
             React.createElement("option", { value: "Very Long" }, "Very Long (>8 sec)")));
     };
-    Blind.prototype.addFruitFloral = function () {
-        return (React.createElement("select", { value: "Citrus", onChange: this.addAromaFruitFloral },
-            React.createElement("option", { value: "Citrus" }, "Citrus"),
+    Blind.prototype.addCitrus = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaFruitFloral },
+            React.createElement("option", { value: "Top" }, "Citrus"),
+            React.createElement("option", { value: "Citrus" }, "CITRUS"),
             React.createElement("option", { value: "Grapefruit" }, "Grapefruit"),
             React.createElement("option", { value: "Lemon" }, "Lemon"),
             React.createElement("option", { value: "Lime" }, "Lime"),
             React.createElement("option", { value: "Orange" }, "Orange"),
             React.createElement("option", { value: "Tangerine" }, "Tangerine")));
+    };
+    Blind.prototype.addTreeFruit = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaFruitFloral },
+            React.createElement("option", { value: "Top" }, "Tree Fruit"),
+            React.createElement("option", { value: "Tree Fruit" }, "TREE FRUIT"),
+            React.createElement("option", { value: "Apple" }, "Apple"),
+            React.createElement("option", { value: "Apricot" }, "Apricot"),
+            React.createElement("option", { value: "Cherry" }, "Cherry"),
+            React.createElement("option", { value: "Nectarine" }, "Nectarine"),
+            React.createElement("option", { value: "Peach" }, "Peach"),
+            React.createElement("option", { value: "Pear" }, "Pear"),
+            React.createElement("option", { value: "Persimmon" }, "Persimmon"),
+            React.createElement("option", { value: "Plum" }, "Plum")));
+    };
+    Blind.prototype.addBerries = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaFruitFloral },
+            React.createElement("option", { value: "Top" }, "Berries"),
+            React.createElement("option", { value: "Berries" }, "BERRIES"),
+            React.createElement("option", { value: "Blackberry" }, "Blackberry"),
+            React.createElement("option", { value: "Blueberry" }, "Blueberry"),
+            React.createElement("option", { value: "Cranberry" }, "Cranberry"),
+            React.createElement("option", { value: "Currant" }, "Currant"),
+            React.createElement("option", { value: "Gooseberry" }, "Gooseberry"),
+            React.createElement("option", { value: "Grape" }, "Grape"),
+            React.createElement("option", { value: "Loganberry" }, "Loganberry"),
+            React.createElement("option", { value: "Raspberry" }, "Raspberry"),
+            React.createElement("option", { value: "Strawberry" }, "Strawberry")));
+    };
+    Blind.prototype.addTropicalFruit = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaFruitFloral },
+            React.createElement("option", { value: "Top" }, "Tropical Fruit"),
+            React.createElement("option", { value: "Tropical Fruit" }, "TROPICAL FRUIT"),
+            React.createElement("option", { value: "Asian Pear" }, "Asian Pear"),
+            React.createElement("option", { value: "Banana" }, "Banana"),
+            React.createElement("option", { value: "Guava" }, "Guava"),
+            React.createElement("option", { value: "Kiwi" }, "Kiwi"),
+            React.createElement("option", { value: "Lychee" }, "Lychee"),
+            React.createElement("option", { value: "Mango" }, "Mango"),
+            React.createElement("option", { value: "Melon" }, "Melon"),
+            React.createElement("option", { value: "Papaya" }, "Papaya"),
+            React.createElement("option", { value: "Passionfruit" }, "Passionfruit"),
+            React.createElement("option", { value: "Pineapple" }, "Pineapple"),
+            React.createElement("option", { value: "Plantain" }, "Plantain"),
+            React.createElement("option", { value: "Star Fruit" }, "Star Fruit")));
+    };
+    Blind.prototype.addDriedFruit = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaFruitFloral },
+            React.createElement("option", { value: "Top" }, "Dried Fruit"),
+            React.createElement("option", { value: "Dried Fruit" }, "DRIED FRUIT"),
+            React.createElement("option", { value: "Date" }, "Date"),
+            React.createElement("option", { value: "Fig" }, "Fig"),
+            React.createElement("option", { value: "Golden Raisin" }, "Golden Raisin"),
+            React.createElement("option", { value: "Jam & Jelly" }, "Jam & Jelly"),
+            React.createElement("option", { value: "Prune" }, "Prune"),
+            React.createElement("option", { value: "Raisin" }, "Raisin")));
+    };
+    Blind.prototype.addArtificial = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaFruitFloral },
+            React.createElement("option", { value: "Top" }, "Artificial"),
+            React.createElement("option", { value: "Artificial" }, "ARTIFICIAL"),
+            React.createElement("option", { value: "Fruit Cocktail" }, "Fruit Cocktail"),
+            React.createElement("option", { value: "Froot Loop" }, "Froot Loop"),
+            React.createElement("option", { value: "Fruit Punch" }, "Fruit Punch"),
+            React.createElement("option", { value: "Grape Soda" }, "Grape Soda"),
+            React.createElement("option", { value: "Hard Candy" }, "Hard Candy"),
+            React.createElement("option", { value: "Red Licorice" }, "Red Licorice")));
+    };
+    Blind.prototype.addFloral = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaFruitFloral },
+            React.createElement("option", { value: "Top" }, "Floral"),
+            React.createElement("option", { value: "Floral" }, "FLORAL"),
+            React.createElement("option", { value: "Acadia" }, "Acadia"),
+            React.createElement("option", { value: "Apple Blossom" }, "Apple Blossom"),
+            React.createElement("option", { value: "Gardenia" }, "Gardenia"),
+            React.createElement("option", { value: "Geranium" }, "Geranium "),
+            React.createElement("option", { value: "Honeysuckle" }, "Honeysuckle"),
+            React.createElement("option", { value: "Lavender" }, "Lavender"),
+            React.createElement("option", { value: "Orange Blossom" }, "Orange Blossom"),
+            React.createElement("option", { value: "Perfume" }, "Perfume"),
+            React.createElement("option", { value: "Rose" }, "Rose"),
+            React.createElement("option", { value: "Violet" }, "Violet")));
+    };
+    Blind.prototype.addEarth = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaEarthMineral },
+            React.createElement("option", { value: "Top" }, "Earth"),
+            React.createElement("option", { value: "Earth" }, "EARTH"),
+            React.createElement("option", { value: "Clay" }, "Clay"),
+            React.createElement("option", { value: "Dirt" }, "Dirt"),
+            React.createElement("option", { value: "Dusty" }, "Dusty"),
+            React.createElement("option", { value: "Leather" }, "Leather"),
+            React.createElement("option", { value: "Gamey" }, "Gamey"),
+            React.createElement("option", { value: "Moss" }, "Moss"),
+            React.createElement("option", { value: "Mushroom" }, "Mushroom")));
+    };
+    Blind.prototype.addMineral = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaEarthMineral },
+            React.createElement("option", { value: "Top" }, "Mineral"),
+            React.createElement("option", { value: "Mineral" }, "MINERAL"),
+            React.createElement("option", { value: "Chalk" }, "Chalk"),
+            React.createElement("option", { value: "Concrete Drying" }, "Concrete Drying"),
+            React.createElement("option", { value: "Drywall" }, "Drywall"),
+            React.createElement("option", { value: "Flint" }, "Flint"),
+            React.createElement("option", { value: "Metallic" }, "Metallic"),
+            React.createElement("option", { value: "Petrichor" }, "Petrichor"),
+            React.createElement("option", { value: "Sheetrock" }, "Sheetrock"),
+            React.createElement("option", { value: "Slate" }, "Slate"),
+            React.createElement("option", { value: "Vitamin Jar" }, "Vitamin Jar"),
+            React.createElement("option", { value: "Wet Granite" }, "Wet Granite"),
+            React.createElement("option", { value: "Wet Sand" }, "Wet Sand")));
+    };
+    Blind.prototype.addPlantMatter = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaEarthMineral },
+            React.createElement("option", { value: "Top" }, "Plant Matter"),
+            React.createElement("option", { value: "Plant Matter" }, "PLANT MATTER"),
+            React.createElement("option", { value: "Alfalfa" }, "Alfalfa"),
+            React.createElement("option", { value: "Cut Grass" }, "Cut Grass"),
+            React.createElement("option", { value: "Hay" }, "Hay"),
+            React.createElement("option", { value: "Pine Sap" }, "Pine Sap"),
+            React.createElement("option", { value: "Resin" }, "Resin"),
+            React.createElement("option", { value: "Steamy" }, "Steamy"),
+            React.createElement("option", { value: "Straw" }, "Straw"),
+            React.createElement("option", { value: "Tea Leaves" }, "Tea Leaves"),
+            React.createElement("option", { value: "Tobacco" }, "Tobacco")));
+    };
+    Blind.prototype.addHerbal = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaEarthMineral },
+            React.createElement("option", { value: "Top" }, "Herbal"),
+            React.createElement("option", { value: "Herbal" }, "HERBAL"),
+            React.createElement("option", { value: "Basil" }, "Basil"),
+            React.createElement("option", { value: "Dill" }, "Dill"),
+            React.createElement("option", { value: "Eucalyptus" }, "Eucalyptus"),
+            React.createElement("option", { value: "Herbal Tea" }, "Herbal Tea"),
+            React.createElement("option", { value: "Menthol" }, "Menthol"),
+            React.createElement("option", { value: "Mint" }, "Mint"),
+            React.createElement("option", { value: "Rosemary" }, "Rosemary"),
+            React.createElement("option", { value: "Tarragon" }, "Tarragon")));
+    };
+    Blind.prototype.addVegetable = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaEarthMineral },
+            React.createElement("option", { value: "Top" }, "Vegetable"),
+            React.createElement("option", { value: "Vegetable" }, "VEGETABLE"),
+            React.createElement("option", { value: "Artichoke" }, "Artichoke"),
+            React.createElement("option", { value: "Asparagus" }, "Asparagus"),
+            React.createElement("option", { value: "Black Olive" }, "Black Olive"),
+            React.createElement("option", { value: "Fennel" }, "Fennel"),
+            React.createElement("option", { value: "Green Bean" }, "Green Bean"),
+            React.createElement("option", { value: "Green Olive" }, "Green Olive"),
+            React.createElement("option", { value: "Pepper" }, "Pepper")));
+    };
+    Blind.prototype.addWood = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaWoodSpice },
+            React.createElement("option", { value: "Top" }, "Wood"),
+            React.createElement("option", { value: "Wood" }, "WOOD"),
+            React.createElement("option", { value: "Cedar" }, "Cedar"),
+            React.createElement("option", { value: "Decomposing Log" }, "Decomposing Log"),
+            React.createElement("option", { value: "Oak" }, "Oak"),
+            React.createElement("option", { value: "Pencil Shavings" }, "Pencil Shavings"),
+            React.createElement("option", { value: "Sawdust" }, "Sawdust"),
+            React.createElement("option", { value: "Tree Bark" }, "Tree Bark")));
+    };
+    Blind.prototype.addRoasted = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaWoodSpice },
+            React.createElement("option", { value: "Top" }, "Roasted"),
+            React.createElement("option", { value: "Roasted" }, "ROASTED"),
+            React.createElement("option", { value: "Burnt Toast" }, "Burnt Toast"),
+            React.createElement("option", { value: "Chocolate" }, "Chocolate"),
+            React.createElement("option", { value: "Cocoa Powder" }, "Cocoa Powder"),
+            React.createElement("option", { value: "Coffee" }, "Coffee"),
+            React.createElement("option", { value: "Biscuits" }, "Biscuits"),
+            React.createElement("option", { value: "Mocha" }, "Mocha"),
+            React.createElement("option", { value: "Roasted Nuts" }, "Roasted Nuts"),
+            React.createElement("option", { value: "Toast" }, "Toast"),
+            React.createElement("option", { value: "Toasted Coconut" }, "Toasted Coconut")));
+    };
+    Blind.prototype.addSmokey = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaWoodSpice },
+            React.createElement("option", { value: "Top" }, "Smokey"),
+            React.createElement("option", { value: "Smokey" }, "SMOKEY"),
+            React.createElement("option", { value: "Campfire" }, "Campfire"),
+            React.createElement("option", { value: "Toasted Wood" }, "Toasted Wood"),
+            React.createElement("option", { value: "Bacon" }, "Bacon"),
+            React.createElement("option", { value: "Peat" }, "Peat")));
+    };
+    Blind.prototype.addSpice = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaWoodSpice },
+            React.createElement("option", { value: "Top" }, "Spice"),
+            React.createElement("option", { value: "Spice" }, "SPICE"),
+            React.createElement("option", { value: "Black Licorice" }, "Black Licorice"),
+            React.createElement("option", { value: "Chinese Five Spice" }, "Chinese Five Spice"),
+            React.createElement("option", { value: "Cinnamon" }, "Cinnamon"),
+            React.createElement("option", { value: "Clove" }, "Clove"),
+            React.createElement("option", { value: "Dill" }, "Dill"),
+            React.createElement("option", { value: "Nutmeg" }, "Nutmeg"),
+            React.createElement("option", { value: "Black Pepper" }, "Black Pepper"),
+            React.createElement("option", { value: "Star Anise" }, "Star Anise"),
+            React.createElement("option", { value: "Vanilla" }, "Vanilla")));
+    };
+    Blind.prototype.addOxidation = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaWoodSpice },
+            React.createElement("option", { value: "Top" }, "Oxidation"),
+            React.createElement("option", { value: "Oxidation" }, "OXIDATION"),
+            React.createElement("option", { value: "Brown Sugar" }, "Brown Sugar"),
+            React.createElement("option", { value: "Burnt Sugar" }, "Burnt Sugar"),
+            React.createElement("option", { value: "Butterscotch" }, "Butterscotch"),
+            React.createElement("option", { value: "Carmel" }, "Carmel"),
+            React.createElement("option", { value: "Caramelized Sugar" }, "Caramelized Sugar"),
+            React.createElement("option", { value: "Crem Brulee" }, "Crem Brulee"),
+            React.createElement("option", { value: "Honey" }, "Honey"),
+            React.createElement("option", { value: "Molasses" }, "Molasses"),
+            React.createElement("option", { value: "Soy Sauce" }, "Soy Sauce")));
+    };
+    Blind.prototype.addBiological = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaBiologicalChemical },
+            React.createElement("option", { value: "Top" }, "Biological"),
+            React.createElement("option", { value: "Biological" }, "BIOLOGICAL"),
+            React.createElement("option", { value: "Barnyard" }, "Barnyard"),
+            React.createElement("option", { value: "Butter" }, "Butter"),
+            React.createElement("option", { value: "Cat Urine" }, "Cat Urine"),
+            React.createElement("option", { value: "Horse Stable" }, "Horse Stable"),
+            React.createElement("option", { value: "Manure" }, "Manure"),
+            React.createElement("option", { value: "Mildew" }, "Mildew"),
+            React.createElement("option", { value: "Moldy" }, "Moldy"),
+            React.createElement("option", { value: "Mousey" }, "Mousey"),
+            React.createElement("option", { value: "Rotting Meat" }, "Rotting Meat"),
+            React.createElement("option", { value: "Skunk" }, "Skunk"),
+            React.createElement("option", { value: "Spoiled Fruit" }, "Spoiled Fruit"),
+            React.createElement("option", { value: "Sweaty" }, "Sweaty"),
+            React.createElement("option", { value: "Vinegar" }, "Vinegar"),
+            React.createElement("option", { value: "Wet Basement" }, "Wet Basement"),
+            React.createElement("option", { value: "Wet Dog" }, "Wet Dog"),
+            React.createElement("option", { value: "Wet Wool" }, "Wet Wool"),
+            React.createElement("option", { value: "Yeast" }, "Yeast")));
+    };
+    Blind.prototype.addChemical = function () {
+        return (React.createElement("select", { value: "Top", onChange: this.addAromaBiologicalChemical },
+            React.createElement("option", { value: "Top" }, "Chemical"),
+            React.createElement("option", { value: "Chemical" }, "CHEMICAL"),
+            React.createElement("option", { value: "Acrid" }, "Acrid"),
+            React.createElement("option", { value: "Ammonia" }, "Ammonia"),
+            React.createElement("option", { value: "Asphault" }, "Asphault"),
+            React.createElement("option", { value: "Cloth" }, "Cloth"),
+            React.createElement("option", { value: "Disinfectant" }, "Disinfectant"),
+            React.createElement("option", { value: "Gasoline" }, "Gasoline"),
+            React.createElement("option", { value: "Hospital" }, "Hospital"),
+            React.createElement("option", { value: "Kerosene" }, "Kerosene"),
+            React.createElement("option", { value: "Band-aid" }, "Band-aid"),
+            React.createElement("option", { value: "Medicinal" }, "Medicinal"),
+            React.createElement("option", { value: "Mothballs" }, "Mothballs"),
+            React.createElement("option", { value: "Nail Polish Remover" }, "Nail Polish Remover"),
+            React.createElement("option", { value: "Plastic" }, "Plastic"),
+            React.createElement("option", { value: "Rubber Cement" }, "Rubber Cement"),
+            React.createElement("option", { value: "Rubbing Alcohol" }, "Rubbing Alcohol"),
+            React.createElement("option", { value: "Shoe Polish" }, "Shoe Polish"),
+            React.createElement("option", { value: "Soapy" }, "Soapy"),
+            React.createElement("option", { value: "Sulphur" }, "Sulphur"),
+            React.createElement("option", { value: "Wet Newspaper" }, "Wet Newspaper")));
     };
     return Blind;
 }(React.Component));
