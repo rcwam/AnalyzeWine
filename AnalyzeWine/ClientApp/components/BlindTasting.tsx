@@ -13,50 +13,93 @@ type BlindProps =
 class Blind extends React.Component<BlindProps, {}> {
     changeWineType(e: any) {
         this.props.setWineType(e.target.value);
+        // Run Varietal
     }
 
     // Change Sight State
     changeColor(e: any) {
         this.props.setColor(e.target.value);
+        this.age();
     }
+
     changeDepth(e: any) {
         this.props.setDepth(e.target.value);
+        // Run Varietal - Thick skin vs thin skin
     }
+
     changeClarity(e: any) {
         this.props.setClarity(e.target.value);
+        // Run Quality
     }
+
     changeSediment(e: any) {
         this.props.setSediment(e.target.value);
+        this.age();
     }
+
     changeViscosity(e: any) {
         this.props.setViscosity(e.target.value);
+        // Run Climate - new world style is more viscous
+        // Run Varietal
     }
+
     changeCarbonation(e: any) {
         this.props.setCarbonation(e.target.value);
+        // determine carbonation style
     }
 
     // Change Smell State
     changeSmellIntensity(e: any) {
         this.props.setSmellIntensity(e.target.value);
+        // Run Quality - indicates stressed vines
     }
+
     changeSmellComplexity(e: any) {
         this.props.setSmellComplexity(e.target.value);
+        // Run Quality
+        // possible malolactic fermentation
     }
+
     changeSmellAlcohol(e: any) {
         this.props.setSmellAlcohol(e.target.value);
+        // Run Climate- new world style is more alcohol
+        // Update Varietal with Climate
     }
+
     addAromaFruitFloral(e: any) {
-        this.props.addAroma(e.target.value,"fruitFloral");
+        this.props.addAroma(e.target.value, "fruitFloral");
+        this.barrel();
+        // Run Age (young is fruit & floral (1-3 years))
+        // Run Climate - New World is more FruitFloral
+        // Update Varietal with Climate
+        // Varietal - Aromas
     }
+
     addAromaEarthMineral(e: any) {
-        this.props.addAroma(e.target.value,"earthMineral");
+        this.props.addAroma(e.target.value, "earthMineral");
+        this.barrel();
+        // Run Age (as wine ages it loses FruitFloral and gains EarthMineral (3-5))
+        // Run Climate - Old World more EarthMineral
+        // Update Varietal with Climate
+        // Varietal - Aromas
     }
+
     addAromaWoodSpice(e: any) {
-        this.props.addAroma(e.target.value,"woodSpice");
+        this.props.addAroma(e.target.value, "woodSpice");
+        this.barrel();
+        // Run Age (barrel aging is darker/browner (brown sugar & molasses) - Lower age estimate) - Update Barrel Container
+        // Run Climate - New World uses more oak
+        // Update Varietal with Climate
+        // Varietal - Aromas
     }
+
     addAromaBiologicalChemical(e: any) {
-        this.props.addAroma(e.target.value,"biologicalChemical");
+        this.props.addAroma(e.target.value, "biologicalChemical");
+        this.barrel();
+        // Run Age (yeast indicates youth - aging wine gains non-fermentation BiologicalChemical strong after 5 years along with carmel)
+        // Varietal - Aromas
     }
+
     clearAroma(aromaCategory: string) {
         this.props.clearAroma(aromaCategory);
     }
@@ -64,42 +107,294 @@ class Blind extends React.Component<BlindProps, {}> {
     // Change Taste State
     changeTasteIntensity(e: any) {
         this.props.setTasteIntensity(e.target.value);
+        // Run Quality - indicates stressed vines
     }
+
     changeTasteComplexity(e: any) {
         this.props.setTasteComplexity(e.target.value);
+        // Run Quality
+        // possible malolactic fermentation
     }
+
     changeBody(e: any) {
         this.props.setBody(e.target.value);
+        // Run Climate - new world style is more viscous
+        // Run Quality - Balance
+        // Run Varietal
     }
+
     changeSweetness(e: any) {
         this.props.setSweetness(e.target.value);
+        // Run Age (sweeter is darker)
+        // Run Quality - Balance
+        // Run Varietal - Certain white wine grapes are used in sweet wines.
     }
+
     changeAcidity(e: any) {
         this.props.setAcidity(e.target.value);
+        // Run Climate
+        // Run Quality - Balance
+        // Run Varietal
     }
+
     changeTannins(e: any) {
         this.props.setTannins(e.target.value);
+        // Run Age (aggressive, astringent, harsh tannins are youthful, soft tannins are aged)
+        // Run Quality - Balance
+        // Run Varietal - Thick skin grapes produce more tannins
     }
+
     changeTasteAlcohol(e: any) {
         this.props.setTasteAlcohol(e.target.value);
+        // Run Climate - new world style is more alcohol
+        // Update Varietal with Climate
     }
+
     changeFinish(e: any) {
         this.props.setFinish(e.target.value);
+        // Run Quality
     }
+
     addFlavorFruitFloral(e: any) {
-        this.props.addFlavor(e.target.value,"fruitFloral");
+        this.props.addFlavor(e.target.value, "fruitFloral");
+        this.barrel();
+        // Run Age
+        // Run Climate - New World is more FruitFloral
+        // Update Varietal with Climate
+        // Varietal - Flavors
     }
+
     addFlavorEarthMineral(e: any) {
-        this.props.addFlavor(e.target.value,"earthMineral");
+        this.props.addFlavor(e.target.value, "earthMineral");
+        this.barrel();
+        // Run Age
+        // Run Climate - Old World is more EarthMineral
+        // Update Varietal with Climate
+        // Varietal - Flavors
     }
+
     addFlavorWoodSpice(e: any) {
-        this.props.addFlavor(e.target.value,"woodSpice");
+        this.props.addFlavor(e.target.value, "woodSpice");
+        this.barrel();
+        // Run Age - Update Barrel
+        // Run Climate - New World uses more Oak
+        // Run Varietal - Certain white wine grapes are oak aged
+        // Varietal - Flavors
     }
+
     addFlavorBiologicalChemical(e: any) {
-        this.props.addFlavor(e.target.value,"biologicalChemical");
+        this.props.addFlavor(e.target.value, "biologicalChemical");
+        this.barrel();
+        // Run Age (yeast indicates youth - aging wine gains non-fermentation BiologicalChemical strong after 5 years along with carmel)
+        // Varietal - Flavors
     }
+
     clearFlavor(flavorCategory: string) {
         this.props.clearFlavor(flavorCategory);
+    }
+
+    barrel(){
+        const smellFruitFloral = this.props.notes.nose.smellProfile.fruitFloral;
+        const smellEarthMineral = this.props.notes.nose.smellProfile.earthMineral;
+        const smellWoodSpice = this.props.notes.nose.smellProfile.woodSpice;
+        const smellBiologicalChemical = this.props.notes.nose.smellProfile.biologicalChemical;
+
+        let smell: string[];
+        smell = [];
+        smell = smell.concat(smellFruitFloral, smellEarthMineral, smellWoodSpice, smellBiologicalChemical);
+
+        // Light toasting toastedBread, Nuts
+        let lightToasting = 0;
+        if (smell.indexOf("toast") > -1) {
+            lightToasting++;
+        }
+        if (smell.indexOf("nuts") > -1) {
+            lightToasting++;
+        }
+        // heavy toasting roasted coffee beans, dark chocolate
+        let heavyToasting = 0;
+        if (smell.indexOf("coffee") > -1) {
+            heavyToasting++;
+        }
+        if (smell.indexOf("dark chocolate") > -1) {
+            heavyToasting++;
+        }
+
+        // Oak Barrel
+        let oakBarrel = 0;
+        if (smell.indexOf("vanilla") > -1) {
+            oakBarrel++;
+        }
+        // French Oak
+        // elegantVanilla, cinnamon, cloves, nutmeg
+        let frenchOak = 0;
+        if (smell.indexOf("cinnamon") > -1) {
+            frenchOak++;
+        }
+        if (smell.indexOf("cloves") > -1) {
+            frenchOak++;
+        }
+        if (smell.indexOf("nutmeg") > -1) {
+            frenchOak++;
+        }
+
+        // American Oak
+        // aggressiveVanilla, toastedCoconut, dill
+        let americanOak = 0;
+        if (smell.indexOf("coconut") > -1) {
+            americanOak++;
+        }
+        if (smell.indexOf("dill") > -1) {
+            americanOak++;
+        }
+
+        //barrel
+        // aging (none, possible, likely)
+        // wood (oak, american oak, french oak)
+        // roast (none, light, heavy)
+
+        let ageing = "None";
+        let wood = "None";
+        let toast = "None";
+
+        // Wood
+        if (oakBarrel + frenchOak + americanOak > 0) {
+            if (oakBarrel > 0) {
+                wood = "Oak";
+            }
+            if (frenchOak > 0) {
+                wood = "French Oak";
+            }
+            if (americanOak > 0) {
+                wood = "American Oak";
+            }
+        }
+
+        // Toast
+        if (lightToasting + heavyToasting > 0) {
+            toast = "Light";
+            if (heavyToasting > 0) {
+                toast = "Heavy";
+            }
+        }
+
+        // Aging
+        if (oakBarrel + frenchOak + americanOak + lightToasting + heavyToasting > 0) {
+            ageing = "Possible";
+            if (oakBarrel + frenchOak + americanOak + lightToasting + heavyToasting > 2) {
+                ageing = "Likely";
+            }
+        }
+
+        this.props.setBarrel(ageing, wood, toast);
+    }
+
+
+    age() {
+        let min = 1;
+        let max = 3;
+        switch (this.props.notes.eye.wineType) {
+            // get initial guess based on color
+            case "Red":
+                if (this.props.notes.eye.sediment = ("Light" || "Heavy")) {
+                    min = 5;
+                    max = 99;
+                    return;
+                }
+                else {
+                    switch (this.props.notes.eye.color) {
+                        case "Purple":
+                            min = 0;
+                            max = 2;
+                            return;
+                        case "Ruby":
+                            min = 1;
+                            max = 3;
+                            return;
+                        case "Red":
+                            min = 2;
+                            max = 5;
+                            return;
+                        case "Garnet":
+                            min = 4;
+                            max = 9;
+                            return;
+                        case "Brick":
+                            min = 5;
+                            max = 99;
+                            return;
+                        case "Brown":
+                            min = 99;
+                            max = 99;
+                            return;
+                        default:
+                            return;
+                    }
+                }
+            case "White":
+                switch (this.props.notes.eye.color) {
+                    case "Clear" || "Greenish":
+                        min = 0;
+                        max = 2;
+                        return;
+                    case "Yellow":
+                        min = 2;
+                        max = 4;
+                        return;
+                    case "Golden":
+                        min = 4;
+                        max = 7;
+                        return;
+                    case "Amber":
+                        min = 5;
+                        max = 99;
+                        return;
+                    case "Brown":
+                        min = 99;
+                        max = 99;
+                        return;
+                    default:
+                        return;
+                }
+            case "Rose":
+                switch (this.props.notes.eye.color) {
+                    case "Pink":
+                        min = 0;
+                        max = 2;
+                        return;
+                    case "Salmon":
+                        min = 2;
+                        max = 4;
+                        return;
+                    case "Orange":
+                        min = 4;
+                        max = 7;
+                        return;
+                    case "Copper":
+                        min = 5;
+                        max = 99;
+                        return;
+                    case "Brown":
+                        min = 99;
+                        max = 99;
+                        return;
+                    default:
+                        return;
+                }
+        }
+
+        // Use aroma group to verify the final guess.
+        const smellFruitFloral = this.props.notes.nose.smellProfile.fruitFloral;
+        const smellEarthMineral = this.props.notes.nose.smellProfile.earthMineral;
+        const smellWoodSpice = this.props.notes.nose.smellProfile.woodSpice;
+        const smellBiologicalChemical = this.props.notes.nose.smellProfile.biologicalChemical;
+
+        // open up the range at the end to be more inclusive of possible dates
+        // Make sure numbers are positive
+
+        // run prop to update age numbers (min , max)
+
+
     }
 
 
@@ -139,6 +434,9 @@ class Blind extends React.Component<BlindProps, {}> {
         this.addFlavorWoodSpice = this.addFlavorWoodSpice.bind(this);
         this.addFlavorBiologicalChemical = this.addFlavorBiologicalChemical.bind(this);
         this.clearFlavor = this.clearFlavor.bind(this);
+
+        // Conclusion Constructors
+        this.barrel = this.barrel.bind(this);
     }
 
 
@@ -344,11 +642,13 @@ class Blind extends React.Component<BlindProps, {}> {
     whiteColorList() {
         return (
             <select value={this.props.notes.eye.color} onChange={this.changeColor}>
+                <option value="Clear">Greenish</option>
                 <option value="Greenish">Greenish</option>
                 <option value="Yellow">Yellow</option>
                 <option value="Straw">Straw</option>
                 <option value="Golden">Golden</option>
                 <option value="Amber">Amber</option>
+                <option value="Brown">Brown</option>
             </select>
         );
     }
@@ -361,6 +661,7 @@ class Blind extends React.Component<BlindProps, {}> {
                 <option value="Salmon">Salmon</option>
                 <option value="Orange">Orange</option>
                 <option value="Copper">Copper</option>
+                <option value="Brown">Brown</option>
             </select>
         );
     }
@@ -510,9 +811,14 @@ class Blind extends React.Component<BlindProps, {}> {
         return (
             <select value={this.props.notes.palate.tannins} onChange={this.changeTannins}>
                 <option value="None">None</option>
+                <option value="Refined">Refined</option>
+                <option value="Soft">Soft</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
+                <option value="Harsh">Harsh</option>
+                <option value="Astringent">Astringent</option>
+                <option value="Aggressive">Aggressive</option>
             </select>
         );
     }

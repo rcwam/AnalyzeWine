@@ -16,7 +16,7 @@ export interface BlindTastingState {
             smellIntensity: string,
             smellComplexity: string,
             smellAlcohol: string,
-            smellProfile:{
+            smellProfile: {
                 fruitFloral: string[],
                 earthMineral: string[],
                 woodSpice: string[],
@@ -32,13 +32,47 @@ export interface BlindTastingState {
             tannins: string,
             tasteAlcohol: string,
             finish: string
-            flavorProfile:{
+            flavorProfile: {
                 fruitFloral: string[],
                 earthMineral: string[],
                 woodSpice: string[],
                 biologicalChemical: string[]
             }
         }
+    }
+
+    conclusions: {
+        barrel:{
+            aging: string;
+            wood: string;
+            toast: string;
+        }
+        /*
+        style: string,
+        boytritis: string,
+        aging: {
+            container: string,
+            sur lie: string,
+            malolactic fermentation, string
+            months: {
+                min: number,
+                max: number,
+            }
+        }
+        age: { // oxidation in bottle.  adjust for oak barrel aging detected by oak & oxidation notes. Also adjust for sugar detected by sweetness.
+            min: number,
+            max: number,
+        }
+        place: {
+            climate: string,
+            country: string[],
+            region: string[],
+            appellation: string[],
+        }
+        varietal: string[],
+        quality: {score: string, min: number, max: number},
+
+    */
     }
 }
 
@@ -80,6 +114,13 @@ const initialBlindTastingState: BlindTastingState = {
                 biologicalChemical: []
             }
         }
+    },
+    conclusions: {
+        barrel: {
+            aging: "None",
+            wood: "None",
+            toast: "None",
+        }
     }
 };
 
@@ -112,10 +153,14 @@ interface SetFinish {type: 'SET_FINISH', selectFinish: string}
 interface AddFlavor{type: 'ADD_FLAVOR', flavorCategory: string, flavor: string}
 interface ClearFlavor{type: 'CLEAR_FLAVOR', flavorCategory: string}
 
+// Conclusion Interfaces
+interface SetBarrel {type: 'SET_BARREL', aging: string, wood: string, toast: string}
+
 
 type KnownAction = SetWineType | SetColor | SetDepth | SetClarity | SetSediment | SetViscosity | SetCarbonation
     | SetSmellIntensity | SetSmellComplexity | SetSmellAlcohol | AddAroma | ClearAroma
-    | SetTasteIntensity | SetTasteComplexity | SetBody | SetSweetness | SetAcidity | SetTannins | SetTasteAlcohol | SetFinish | AddFlavor | ClearFlavor;
+    | SetTasteIntensity | SetTasteComplexity | SetBody | SetSweetness | SetAcidity | SetTannins | SetTasteAlcohol | SetFinish | AddFlavor | ClearFlavor
+    | SetBarrel;
 
 export const  actionCreators  = {
     setWineType: (selectWineType: string) => <SetWineType>{type: 'SET_WINE_TYPE', selectWineType: selectWineType},
@@ -145,7 +190,10 @@ export const  actionCreators  = {
     setTasteAlcohol: (selectTasteAlcohol: string) => <SetTasteAlcohol>{type: 'SET_TASTE_ALCOHOL', selectTasteAlcohol: selectTasteAlcohol},
     setFinish: (selectFinish: string) => <SetFinish>{type: 'SET_FINISH', selectFinish: selectFinish},
     addFlavor: (flavor: string, flavorCategory: string) => <AddFlavor>{type: 'ADD_FLAVOR', flavor: flavor, flavorCategory: flavorCategory},
-    clearFlavor: (flavorCategory: string) => <ClearFlavor>{type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory}
+    clearFlavor: (flavorCategory: string) => <ClearFlavor>{type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory},
+
+    // Conclusion Actions
+    setBarrel: (aging: string, wood: string, toast: string) => <SetBarrel>{type: 'SET_BARREL', aging: aging, wood: wood, toast: toast},
 };
 
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
@@ -189,6 +237,13 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                     woodSpice: state.notes.palate.flavorProfile.woodSpice,
                     biologicalChemical: state.notes.palate.flavorProfile.biologicalChemical
                 }
+            }
+        },
+        conclusions: {
+            barrel:{
+                aging: state.conclusions.barrel.aging,
+                wood:   state.conclusions.barrel.wood,
+                toast: state.conclusions.barrel.toast,
             }
         }
     };
@@ -359,6 +414,12 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                 default:
                     return tempState;
             }
+
+        case 'SET_BARREL':
+                tempState.conclusions.barrel.aging = action.aging;
+            tempState.conclusions.barrel.wood = action.wood;
+            tempState.conclusions.barrel.toast = action.toast;
+            return tempState;
 
         default:
             const exhaustiveCheck: never = action;

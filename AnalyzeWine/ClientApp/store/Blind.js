@@ -44,6 +44,13 @@ var initialBlindTastingState = {
                 biologicalChemical: []
             }
         }
+    },
+    conclusions: {
+        barrel: {
+            aging: "None",
+            wood: "None",
+            toast: "None",
+        }
     }
 };
 export var actionCreators = {
@@ -71,7 +78,9 @@ export var actionCreators = {
     setTasteAlcohol: function (selectTasteAlcohol) { return ({ type: 'SET_TASTE_ALCOHOL', selectTasteAlcohol: selectTasteAlcohol }); },
     setFinish: function (selectFinish) { return ({ type: 'SET_FINISH', selectFinish: selectFinish }); },
     addFlavor: function (flavor, flavorCategory) { return ({ type: 'ADD_FLAVOR', flavor: flavor, flavorCategory: flavorCategory }); },
-    clearFlavor: function (flavorCategory) { return ({ type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory }); }
+    clearFlavor: function (flavorCategory) { return ({ type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory }); },
+    // Conclusion Actions
+    setBarrel: function (aging, wood, toast) { return ({ type: 'SET_BARREL', aging: aging, wood: wood, toast: toast }); },
 };
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export var reducer = function (state, action) {
@@ -114,6 +123,13 @@ export var reducer = function (state, action) {
                     woodSpice: state.notes.palate.flavorProfile.woodSpice,
                     biologicalChemical: state.notes.palate.flavorProfile.biologicalChemical
                 }
+            }
+        },
+        conclusions: {
+            barrel: {
+                aging: state.conclusions.barrel.aging,
+                wood: state.conclusions.barrel.wood,
+                toast: state.conclusions.barrel.toast,
             }
         }
     };
@@ -276,6 +292,11 @@ export var reducer = function (state, action) {
                 default:
                     return tempState;
             }
+        case 'SET_BARREL':
+            tempState.conclusions.barrel.aging = action.aging;
+            tempState.conclusions.barrel.wood = action.wood;
+            tempState.conclusions.barrel.toast = action.toast;
+            return tempState;
         default:
             var exhaustiveCheck = action;
     }
