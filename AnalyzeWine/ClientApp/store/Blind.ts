@@ -47,6 +47,10 @@ export interface BlindTastingState {
             wood: string;
             toast: string;
         }
+        age:{
+            min: number;
+            max: number;
+        }
         /*
         style: string,
         boytritis: string,
@@ -120,6 +124,10 @@ const initialBlindTastingState: BlindTastingState = {
             aging: "None",
             wood: "None",
             toast: "None",
+        },
+        age:{
+            min: 1,
+            max: 3,
         }
     }
 };
@@ -155,12 +163,13 @@ interface ClearFlavor{type: 'CLEAR_FLAVOR', flavorCategory: string}
 
 // Conclusion Interfaces
 interface SetBarrel {type: 'SET_BARREL', aging: string, wood: string, toast: string}
+interface SetAge{type: 'SET_AGE', min: number, max: number}
 
 
 type KnownAction = SetWineType | SetColor | SetDepth | SetClarity | SetSediment | SetViscosity | SetCarbonation
     | SetSmellIntensity | SetSmellComplexity | SetSmellAlcohol | AddAroma | ClearAroma
     | SetTasteIntensity | SetTasteComplexity | SetBody | SetSweetness | SetAcidity | SetTannins | SetTasteAlcohol | SetFinish | AddFlavor | ClearFlavor
-    | SetBarrel;
+    | SetBarrel | SetAge;
 
 export const  actionCreators  = {
     setWineType: (selectWineType: string) => <SetWineType>{type: 'SET_WINE_TYPE', selectWineType: selectWineType},
@@ -194,6 +203,7 @@ export const  actionCreators  = {
 
     // Conclusion Actions
     setBarrel: (aging: string, wood: string, toast: string) => <SetBarrel>{type: 'SET_BARREL', aging: aging, wood: wood, toast: toast},
+    setAge: (min: number, max: number) => <SetAge>{type: 'SET_AGE', min: min, max: max},
 };
 
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
@@ -244,6 +254,10 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                 aging: state.conclusions.barrel.aging,
                 wood:   state.conclusions.barrel.wood,
                 toast: state.conclusions.barrel.toast,
+            },
+            age: {
+                min: state.conclusions.age.min,
+                max: state.conclusions.age.max,
             }
         }
     };
@@ -419,6 +433,10 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                 tempState.conclusions.barrel.aging = action.aging;
             tempState.conclusions.barrel.wood = action.wood;
             tempState.conclusions.barrel.toast = action.toast;
+            return tempState;
+        case 'SET_AGE':
+            tempState.conclusions.age.min = action.min;
+            tempState.conclusions.age.max = action.max;
             return tempState;
 
         default:

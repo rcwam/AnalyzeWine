@@ -50,6 +50,10 @@ var initialBlindTastingState = {
             aging: "None",
             wood: "None",
             toast: "None",
+        },
+        age: {
+            min: 1,
+            max: 3,
         }
     }
 };
@@ -81,6 +85,7 @@ export var actionCreators = {
     clearFlavor: function (flavorCategory) { return ({ type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory }); },
     // Conclusion Actions
     setBarrel: function (aging, wood, toast) { return ({ type: 'SET_BARREL', aging: aging, wood: wood, toast: toast }); },
+    setAge: function (min, max) { return ({ type: 'SET_AGE', min: min, max: max }); },
 };
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export var reducer = function (state, action) {
@@ -130,6 +135,10 @@ export var reducer = function (state, action) {
                 aging: state.conclusions.barrel.aging,
                 wood: state.conclusions.barrel.wood,
                 toast: state.conclusions.barrel.toast,
+            },
+            age: {
+                min: state.conclusions.age.min,
+                max: state.conclusions.age.max,
             }
         }
     };
@@ -296,6 +305,10 @@ export var reducer = function (state, action) {
             tempState.conclusions.barrel.aging = action.aging;
             tempState.conclusions.barrel.wood = action.wood;
             tempState.conclusions.barrel.toast = action.toast;
+            return tempState;
+        case 'SET_AGE':
+            tempState.conclusions.age.min = action.min;
+            tempState.conclusions.age.max = action.max;
             return tempState;
         default:
             var exhaustiveCheck = action;

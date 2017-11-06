@@ -290,105 +290,129 @@ var Blind = (function (_super) {
         this.props.setBarrel(ageing, wood, toast);
     };
     Blind.prototype.age = function () {
-        var min = 1;
-        var max = 3;
-        switch (this.props.notes.eye.wineType) {
-            // get initial guess based on color
-            case "Red":
-                if (this.props.notes.eye.sediment = ("Light" || "Heavy")) {
-                    min = 5;
-                    max = 99;
-                    return;
-                }
-                else {
+        var minAge = 1;
+        var maxAge = 3;
+        if (this.props.notes.eye.sediment = ("Light" || "Heavy")) {
+            minAge = 5;
+            maxAge = 99;
+            return;
+        }
+        else {
+            switch (this.props.notes.eye.wineType) {
+                // get initial guess based on color
+                case "Red":
                     switch (this.props.notes.eye.color) {
                         case "Purple":
-                            min = 0;
-                            max = 2;
+                            minAge = 0;
+                            maxAge = 2;
                             return;
                         case "Ruby":
-                            min = 1;
-                            max = 3;
+                            minAge = 1;
+                            maxAge = 3;
                             return;
                         case "Red":
-                            min = 2;
-                            max = 5;
+                            minAge = 2;
+                            maxAge = 5;
                             return;
                         case "Garnet":
-                            min = 4;
-                            max = 9;
+                            minAge = 4;
+                            maxAge = 9;
                             return;
                         case "Brick":
-                            min = 5;
-                            max = 99;
+                            minAge = 5;
+                            maxAge = 99;
                             return;
                         case "Brown":
-                            min = 99;
-                            max = 99;
+                            minAge = 99;
+                            maxAge = 99;
                             return;
                         default:
                             return;
                     }
-                }
-            case "White":
-                switch (this.props.notes.eye.color) {
-                    case "Clear" || "Greenish":
-                        min = 0;
-                        max = 2;
-                        return;
-                    case "Yellow":
-                        min = 2;
-                        max = 4;
-                        return;
-                    case "Golden":
-                        min = 4;
-                        max = 7;
-                        return;
-                    case "Amber":
-                        min = 5;
-                        max = 99;
-                        return;
-                    case "Brown":
-                        min = 99;
-                        max = 99;
-                        return;
-                    default:
-                        return;
-                }
-            case "Rose":
-                switch (this.props.notes.eye.color) {
-                    case "Pink":
-                        min = 0;
-                        max = 2;
-                        return;
-                    case "Salmon":
-                        min = 2;
-                        max = 4;
-                        return;
-                    case "Orange":
-                        min = 4;
-                        max = 7;
-                        return;
-                    case "Copper":
-                        min = 5;
-                        max = 99;
-                        return;
-                    case "Brown":
-                        min = 99;
-                        max = 99;
-                        return;
-                    default:
-                        return;
-                }
+                case "White":
+                    switch (this.props.notes.eye.color) {
+                        case "Clear" || "Greenish":
+                            minAge = 0;
+                            maxAge = 2;
+                            return;
+                        case "Yellow":
+                            minAge = 2;
+                            maxAge = 4;
+                            return;
+                        case "Golden":
+                            minAge = 4;
+                            maxAge = 7;
+                            return;
+                        case "Amber":
+                            minAge = 5;
+                            maxAge = 99;
+                            return;
+                        case "Brown":
+                            minAge = 99;
+                            maxAge = 99;
+                            return;
+                        default:
+                            return;
+                    }
+                case "Rose":
+                    switch (this.props.notes.eye.color) {
+                        case "Pink":
+                            minAge = 0;
+                            maxAge = 2;
+                            return;
+                        case "Salmon":
+                            minAge = 2;
+                            maxAge = 4;
+                            return;
+                        case "Orange":
+                            minAge = 4;
+                            maxAge = 7;
+                            return;
+                        case "Copper":
+                            minAge = 5;
+                            maxAge = 99;
+                            return;
+                        case "Brown":
+                            minAge = 99;
+                            maxAge = 99;
+                            return;
+                        default:
+                            return;
+                    }
+            }
+        }
+        // Make adjustments based on Barrel Aging
+        if (this.props.conclusions.barrel.toast == "Light") {
+            minAge = minAge - 1;
+            maxAge = maxAge - 1;
+        }
+        if (this.props.conclusions.barrel.toast == "Heavy") {
+            minAge = minAge - 2;
+            maxAge = maxAge - 2;
         }
         // Use aroma group to verify the final guess.
-        var smellFruitFloral = this.props.notes.nose.smellProfile.fruitFloral;
-        var smellEarthMineral = this.props.notes.nose.smellProfile.earthMineral;
-        var smellWoodSpice = this.props.notes.nose.smellProfile.woodSpice;
-        var smellBiologicalChemical = this.props.notes.nose.smellProfile.biologicalChemical;
-        // open up the range at the end to be more inclusive of possible dates
-        // Make sure numbers are positive
+        var smellFruitFloraCount = this.props.notes.nose.smellProfile.fruitFloral.length;
+        var smellEarthMineralCount = this.props.notes.nose.smellProfile.earthMineral.length;
+        var smellBiologicalChemicalCount = this.props.notes.nose.smellProfile.biologicalChemical.length;
+        // take into account the expected type of wine?
+        if (smellFruitFloraCount >= smellEarthMineralCount && smellFruitFloraCount >= smellBiologicalChemicalCount) {
+            minAge = Math.min(minAge, 3);
+            if (this.props.notes.palate.tannins = "Harsh" || "Astringent" || "Aggressive") {
+                maxAge = Math.max(maxAge, 5);
+            }
+        }
+        if (smellBiologicalChemicalCount >= smellEarthMineralCount && smellBiologicalChemicalCount >= smellFruitFloraCount) {
+            maxAge = Math.min(maxAge, 5);
+        }
+        // Expand Results
+        // minAge--;
+        // maxAge++;
+        minAge = Math.max(0, minAge);
+        maxAge = Math.max(1, maxAge);
+        minAge = Math.min(99, minAge);
+        maxAge = Math.min(99, maxAge);
         // run prop to update age numbers (min , max)
+        this.props.setAge(minAge, maxAge);
     };
     Blind.prototype.render = function () {
         var _this = this;

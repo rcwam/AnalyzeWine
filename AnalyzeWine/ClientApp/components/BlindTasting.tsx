@@ -291,67 +291,68 @@ class Blind extends React.Component<BlindProps, {}> {
 
 
     age() {
-        let min = 1;
-        let max = 3;
+        let minAge = 1;
+        let maxAge = 3;
+        if (this.props.notes.eye.sediment = ("Light" || "Heavy")) {
+            minAge = 5;
+            maxAge = 99;
+            return;
+        }
+        else {
         switch (this.props.notes.eye.wineType) {
             // get initial guess based on color
             case "Red":
-                if (this.props.notes.eye.sediment = ("Light" || "Heavy")) {
-                    min = 5;
-                    max = 99;
-                    return;
+
+                switch (this.props.notes.eye.color) {
+                    case "Purple":
+                        minAge = 0;
+                        maxAge = 2;
+                        return;
+                    case "Ruby":
+                        minAge = 1;
+                        maxAge = 3;
+                        return;
+                    case "Red":
+                        minAge = 2;
+                        maxAge = 5;
+                        return;
+                    case "Garnet":
+                        minAge = 4;
+                        maxAge = 9;
+                        return;
+                    case "Brick":
+                        minAge = 5;
+                        maxAge = 99;
+                        return;
+                    case "Brown":
+                        minAge = 99;
+                        maxAge = 99;
+                        return;
+                    default:
+                        return;
                 }
-                else {
-                    switch (this.props.notes.eye.color) {
-                        case "Purple":
-                            min = 0;
-                            max = 2;
-                            return;
-                        case "Ruby":
-                            min = 1;
-                            max = 3;
-                            return;
-                        case "Red":
-                            min = 2;
-                            max = 5;
-                            return;
-                        case "Garnet":
-                            min = 4;
-                            max = 9;
-                            return;
-                        case "Brick":
-                            min = 5;
-                            max = 99;
-                            return;
-                        case "Brown":
-                            min = 99;
-                            max = 99;
-                            return;
-                        default:
-                            return;
-                    }
-                }
+
             case "White":
                 switch (this.props.notes.eye.color) {
                     case "Clear" || "Greenish":
-                        min = 0;
-                        max = 2;
+                        minAge = 0;
+                        maxAge = 2;
                         return;
                     case "Yellow":
-                        min = 2;
-                        max = 4;
+                        minAge = 2;
+                        maxAge = 4;
                         return;
                     case "Golden":
-                        min = 4;
-                        max = 7;
+                        minAge = 4;
+                        maxAge = 7;
                         return;
                     case "Amber":
-                        min = 5;
-                        max = 99;
+                        minAge = 5;
+                        maxAge = 99;
                         return;
                     case "Brown":
-                        min = 99;
-                        max = 99;
+                        minAge = 99;
+                        maxAge = 99;
                         return;
                     default:
                         return;
@@ -359,42 +360,65 @@ class Blind extends React.Component<BlindProps, {}> {
             case "Rose":
                 switch (this.props.notes.eye.color) {
                     case "Pink":
-                        min = 0;
-                        max = 2;
+                        minAge = 0;
+                        maxAge = 2;
                         return;
                     case "Salmon":
-                        min = 2;
-                        max = 4;
+                        minAge = 2;
+                        maxAge = 4;
                         return;
                     case "Orange":
-                        min = 4;
-                        max = 7;
+                        minAge = 4;
+                        maxAge = 7;
                         return;
                     case "Copper":
-                        min = 5;
-                        max = 99;
+                        minAge = 5;
+                        maxAge = 99;
                         return;
                     case "Brown":
-                        min = 99;
-                        max = 99;
+                        minAge = 99;
+                        maxAge = 99;
                         return;
                     default:
                         return;
                 }
         }
+        }
+
+        // Make adjustments based on Barrel Aging
+        if (this.props.conclusions.barrel.toast == "Light"){ minAge=minAge-1; maxAge=maxAge-1;}
+        if (this.props.conclusions.barrel.toast == "Heavy"){ minAge=minAge-2; maxAge=maxAge-2;}
 
         // Use aroma group to verify the final guess.
-        const smellFruitFloral = this.props.notes.nose.smellProfile.fruitFloral;
-        const smellEarthMineral = this.props.notes.nose.smellProfile.earthMineral;
-        const smellWoodSpice = this.props.notes.nose.smellProfile.woodSpice;
-        const smellBiologicalChemical = this.props.notes.nose.smellProfile.biologicalChemical;
+        const smellFruitFloraCount = this.props.notes.nose.smellProfile.fruitFloral.length;
+        const smellEarthMineralCount = this.props.notes.nose.smellProfile.earthMineral.length;
+        const smellBiologicalChemicalCount = this.props.notes.nose.smellProfile.biologicalChemical.length;
 
-        // open up the range at the end to be more inclusive of possible dates
-        // Make sure numbers are positive
+        // take into account the expected type of wine?
+        if(smellFruitFloraCount>= smellEarthMineralCount && smellFruitFloraCount>= smellBiologicalChemicalCount)        {
+            minAge = Math.min(minAge,3);
+            if(this.props.notes.palate.tannins = "Harsh" || "Astringent" || "Aggressive"){
+                maxAge = Math.max(maxAge,5);
+            }
+        }
+        if(smellBiologicalChemicalCount>= smellEarthMineralCount && smellBiologicalChemicalCount>= smellFruitFloraCount)        {
+
+                maxAge = Math.min(maxAge,5);
+
+        }
+
+        // Expand Results
+        // minAge--;
+        // maxAge++;
+
+        minAge = Math.max(0,minAge);
+        maxAge = Math.max(1,maxAge);
+        minAge = Math.min(99,minAge);
+        maxAge = Math.min(99,maxAge);
 
         // run prop to update age numbers (min , max)
 
-
+        this.props.setAge(minAge,maxAge);
     }
 
 
