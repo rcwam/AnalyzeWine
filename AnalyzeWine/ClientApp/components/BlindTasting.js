@@ -8,9 +8,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+///<reference path="../../node_modules/@types/react/index.d.ts"/>
 import * as React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as BlindStore from '../store/Blind';
+var helloWorld = "Hello World";
 var Blind = (function (_super) {
     __extends(Blind, _super);
     function Blind() {
@@ -58,6 +61,8 @@ var Blind = (function (_super) {
     Blind.prototype.changeColor = function (e) {
         this.props.setColor(e.target.value);
         this.age();
+        //  this.forceUpdate();
+        //  alert(this.props.conclusions.age.min);
     };
     Blind.prototype.changeDepth = function (e) {
         this.props.setDepth(e.target.value);
@@ -292,10 +297,10 @@ var Blind = (function (_super) {
     Blind.prototype.age = function () {
         var minAge = 1;
         var maxAge = 3;
-        if (this.props.notes.eye.sediment = ("Light" || "Heavy")) {
+        if (this.props.notes.eye.sediment == ("Light" || "Heavy")) {
             minAge = 5;
             maxAge = 99;
-            return;
+            //  return;
         }
         else {
             switch (this.props.notes.eye.wineType) {
@@ -305,80 +310,77 @@ var Blind = (function (_super) {
                         case "Purple":
                             minAge = 0;
                             maxAge = 2;
-                            return;
+                            break;
                         case "Ruby":
                             minAge = 1;
                             maxAge = 3;
-                            return;
+                            break;
                         case "Red":
                             minAge = 2;
                             maxAge = 5;
-                            return;
+                            break;
                         case "Garnet":
                             minAge = 4;
                             maxAge = 9;
-                            return;
+                            break;
                         case "Brick":
                             minAge = 5;
                             maxAge = 99;
-                            return;
+                            break;
                         case "Brown":
                             minAge = 99;
                             maxAge = 99;
-                            return;
-                        default:
-                            return;
+                            break;
                     }
+                    break;
                 case "White":
                     switch (this.props.notes.eye.color) {
                         case "Clear" || "Greenish":
                             minAge = 0;
                             maxAge = 2;
-                            return;
+                            break;
                         case "Yellow":
                             minAge = 2;
                             maxAge = 4;
-                            return;
+                            break;
                         case "Golden":
                             minAge = 4;
                             maxAge = 7;
-                            return;
+                            break;
                         case "Amber":
                             minAge = 5;
                             maxAge = 99;
-                            return;
+                            break;
                         case "Brown":
                             minAge = 99;
                             maxAge = 99;
-                            return;
-                        default:
-                            return;
+                            break;
                     }
+                    break;
                 case "Rose":
                     switch (this.props.notes.eye.color) {
                         case "Pink":
                             minAge = 0;
                             maxAge = 2;
-                            return;
+                            break;
                         case "Salmon":
                             minAge = 2;
                             maxAge = 4;
-                            return;
+                            break;
                         case "Orange":
                             minAge = 4;
                             maxAge = 7;
-                            return;
+                            break;
                         case "Copper":
                             minAge = 5;
                             maxAge = 99;
-                            return;
+                            break;
                         case "Brown":
                             minAge = 99;
                             maxAge = 99;
-                            return;
-                        default:
-                            return;
+                            break;
                     }
+                    break;
             }
         }
         // Make adjustments based on Barrel Aging
@@ -395,13 +397,13 @@ var Blind = (function (_super) {
         var smellEarthMineralCount = this.props.notes.nose.smellProfile.earthMineral.length;
         var smellBiologicalChemicalCount = this.props.notes.nose.smellProfile.biologicalChemical.length;
         // take into account the expected type of wine?
-        if (smellFruitFloraCount >= smellEarthMineralCount && smellFruitFloraCount >= smellBiologicalChemicalCount) {
+        if ((smellFruitFloraCount > smellEarthMineralCount) && (smellFruitFloraCount > smellBiologicalChemicalCount)) {
             minAge = Math.min(minAge, 3);
             if (this.props.notes.palate.tannins = "Harsh" || "Astringent" || "Aggressive") {
                 maxAge = Math.max(maxAge, 5);
             }
         }
-        if (smellBiologicalChemicalCount >= smellEarthMineralCount && smellBiologicalChemicalCount >= smellFruitFloraCount) {
+        if ((smellBiologicalChemicalCount > smellEarthMineralCount) && (smellBiologicalChemicalCount > smellFruitFloraCount)) {
             maxAge = Math.min(maxAge, 5);
         }
         // Expand Results
@@ -412,9 +414,17 @@ var Blind = (function (_super) {
         minAge = Math.min(99, minAge);
         maxAge = Math.min(99, maxAge);
         // run prop to update age numbers (min , max)
+        //alert(smellFruitFloraCount+" "+smellEarthMineralCount+" "+smellBiologicalChemicalCount);
+        // alert(minAge +" to " + maxAge);
         this.props.setAge(minAge, maxAge);
+        // this.setState(this.props.conclusions.age.min);
+        //   this.forceUpdate(() => this.props.conclusions.age);
+    };
+    Blind.prototype.updateAge = function () {
+        this.setState(this.props.conclusions.age.min);
     };
     Blind.prototype.render = function () {
+        //   this.componentDidMount()(this.updateAge());
         var _this = this;
         return React.createElement("div", null,
             React.createElement("h3", null, "Choose Type"),
@@ -572,14 +582,16 @@ var Blind = (function (_super) {
                     this.addBiologicalFlavor(),
                     this.addChemicalFlavor())),
             React.createElement("hr", null),
-            React.createElement("h3", null, "Summary"),
-            React.createElement("p", null, "Age? "),
-            React.createElement("p", null, "Climate? "),
-            React.createElement("p", null, "Balance (alcohol, acid, tannin, sugar)? "),
-            React.createElement("p", null, "Origin List "),
-            React.createElement("p", null, "Style? "),
-            React.createElement("p", null, "Varietal List "),
-            React.createElement("p", null, "Quality/Rating "));
+            React.createElement(BotConclusions, { barrel: {
+                    aging: this.props.conclusions.barrel.aging,
+                    wood: this.props.conclusions.barrel.wood,
+                    toast: this.props.conclusions.barrel.toast
+                }, age: {
+                    min: this.props.conclusions.age.min,
+                    max: this.props.conclusions.age.max
+                } }),
+            React.createElement(UserName, null),
+            React.createElement(FetchUser, { children: UserName }));
     };
     Blind.prototype.selectTypeList = function () {
         return (React.createElement("select", { name: "WineTypeSelector", value: this.props.notes.eye.wineType, onChange: this.changeWineType },
@@ -1281,6 +1293,80 @@ var Blind = (function (_super) {
             React.createElement("option", { value: "Wet Newspaper" }, "Wet Newspaper")));
     };
     return Blind;
+}(Component));
+var BotConclusions = (function (_super) {
+    __extends(BotConclusions, _super);
+    function BotConclusions(props, context) {
+        var _this = _super.call(this, props, context) || this;
+        _this.state = {
+            barrel: {
+                wood: props.barrel.wood,
+                toast: props.barrel.toast,
+                aging: props.barrel.aging
+            },
+            age: {
+                min: props.age.min,
+                max: props.age.max,
+            }
+        };
+        return _this;
+    }
+    /*
+       componentWillMount(){}  // finishing touches such as external data
+       componentDidMount(){}  // good place to update a database
+    
+       shouldComponentUpdate(){}
+       componentWillUpdate(){}
+       componentDidUpdate(){}
+    
+     */
+    BotConclusions.prototype.render = function () {
+        return (React.createElement("div", null,
+            React.createElement("h3", null, "Summary"),
+            React.createElement("p", null, "Som-Bot can give suggested conclusions based on your tasting notes:"),
+            React.createElement("p", null,
+                "Age: ",
+                this.props.age.min,
+                " to ",
+                this.props.age.max),
+            React.createElement("p", null,
+                "Barrel Aging: ",
+                this.props.barrel.aging),
+            React.createElement("p", null,
+                "Wood: ",
+                this.props.barrel.wood),
+            React.createElement("p", null,
+                "Toast: ",
+                this.props.barrel.toast),
+            React.createElement("p", null, "Climate? "),
+            React.createElement("p", null, "Balance (alcohol, acid, tannin, sugar)? "),
+            React.createElement("p", null, "Origin List "),
+            React.createElement("p", null, "Style? "),
+            React.createElement("p", null, "Varietal List "),
+            React.createElement("p", null, "Quality/Rating ")));
+    };
+    return BotConclusions;
+}(Component));
+var FetchUser = (function (_super) {
+    __extends(FetchUser, _super);
+    function FetchUser() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    FetchUser.prototype.render = function () {
+        return this.state
+            ? this.props.children(this.state.result)
+            : null;
+    };
+    return FetchUser;
 }(React.Component));
+function UserName() {
+    return (React.createElement(FetchUser, null, function (user) { return (React.createElement("h1", null, user.Name)); }));
+}
+function Comp(p) {
+    return React.createElement("div", null, p.b);
+}
+// OK
+var k1 = React.createElement(Comp, { a: 10, b: "hi" },
+    React.createElement("h2", null, "Hello"));
 export default connect(function (state) { return state.blind; }, BlindStore.actionCreators)(Blind);
 //# sourceMappingURL=BlindTasting.js.map

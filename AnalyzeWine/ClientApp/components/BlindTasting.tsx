@@ -1,8 +1,14 @@
-﻿import * as React from 'react';
+﻿///<reference path="../../node_modules/@types/react/index.d.ts"/>
+import * as React from 'react';
+import  {Component, PropTypes} from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
+//import PropTypes from 'prop-types';
 import { ApplicationState } from '../store';
 import * as BlindStore from '../store/Blind';
+import {render} from "react-dom";
+//import set = Reflect.set;
+//import {createClass, PropTypes} from "react";
 
 
 type BlindProps =
@@ -10,7 +16,9 @@ type BlindProps =
     & typeof BlindStore.actionCreators
     & RouteComponentProps<{}>;
 
-class Blind extends React.Component<BlindProps, {}> {
+const helloWorld = "Hello World";
+
+class Blind extends Component<BlindProps, {}> {
     changeWineType(e: any) {
         this.props.setWineType(e.target.value);
         // Run Varietal
@@ -20,6 +28,8 @@ class Blind extends React.Component<BlindProps, {}> {
     changeColor(e: any) {
         this.props.setColor(e.target.value);
         this.age();
+      //  this.forceUpdate();
+      //  alert(this.props.conclusions.age.min);
     }
 
     changeDepth(e: any) {
@@ -293,117 +303,131 @@ class Blind extends React.Component<BlindProps, {}> {
     age() {
         let minAge = 1;
         let maxAge = 3;
-        if (this.props.notes.eye.sediment = ("Light" || "Heavy")) {
+        if (this.props.notes.eye.sediment == ("Light" || "Heavy")) {
             minAge = 5;
             maxAge = 99;
-            return;
-        }
-        else {
-        switch (this.props.notes.eye.wineType) {
-            // get initial guess based on color
-            case "Red":
+            //  return;
+        } else {
+            switch (this.props.notes.eye.wineType) {
+                // get initial guess based on color
+                case "Red":
 
-                switch (this.props.notes.eye.color) {
-                    case "Purple":
-                        minAge = 0;
-                        maxAge = 2;
-                        return;
-                    case "Ruby":
-                        minAge = 1;
-                        maxAge = 3;
-                        return;
-                    case "Red":
-                        minAge = 2;
-                        maxAge = 5;
-                        return;
-                    case "Garnet":
-                        minAge = 4;
-                        maxAge = 9;
-                        return;
-                    case "Brick":
-                        minAge = 5;
-                        maxAge = 99;
-                        return;
-                    case "Brown":
-                        minAge = 99;
-                        maxAge = 99;
-                        return;
-                    default:
-                        return;
-                }
+                    switch (this.props.notes.eye.color) {
+                        case "Purple":
+                            minAge = 0;
+                            maxAge = 2;
 
-            case "White":
-                switch (this.props.notes.eye.color) {
-                    case "Clear" || "Greenish":
-                        minAge = 0;
-                        maxAge = 2;
-                        return;
-                    case "Yellow":
-                        minAge = 2;
-                        maxAge = 4;
-                        return;
-                    case "Golden":
-                        minAge = 4;
-                        maxAge = 7;
-                        return;
-                    case "Amber":
-                        minAge = 5;
-                        maxAge = 99;
-                        return;
-                    case "Brown":
-                        minAge = 99;
-                        maxAge = 99;
-                        return;
-                    default:
-                        return;
-                }
-            case "Rose":
-                switch (this.props.notes.eye.color) {
-                    case "Pink":
-                        minAge = 0;
-                        maxAge = 2;
-                        return;
-                    case "Salmon":
-                        minAge = 2;
-                        maxAge = 4;
-                        return;
-                    case "Orange":
-                        minAge = 4;
-                        maxAge = 7;
-                        return;
-                    case "Copper":
-                        minAge = 5;
-                        maxAge = 99;
-                        return;
-                    case "Brown":
-                        minAge = 99;
-                        maxAge = 99;
-                        return;
-                    default:
-                        return;
-                }
+
+                            break;
+                        case "Ruby":
+                            minAge = 1;
+                            maxAge = 3;
+                            break;
+                        case "Red":
+                            minAge = 2;
+                            maxAge = 5;
+                            break;
+                        case "Garnet":
+                            minAge = 4;
+                            maxAge = 9;
+                            break;
+                        case "Brick":
+                            minAge = 5;
+                            maxAge = 99;
+                            break;
+                        case "Brown":
+                            minAge = 99;
+                            maxAge = 99;
+                            break;
+                     //   default:
+                     //       return;
+                    }
+
+                    break;
+
+                case "White":
+                    switch (this.props.notes.eye.color) {
+                        case "Clear" || "Greenish":
+                            minAge = 0;
+                            maxAge = 2;
+                            break;
+                        case "Yellow":
+                            minAge = 2;
+                            maxAge = 4;
+                            break;
+                        case "Golden":
+                            minAge = 4;
+                            maxAge = 7;
+                            break;
+                        case "Amber":
+                            minAge = 5;
+                            maxAge = 99;
+                            break;
+                        case "Brown":
+                            minAge = 99;
+                            maxAge = 99;
+                            break;
+                      //  default:
+                      //      return;
+                    }
+                    break;
+                case "Rose":
+                    switch (this.props.notes.eye.color) {
+                        case "Pink":
+                            minAge = 0;
+                            maxAge = 2;
+                            break;
+                        case "Salmon":
+                            minAge = 2;
+                            maxAge = 4;
+                            break;
+                        case "Orange":
+                            minAge = 4;
+                            maxAge = 7;
+                            break;
+                        case "Copper":
+                            minAge = 5;
+                            maxAge = 99;
+                            break;
+                        case "Brown":
+                            minAge = 99;
+                            maxAge = 99;
+                            break;
+                     //   default:
+                     //       return;
+                    }
+                    break;
+            }
         }
-        }
+
+
+
 
         // Make adjustments based on Barrel Aging
-        if (this.props.conclusions.barrel.toast == "Light"){ minAge=minAge-1; maxAge=maxAge-1;}
-        if (this.props.conclusions.barrel.toast == "Heavy"){ minAge=minAge-2; maxAge=maxAge-2;}
+        if (this.props.conclusions.barrel.toast == "Light") {
+            minAge = minAge - 1;
+            maxAge = maxAge - 1;
+        }
+        if (this.props.conclusions.barrel.toast == "Heavy") {
+            minAge = minAge - 2;
+            maxAge = maxAge - 2;
+        }
 
         // Use aroma group to verify the final guess.
-        const smellFruitFloraCount = this.props.notes.nose.smellProfile.fruitFloral.length;
+                const smellFruitFloraCount = this.props.notes.nose.smellProfile.fruitFloral.length;
         const smellEarthMineralCount = this.props.notes.nose.smellProfile.earthMineral.length;
         const smellBiologicalChemicalCount = this.props.notes.nose.smellProfile.biologicalChemical.length;
 
         // take into account the expected type of wine?
-        if(smellFruitFloraCount>= smellEarthMineralCount && smellFruitFloraCount>= smellBiologicalChemicalCount)        {
-            minAge = Math.min(minAge,3);
-            if(this.props.notes.palate.tannins = "Harsh" || "Astringent" || "Aggressive"){
-                maxAge = Math.max(maxAge,5);
+        if ((smellFruitFloraCount > smellEarthMineralCount) && (smellFruitFloraCount > smellBiologicalChemicalCount)) {
+            minAge = Math.min(minAge, 3);
+            if (this.props.notes.palate.tannins = "Harsh" || "Astringent" || "Aggressive") {
+                maxAge = Math.max(maxAge, 5);
             }
         }
-        if(smellBiologicalChemicalCount>= smellEarthMineralCount && smellBiologicalChemicalCount>= smellFruitFloraCount)        {
+        if ((smellBiologicalChemicalCount > smellEarthMineralCount) && (smellBiologicalChemicalCount > smellFruitFloraCount)) {
 
-                maxAge = Math.min(maxAge,5);
+            maxAge = Math.min(maxAge, 5);
 
         }
 
@@ -411,14 +435,21 @@ class Blind extends React.Component<BlindProps, {}> {
         // minAge--;
         // maxAge++;
 
-        minAge = Math.max(0,minAge);
-        maxAge = Math.max(1,maxAge);
-        minAge = Math.min(99,minAge);
-        maxAge = Math.min(99,maxAge);
+        minAge = Math.max(0, minAge);
+        maxAge = Math.max(1, maxAge);
+        minAge = Math.min(99, minAge);
+        maxAge = Math.min(99, maxAge);
 
         // run prop to update age numbers (min , max)
 
-        this.props.setAge(minAge,maxAge);
+        //alert(smellFruitFloraCount+" "+smellEarthMineralCount+" "+smellBiologicalChemicalCount);
+       // alert(minAge +" to " + maxAge);
+
+        this.props.setAge(minAge, maxAge);
+       // this.setState(this.props.conclusions.age.min);
+
+     //   this.forceUpdate(() => this.props.conclusions.age);
+
     }
 
 
@@ -464,7 +495,17 @@ class Blind extends React.Component<BlindProps, {}> {
     }
 
 
-    public render() {
+    updateAge(){
+        this.setState(this.props.conclusions.age.min);
+    }
+
+
+
+    public render()  {
+
+     //   this.componentDidMount()(this.updateAge());
+
+
         return <div>
             <h3>Choose Type</h3>
             <p>What type of wine are you analyzing? {this.selectTypeList()} </p>
@@ -612,17 +653,25 @@ class Blind extends React.Component<BlindProps, {}> {
             </div>
             <hr/>
 
-            <h3>Summary</h3>
-            <p>Age? {}</p>
-            <p>Climate? {}</p>
-            <p>Balance (alcohol, acid, tannin, sugar)? {}</p>
-            <p>Origin List {}</p>
-            <p>Style? {}</p>
-            <p>Varietal List {}</p>
-            <p>Quality/Rating {}</p>
+
+
+            < BotConclusions
+                barrel={{
+                aging: this.props.conclusions.barrel.aging,
+                wood:this.props.conclusions.barrel.wood,
+                toast:this.props.conclusions.barrel.toast}}
+                age={{
+                    min:this.props.conclusions.age.min,
+                    max:this.props.conclusions.age.max}}  />
+
+            <UserName />
+
+            <FetchUser children={UserName} />
 
         </div>;
     }
+
+
 
     selectTypeList() {
         return (
@@ -1544,5 +1593,185 @@ addTreeFruitSmell(){
 
 
 }
+
+/*
+
+            <p>Age: {this.props.conclusions.age.min} to {this.props.conclusions.age.max}</p>
+            <p>Barrel Aging: {this.props.conclusions.barrel.aging}, Wood: {this.props.conclusions.barrel.wood},
+                Toast: {this.props.conclusions.barrel.toast}</p>
+
+
+
+
+
+const Conclusions = createClass({
+    render () {
+
+        return(
+        <div>
+            <h3>Summary</h3>
+            <p>Rob-bot can give suggested conclusions based on your tasting notes:</p>
+            <p>Age: {this.props.conclusions.age.min} to {this.props.conclusions.age.max}</p>
+            <p>Barrel Aging: {this.props.conclusions.barrel.aging}, Wood: {this.props.conclusions.barrel.wood},
+                Toast: {this.props.conclusions.barrel.toast}</p>
+
+            <p>Climate? {}</p>
+            <p>Balance (alcohol, acid, tannin, sugar)? {}</p>
+            <p>Origin List {}</p>
+            <p>Style? {}</p>
+            <p>Varietal List {}</p>
+            <p>Quality/Rating {}</p>
+        </div>
+        )
+    }
+}
+);
+
+
+    min: number;
+    max: number;
+    aging: string;
+    wood: string;
+    toast: string;
+*/
+
+interface BotProps  {
+    barrel:{
+        aging: string;
+        wood: string;
+        toast: string;
+    }
+    age:{
+        min: number;
+        max: number;
+    }
+}
+
+interface BotState {
+    barrel:{
+        aging: string;
+        wood: string;
+        toast: string;
+    }
+    age:{
+        min: number;
+        max: number;
+    }
+}
+
+
+
+class BotConclusions extends Component <BotProps , BotState>{
+    constructor(props: any, context: any) {
+        super(props, context);
+
+        this.state = {
+            barrel: {
+                wood: props.barrel.wood,
+                toast: props.barrel.toast,
+                aging: props.barrel.aging
+            },
+            age: {
+                min: props.age.min,
+                max: props.age.max,
+            }
+
+
+
+        };
+
+
+    }
+
+/*
+   componentWillMount(){}  // finishing touches such as external data
+   componentDidMount(){}  // good place to update a database
+
+   shouldComponentUpdate(){}
+   componentWillUpdate(){}
+   componentDidUpdate(){}
+
+ */
+
+
+
+    render() {
+
+
+        return (
+            <div>
+                <h3>Summary</h3>
+                <p>Som-Bot can give suggested conclusions based on your tasting notes:</p>
+
+                <p>Age: {this.props.age.min} to {this.props.age.max}</p>
+                <p>Barrel Aging: {this.props.barrel.aging}</p>
+                <p>Wood: {this.props.barrel.wood}</p>
+                <p>Toast: {this.props.barrel.toast}</p>
+
+                <p>Climate? {}</p>
+                <p>Balance (alcohol, acid, tannin, sugar)? {}</p>
+                <p>Origin List {}</p>
+                <p>Style? {}</p>
+                <p>Varietal List {}</p>
+                <p>Quality/Rating {}</p>
+            </div>
+        )
+    }
+
+
+
+}
+
+
+
+
+
+interface IUser {
+    Name: string;
+}
+
+interface IFetchUserProps {
+    children: (user: IUser) => JSX.Element;
+}
+
+class FetchUser extends React.Component<IFetchUserProps, any> {
+    render() {
+        return this.state
+            ? this.props.children(this.state.result)
+            : null;
+    }
+}
+
+
+function UserName() {
+    return (
+        <FetchUser>
+            {user => (
+                <h1>{user.Name}</h1>
+            )}
+        </FetchUser>
+    );
+}
+
+
+interface Prop {
+    a: number,
+    b: string,
+    children: string | JSX.Element
+}
+
+function Comp(p: Prop) {
+    return <div>{p.b}</div>;
+}
+
+// OK
+let k1 = <Comp a={10} b="hi">
+        <h2>Hello</h2>
+    </Comp>
+;
+
+
+
+
 
 export default connect((state: ApplicationState) => state.blind, BlindStore.actionCreators)(Blind) as typeof Blind;

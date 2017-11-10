@@ -1,5 +1,6 @@
-﻿import { Action, Reducer } from 'redux';
-//import { createAction } from 'redux-actions';
+﻿//import { Action, Reducer } from 'redux';
+
+let mySet = new Set();
 
 export interface BlindTastingState {
     notes: {
@@ -208,7 +209,7 @@ export const  actionCreators  = {
 
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export const reducer: any = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
-    const tempState2 = { ...state };
+ //   const tempState2 = { ...state };
 
     let tempState: BlindTastingState = {
         notes: {

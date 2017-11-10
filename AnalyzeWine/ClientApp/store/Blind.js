@@ -1,11 +1,5 @@
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
+//import { Action, Reducer } from 'redux';
+var mySet = new Set();
 var initialBlindTastingState = {
     notes: {
         eye: {
@@ -89,8 +83,8 @@ export var actionCreators = {
 };
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export var reducer = function (state, action) {
+    //   const tempState2 = { ...state };
     if (state === void 0) { state = initialBlindTastingState; }
-    var tempState2 = __assign({}, state);
     var tempState = {
         notes: {
             eye: {
