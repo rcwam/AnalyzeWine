@@ -26,7 +26,6 @@ interface BotState {
     }
 }
 
-
 class BotConclusions extends Component <BotProps , BotState>{
     constructor(props: any, context: any) {
         super(props, context);
@@ -42,17 +41,7 @@ class BotConclusions extends Component <BotProps , BotState>{
                 max: props.age.max,
             }
         };
-
-
-
-
-
-
     }
-
-
-
-
 
     render() {
         const {wood, toast, aging} = this.props.barrel;

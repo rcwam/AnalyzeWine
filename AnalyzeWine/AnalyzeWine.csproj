@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\Age.tsx" />
     <None Remove="ClientApp\components\BlindTasting.tsx" />
     <None Remove="ClientApp\components\Conclusions.tsx" />
     <None Remove="ClientApp\components\eye\WineType.tsx" />
@@ -28,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\Age.tsx" />
     <TypeScriptCompile Include="ClientApp\components\BlindTasting.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Conclusions.tsx" />
     <TypeScriptCompile Include="ClientApp\components\eye\WineType.tsx" />

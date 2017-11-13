@@ -13,20 +13,84 @@ import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as BlindStore from '../store/Blind';
+//import {render} from "react-dom";
 //import set = Reflect.set;
 //import {createClass, PropTypes} from "react";
 import BotConclusions from './Conclusions';
 var helloWorld = "Hello World";
 var Blind = (function (_super) {
     __extends(Blind, _super);
+    /*
+    Alcohol(smellAlcohol: string, palateAlcohol: string){
+        const {color, sediment} = this.props.notes.eye;
+        const {}=this.props.notes.nose;
+        const {acidity, body, sweetness, tannins} = this.props.notes.palate;
+        const {toast} = this.props.conclusions.SomBot.viniculture.bulkAging.barrel;
+        const {fruitFloral, earthMineral, biologicalChemical, woodSpice} = this.props.notes.nose.smellProfile;
+        const {viscosity}=this.props.conclusions.
+
+        let alcohol = "None";
+
+        // None
+
+        // Low
+
+        if ((smellAlcohol == "Low")||(palateAlcohol == "Low")){alcohol="Low"}
+
+        // Medium
+
+        if ((smellAlcohol == "Medium")||(palateAlcohol == "Medium")){alcohol="Medium"}
+
+        // High
+
+        if ((smellAlcohol == "High")||(palateAlcohol == "High")){alcohol="High"}
+
+        this.Climate( acidity, alcohol, viscosity, fruitFloral, earthMineral, biologicalChemical)
+    }
+
+    Viscosity(body: string, palateViscosity: string){
+        const {color, sediment} = this.props.notes.eye;
+        const {sweetness, tannins} = this.props.notes.palate;
+        const {toast} = this.props.conclusions.SomBot.viniculture.bulkAging.barrel;
+        const {fruitFloral, earthMineral, biologicalChemical, woodSpice} = this.props.notes.nose.smellProfile;
+
+        let viscosity = "None";
+
+        // None
+
+        // Low
+
+        if ((body == "Low")||(palateViscosity == "Low")){viscosity="Low"}
+
+        // Medium
+
+        if ((body == "Medium")||(palateViscosity == "Medium")){viscosity="Medium"}
+
+        // High
+
+        if ((body == "High")||(palateViscosity == "High")){viscosity="High"}
+
+        this.Climate( acidity, alcohol, body, viscosity, fruitFloral, earthMineral, biologicalChemical)
+    }
+
+
+    Climate( acidity: string, alcohol: string, body: string, viscosity: string, fruitFloral:string[], earthMineral:string[], biologicalChemical:string[]){
+
+
+    }
+*/
     function Blind() {
         var _this = _super.call(this) || this;
         /* Should these all be converted to arrow functions? */
         _this.addAromaWoodSpice = function (e) {
+            var _a = _this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+            var _b = _this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+            var toast = _this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+            var _c = _this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
             _this.props.addAroma(e.target.value, "woodSpice");
-            _this.barrel(_this.props.notes.nose.smellProfile.fruitFloral, _this.props.notes.nose.smellProfile.earthMineral, _this.props.notes.nose.smellProfile.biologicalChemical, _this.props.notes.nose.smellProfile.woodSpice);
+            _this.barrel(fruitFloral, earthMineral, biologicalChemical, woodSpice);
             // Run Age (barrel aging is darker/browner (brown sugar & molasses) - Lower age estimate) - Update Barrel Container
-            _this.age(_this.props.notes.eye.color, _this.props.notes.palate.sweetness, _this.props.notes.eye.sediment, _this.props.notes.palate.tannins, _this.props.conclusions.barrel.toast, _this.props.notes.nose.smellProfile.fruitFloral, _this.props.notes.nose.smellProfile.earthMineral, _this.props.notes.nose.smellProfile.biologicalChemical);
+            _this.age(color, sweetness, sediment, tannins, toast, fruitFloral, earthMineral, biologicalChemical);
             // Run Climate - New World uses more oak
             // Update Varietal with Climate
             // Varietal - Aromas
@@ -72,8 +136,12 @@ var Blind = (function (_super) {
     };
     // Change Sight State
     Blind.prototype.changeColor = function (e) {
+        var _a = this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+        var _b = this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+        var toast = this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+        var _c = this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
         this.props.setColor(e.target.value);
-        this.age(e.target.value, this.props.notes.palate.sweetness, this.props.notes.eye.sediment, this.props.notes.palate.tannins, this.props.conclusions.barrel.toast, this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical);
+        this.age(e.target.value, sweetness, sediment, tannins, toast, fruitFloral, earthMineral, biologicalChemical);
     };
     Blind.prototype.changeDepth = function (e) {
         this.props.setDepth(e.target.value);
@@ -84,8 +152,12 @@ var Blind = (function (_super) {
         // Run Quality
     };
     Blind.prototype.changeSediment = function (e) {
+        var _a = this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+        var _b = this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+        var toast = this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+        var _c = this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
         this.props.setSediment(e.target.value);
-        this.age(this.props.notes.eye.color, this.props.notes.palate.sweetness, e.target.value, this.props.notes.palate.tannins, this.props.conclusions.barrel.toast, this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical);
+        this.age(color, sweetness, e.target.value, tannins, toast, fruitFloral, earthMineral, biologicalChemical);
     };
     Blind.prototype.changeViscosity = function (e) {
         this.props.setViscosity(e.target.value);
@@ -112,28 +184,39 @@ var Blind = (function (_super) {
         // Update Varietal with Climate
     };
     Blind.prototype.addAromaFruitFloral = function (e) {
+        var _a = this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+        var _b = this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+        var toast = this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+        var _c = this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
         this.props.addAroma(e.target.value, "fruitFloral");
-        this.barrel(this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical, this.props.notes.nose.smellProfile.woodSpice);
-        this.age(this.props.notes.eye.color, this.props.notes.palate.sweetness, this.props.notes.eye.sediment, this.props.notes.palate.tannins, this.props.conclusions.barrel.toast, this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical);
+        this.barrel(fruitFloral, earthMineral, biologicalChemical, woodSpice);
+        this.age(color, sweetness, sediment, tannins, toast, fruitFloral, earthMineral, biologicalChemical);
         // Run Climate - New World is more FruitFloral
         // Update Varietal with Climate
         // Varietal - Aromas
     };
     Blind.prototype.addAromaEarthMineral = function (e) {
+        var _a = this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+        var _b = this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+        var toast = this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+        var _c = this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
         this.props.addAroma(e.target.value, "earthMineral");
-        this.barrel(this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical, this.props.notes.nose.smellProfile.woodSpice);
+        this.barrel(fruitFloral, earthMineral, biologicalChemical, woodSpice);
         // Run Age (as wine ages it loses FruitFloral and gains EarthMineral (3-5))
-        this.age(this.props.notes.eye.color, this.props.notes.palate.sweetness, this.props.notes.eye.sediment, this.props.notes.palate.tannins, this.props.conclusions.barrel.toast, this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical);
+        this.age(color, sweetness, sediment, tannins, toast, fruitFloral, earthMineral, biologicalChemical);
         // Run Climate - Old World more EarthMineral
         // Update Varietal with Climate
         // Varietal - Aromas
     };
     Blind.prototype.addAromaBiologicalChemical = function (e) {
+        var _a = this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+        var _b = this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+        var toast = this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+        var _c = this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
         this.props.addAroma(e.target.value, "biologicalChemical");
-        this.barrel(this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical, this.props.notes.nose.smellProfile.woodSpice);
+        this.barrel(fruitFloral, earthMineral, biologicalChemical, woodSpice);
         // Run Age (yeast indicates youth - aging wine gains non-fermentation BiologicalChemical strong after 5 years along with carmel)
-        this.age(this.props.notes.eye.color, this.props.notes.palate.sweetness, this.props.notes.eye.sediment, this.props.notes.palate.tannins, this.props.conclusions.barrel.toast, this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical);
-        // Varietal - Aromas
+        this.age(color, sweetness, sediment, tannins, toast, fruitFloral, earthMineral, biologicalChemical); // Varietal - Aromas
     };
     Blind.prototype.clearAroma = function (aromaCategory) {
         this.props.clearAroma(aromaCategory);
@@ -167,8 +250,12 @@ var Blind = (function (_super) {
         // Run Varietal
     };
     Blind.prototype.changeTannins = function (e) {
+        var _a = this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+        var _b = this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+        var toast = this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+        var _c = this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
         this.props.setTannins(e.target.value);
-        this.age(this.props.notes.eye.color, this.props.notes.palate.sweetness, this.props.notes.eye.sediment, e.target.value, this.props.conclusions.barrel.toast, this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical);
+        this.age(color, sweetness, sediment, e.target.value, toast, fruitFloral, earthMineral, biologicalChemical);
         // Run Quality - Balance
         // Run Varietal - Thick skin grapes produce more tannins
     };
@@ -182,31 +269,47 @@ var Blind = (function (_super) {
         // Run Quality
     };
     Blind.prototype.addFlavorFruitFloral = function (e) {
+        var _a = this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+        var _b = this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+        var toast = this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+        var _c = this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
         this.props.addFlavor(e.target.value, "fruitFloral");
-        this.barrel(this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical, this.props.notes.nose.smellProfile.woodSpice);
+        this.barrel(fruitFloral, earthMineral, biologicalChemical, woodSpice);
         // Run Age
         // Run Climate - New World is more FruitFloral
         // Update Varietal with Climate
         // Varietal - Flavors
     };
     Blind.prototype.addFlavorEarthMineral = function (e) {
+        var _a = this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+        var _b = this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+        var toast = this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+        var _c = this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
         this.props.addFlavor(e.target.value, "earthMineral");
-        this.barrel(this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical, this.props.notes.nose.smellProfile.woodSpice);
+        this.barrel(fruitFloral, earthMineral, biologicalChemical, woodSpice);
         // Run Age
         // Run Climate - Old World is more EarthMineral
         // Update Varietal with Climate
         // Varietal - Flavors
     };
     Blind.prototype.addFlavorWoodSpice = function (e) {
+        var _a = this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+        var _b = this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+        var toast = this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+        var _c = this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
         this.props.addFlavor(e.target.value, "woodSpice");
-        this.barrel(this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical, this.props.notes.nose.smellProfile.woodSpice);
+        this.barrel(fruitFloral, earthMineral, biologicalChemical, woodSpice);
         // Run Climate - New World uses more Oak
         // Run Varietal - Certain white wine grapes are oak aged
         // Varietal - Flavors
     };
     Blind.prototype.addFlavorBiologicalChemical = function (e) {
+        var _a = this.props.notes.eye, color = _a.color, sediment = _a.sediment;
+        var _b = this.props.notes.palate, sweetness = _b.sweetness, tannins = _b.tannins;
+        var toast = this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast;
+        var _c = this.props.notes.nose.smellProfile, fruitFloral = _c.fruitFloral, earthMineral = _c.earthMineral, biologicalChemical = _c.biologicalChemical, woodSpice = _c.woodSpice;
         this.props.addFlavor(e.target.value, "biologicalChemical");
-        this.barrel(this.props.notes.nose.smellProfile.fruitFloral, this.props.notes.nose.smellProfile.earthMineral, this.props.notes.nose.smellProfile.biologicalChemical, this.props.notes.nose.smellProfile.woodSpice);
+        this.barrel(fruitFloral, earthMineral, biologicalChemical, woodSpice);
         // Run Age (yeast indicates youth - aging wine gains non-fermentation BiologicalChemical strong after 5 years along with carmel)
         // Varietal - Flavors
     };
@@ -214,12 +317,6 @@ var Blind = (function (_super) {
         this.props.clearFlavor(flavorCategory);
     };
     Blind.prototype.barrel = function (smellFruitFloral, smellEarthMineral, smellBiologicalChemical, smellWoodSpice) {
-        /*
-        const smellFruitFloral = this.props.notes.nose.smellProfile.fruitFloral;
-        const smellEarthMineral = this.props.notes.nose.smellProfile.earthMineral;
-        const smellWoodSpice = this.props.notes.nose.smellProfile.woodSpice;
-        const smellBiologicalChemical = this.props.notes.nose.smellProfile.biologicalChemical;
-        */
         var smell;
         smell = [];
         smell = smell.concat(smellFruitFloral, smellEarthMineral, smellWoodSpice, smellBiologicalChemical);
@@ -390,6 +487,9 @@ var Blind = (function (_super) {
                     break;
             }
         }
+        if (sweetness == "Dessert") {
+            minAge = minAge - 1;
+        }
         // Make adjustments based on Barrel Aging
         if (toast == "Light") {
             minAge = minAge - 1;
@@ -408,10 +508,10 @@ var Blind = (function (_super) {
         if (smellFruitFloraCount > smellEarthMineralCount) {
             if (smellFruitFloraCount > smellBiologicalChemicalCount) {
                 minAge = Math.min(minAge, 3); // three years or less
-                if (tannins === "Harsh" || "Astringent" || "Aggressive") {
+                if (tannins == "Harsh" || "Astringent" || "Aggressive") {
                     maxAge = Math.min(maxAge, 5); // five years or less
                 }
-                if (tannins === "Soft") {
+                if (tannins == "Soft") {
                 }
             }
         }
@@ -450,7 +550,7 @@ var Blind = (function (_super) {
         componentDidUpdate(previousProps: any, previousState: any){alert(this.props.conclusions.age.min + " to previous " + previousProps.conclusions.age.min)}
     */
     Blind.prototype.updateAge = function () {
-        this.setState(this.props.conclusions.age.min);
+        this.setState(this.props.conclusions.SomBot.viniculture.bottleAging.min);
     };
     Blind.prototype.render = function () {
         //   this.componentDidMount()(this.updateAge());
@@ -612,12 +712,12 @@ var Blind = (function (_super) {
                     this.addChemicalFlavor())),
             React.createElement("hr", null),
             React.createElement(BotConclusions, { barrel: {
-                    aging: this.props.conclusions.barrel.aging,
-                    wood: this.props.conclusions.barrel.wood,
-                    toast: this.props.conclusions.barrel.toast
+                    aging: this.props.conclusions.SomBot.viniculture.bulkAging.barrel.time,
+                    wood: this.props.conclusions.SomBot.viniculture.bulkAging.barrel.wood,
+                    toast: this.props.conclusions.SomBot.viniculture.bulkAging.barrel.toast
                 }, age: {
-                    min: this.props.conclusions.age.min,
-                    max: this.props.conclusions.age.max
+                    min: this.props.conclusions.SomBot.viniculture.bottleAging.min,
+                    max: this.props.conclusions.SomBot.viniculture.bottleAging.max
                 } }),
             React.createElement(UserName, null),
             React.createElement(FetchUser, { children: UserName }));

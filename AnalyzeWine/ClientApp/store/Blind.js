@@ -40,14 +40,118 @@ var initialBlindTastingState = {
         }
     },
     conclusions: {
-        barrel: {
-            aging: "None",
-            wood: "None",
-            toast: "None",
+        SomBot: {
+            viticulture: {
+                place: {
+                    climate: "",
+                    country: [],
+                    region: [],
+                    appellation: [],
+                },
+                grape: {
+                    varietal: "",
+                }
+            },
+            viniculture: {
+                harvest: {
+                    lateHarvest: false,
+                    botrytis: false,
+                },
+                crush: {
+                    iceWine: false,
+                    sulfites: false,
+                    must: true,
+                },
+                fermentation: {
+                    must: true,
+                    wildYeast: false,
+                    temperature: "Medium",
+                    container: "barrel",
+                },
+                bulkAging: {
+                    inert: false,
+                    barrel: {
+                        time: "None",
+                        wood: "None",
+                        toast: "None",
+                    }
+                },
+                conditioning: {
+                    acidification: false,
+                    surLie: false,
+                    battonage: false,
+                    malolactic: true,
+                },
+                clarification: {
+                    racking: true,
+                    fining: false,
+                    filtering: false,
+                },
+                sparkling: {
+                    method: "",
+                },
+                fortified: {
+                    sugar: false,
+                    alcohol: false,
+                },
+                bottleAging: {
+                    min: 1,
+                    max: 2,
+                },
+            },
+            summary: {
+                quality: "",
+                potential: {
+                    currentReadiness: "",
+                    drinkFrom: 1999,
+                    drinkTo: 2999,
+                    peak: 2499,
+                },
+                pairing: [],
+            }
         },
-        age: {
-            min: 1,
-            max: 3,
+        Analyst: {
+            tasting: {
+                date: "",
+                location: "",
+                decanted: 0,
+            },
+            place: {
+                climate: "",
+                origin: "",
+                why: "",
+            },
+            grape: {
+                varietal: "",
+                why: "",
+            },
+            bottleAge: {
+                min: 0,
+                max: 0,
+                why: ""
+            },
+            assessment: {
+                potential: {
+                    currentReadiness: "",
+                    decantingRecommendation: 0,
+                    drinkFrom: 0,
+                    drinkTo: 0,
+                    peak: 0,
+                },
+                quality: "",
+                pairing: "",
+                summary: "",
+            },
+            reveal: {
+                producer: "",
+                vintage: 0,
+                varietal: "",
+                country: "",
+                region: "",
+                subRegion: "",
+                appellation: "",
+                vineyard: "",
+            }
         }
     }
 };
@@ -78,7 +182,7 @@ export var actionCreators = {
     addFlavor: function (flavor, flavorCategory) { return ({ type: 'ADD_FLAVOR', flavor: flavor, flavorCategory: flavorCategory }); },
     clearFlavor: function (flavorCategory) { return ({ type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory }); },
     // Conclusion Actions
-    setBarrel: function (aging, wood, toast) { return ({ type: 'SET_BARREL', aging: aging, wood: wood, toast: toast }); },
+    setBarrel: function (time, wood, toast) { return ({ type: 'SET_BARREL', time: time, wood: wood, toast: toast }); },
     setAge: function (min, max) { return ({ type: 'SET_AGE', min: min, max: max }); },
 };
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
@@ -125,14 +229,118 @@ export var reducer = function (state, action) {
             }
         },
         conclusions: {
-            barrel: {
-                aging: state.conclusions.barrel.aging,
-                wood: state.conclusions.barrel.wood,
-                toast: state.conclusions.barrel.toast,
+            SomBot: {
+                viticulture: {
+                    place: {
+                        climate: "",
+                        country: [],
+                        region: [],
+                        appellation: [],
+                    },
+                    grape: {
+                        varietal: "",
+                    }
+                },
+                viniculture: {
+                    harvest: {
+                        lateHarvest: false,
+                        botrytis: false,
+                    },
+                    crush: {
+                        iceWine: false,
+                        sulfites: false,
+                        must: true,
+                    },
+                    fermentation: {
+                        must: true,
+                        wildYeast: false,
+                        temperature: "Medium",
+                        container: "barrel",
+                    },
+                    bulkAging: {
+                        inert: false,
+                        barrel: {
+                            time: state.conclusions.SomBot.viniculture.bulkAging.barrel.time,
+                            wood: state.conclusions.SomBot.viniculture.bulkAging.barrel.wood,
+                            toast: state.conclusions.SomBot.viniculture.bulkAging.barrel.toast,
+                        }
+                    },
+                    conditioning: {
+                        acidification: false,
+                        surLie: false,
+                        battonage: false,
+                        malolactic: true,
+                    },
+                    clarification: {
+                        racking: true,
+                        fining: false,
+                        filtering: false,
+                    },
+                    sparkling: {
+                        method: "",
+                    },
+                    fortified: {
+                        sugar: false,
+                        alcohol: false,
+                    },
+                    bottleAging: {
+                        min: state.conclusions.SomBot.viniculture.bottleAging.min,
+                        max: state.conclusions.SomBot.viniculture.bottleAging.max,
+                    },
+                },
+                summary: {
+                    quality: "",
+                    potential: {
+                        currentReadiness: "",
+                        drinkFrom: 1999,
+                        drinkTo: 2999,
+                        peak: 2499,
+                    },
+                    pairing: [],
+                }
             },
-            age: {
-                min: state.conclusions.age.min,
-                max: state.conclusions.age.max,
+            Analyst: {
+                tasting: {
+                    date: "",
+                    location: "",
+                    decanted: 0,
+                },
+                place: {
+                    climate: "",
+                    origin: "",
+                    why: "",
+                },
+                grape: {
+                    varietal: "",
+                    why: "",
+                },
+                bottleAge: {
+                    min: 0,
+                    max: 0,
+                    why: ""
+                },
+                assessment: {
+                    potential: {
+                        currentReadiness: "",
+                        decantingRecommendation: 0,
+                        drinkFrom: 0,
+                        drinkTo: 0,
+                        peak: 0,
+                    },
+                    quality: "",
+                    pairing: "",
+                    summary: "",
+                },
+                reveal: {
+                    producer: "",
+                    vintage: 0,
+                    varietal: "",
+                    country: "",
+                    region: "",
+                    subRegion: "",
+                    appellation: "",
+                    vineyard: "",
+                }
             }
         }
     };
@@ -296,13 +504,13 @@ export var reducer = function (state, action) {
                     return tempState;
             }
         case 'SET_BARREL':
-            tempState.conclusions.barrel.aging = action.aging;
-            tempState.conclusions.barrel.wood = action.wood;
-            tempState.conclusions.barrel.toast = action.toast;
+            tempState.conclusions.SomBot.viniculture.bulkAging.barrel.time = action.time;
+            tempState.conclusions.SomBot.viniculture.bulkAging.barrel.wood = action.wood;
+            tempState.conclusions.SomBot.viniculture.bulkAging.barrel.toast = action.toast;
             return tempState;
         case 'SET_AGE':
-            tempState.conclusions.age.min = action.min;
-            tempState.conclusions.age.max = action.max;
+            tempState.conclusions.SomBot.viniculture.bottleAging.min = action.min;
+            tempState.conclusions.SomBot.viniculture.bottleAging.max = action.max;
             return tempState;
         default:
             var exhaustiveCheck = action;
