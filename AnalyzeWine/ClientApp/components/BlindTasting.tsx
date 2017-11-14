@@ -438,11 +438,11 @@ class Blind extends Component<BlindProps, {}> {
 
 
 
-
+/*
     updateAge(){
         this.setState(this.props.conclusions.SomBot.viniculture.bottleAging.min);
     }
-
+*/
 
 
     public render()  {
@@ -451,6 +451,8 @@ class Blind extends Component<BlindProps, {}> {
 
 
         return <div>
+            <p>{this.props.conclusions.SomBot.viniculture.bottleAging.min} to {this.props.conclusions.SomBot.viniculture.bottleAging.max}</p>
+
             <h3>Choose Type</h3>
             <p>What type of wine are you analyzing? {this.selectTypeList()} </p>
 

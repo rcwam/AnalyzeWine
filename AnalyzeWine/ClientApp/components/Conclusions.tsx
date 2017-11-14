@@ -26,6 +26,9 @@ class BotConclusions extends Component{
 
                 <Age />
 
+
+
+
                 <p>Climate? {}</p>
                 <p>Balance (alcohol, acid, tannin, sugar)? {}</p>
                 <p>Origin List {}</p>

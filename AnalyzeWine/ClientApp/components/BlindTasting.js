@@ -354,13 +354,19 @@ var Blind = (function (_super) {
         }
         componentDidUpdate(previousProps: any, previousState: any){alert(this.props.conclusions.age.min + " to previous " + previousProps.conclusions.age.min)}
     */
-    Blind.prototype.updateAge = function () {
-        this.setState(this.props.conclusions.SomBot.viniculture.bottleAging.min);
-    };
+    /*
+        updateAge(){
+            this.setState(this.props.conclusions.SomBot.viniculture.bottleAging.min);
+        }
+    */
     Blind.prototype.render = function () {
         //   this.componentDidMount()(this.updateAge());
         var _this = this;
         return React.createElement("div", null,
+            React.createElement("p", null,
+                this.props.conclusions.SomBot.viniculture.bottleAging.min,
+                " to ",
+                this.props.conclusions.SomBot.viniculture.bottleAging.max),
             React.createElement("h3", null, "Choose Type"),
             React.createElement("p", null,
                 "What type of wine are you analyzing? ",
