@@ -116,7 +116,7 @@ export interface BlindTastingState {
             tasting: {
                 date: string,
                 location: string,
-                decanted: number;
+                decant: number;
             }
             place: {
                 climate: string,
@@ -142,7 +142,7 @@ export interface BlindTastingState {
                     peak: number,
                 }
                 quality: string,
-                pairing: string,
+                pairing: string, // build personal pairing with reverse-lookup to food
                 summary: string,
             }
             reveal:{
@@ -274,7 +274,7 @@ const initialBlindTastingState: BlindTastingState = {
             tasting: {
                 date: "",
                 location: "",
-                decanted: 0,
+                decant: 0,
             },
             place: {
                 climate: "",
@@ -509,7 +509,7 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                 tasting: {
                     date: "",
                     location: "",
-                    decanted: 0,
+                    decant: 0,
                 },
                 place: {
                     climate: "",

@@ -10,43 +10,26 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from 'react';
 import { Component } from 'react';
+import Age from './Age';
+/*
+import * as BlindStore from '../store/Blind';
+import { ApplicationState } from '../store';
+
+type BlindProps =
+    BlindStore.BlindTastingState
+    & typeof BlindStore.actionCreators
+    & RouteComponentProps<{}>;
+*/
 var BotConclusions = (function (_super) {
     __extends(BotConclusions, _super);
-    function BotConclusions(props, context) {
-        var _this = _super.call(this, props, context) || this;
-        _this.state = {
-            barrel: {
-                wood: props.barrel.wood,
-                toast: props.barrel.toast,
-                aging: props.barrel.aging
-            },
-            age: {
-                min: props.age.min,
-                max: props.age.max,
-            }
-        };
-        return _this;
+    function BotConclusions() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     BotConclusions.prototype.render = function () {
-        var _a = this.props.barrel, wood = _a.wood, toast = _a.toast, aging = _a.aging;
-        var _b = this.props.age, min = _b.min, max = _b.max;
         return (React.createElement("div", null,
             React.createElement("h3", null, "Summary"),
             React.createElement("p", null, "Som-Bot can give suggested conclusions based on your tasting notes:"),
-            React.createElement("p", null,
-                "Age: ",
-                min,
-                " to ",
-                max),
-            React.createElement("p", null,
-                "Barrel Aging: ",
-                aging),
-            React.createElement("p", null,
-                "Wood: ",
-                wood),
-            React.createElement("p", null,
-                "Toast: ",
-                toast),
+            React.createElement(Age, null),
             React.createElement("p", null, "Climate? "),
             React.createElement("p", null, "Balance (alcohol, acid, tannin, sugar)? "),
             React.createElement("p", null, "Origin List "),

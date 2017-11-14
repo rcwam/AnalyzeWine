@@ -114,7 +114,7 @@ var initialBlindTastingState = {
             tasting: {
                 date: "",
                 location: "",
-                decanted: 0,
+                decant: 0,
             },
             place: {
                 climate: "",
@@ -303,7 +303,7 @@ export var reducer = function (state, action) {
                 tasting: {
                     date: "",
                     location: "",
-                    decanted: 0,
+                    decant: 0,
                 },
                 place: {
                     climate: "",
