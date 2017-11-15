@@ -347,14 +347,14 @@ interface AddFlavor{type: 'ADD_FLAVOR', flavorCategory: string, flavor: string}
 interface ClearFlavor{type: 'CLEAR_FLAVOR', flavorCategory: string}
 
 // Conclusion Interfaces
-interface SetBarrel {type: 'SET_BARREL', time: string, wood: string, toast: string}
+interface SetBulk {type: 'SET_BULK', time: string, wood: string, toast: string}
 interface SetAge{type: 'SET_AGE', min: number, max: number}
 
 
 type KnownAction = SetWineType | SetColor | SetDepth | SetClarity | SetSediment | SetViscosity | SetCarbonation
     | SetSmellIntensity | SetSmellComplexity | SetSmellAlcohol | AddAroma | ClearAroma
     | SetTasteIntensity | SetTasteComplexity | SetBody | SetSweetness | SetAcidity | SetTannins | SetTasteAlcohol | SetFinish | AddFlavor | ClearFlavor
-    | SetBarrel | SetAge;
+    | SetBulk | SetAge;
 
 export const  actionCreators  = {
     setWineType: (selectWineType: string) => <SetWineType>{type: 'SET_WINE_TYPE', selectWineType: selectWineType},
@@ -387,7 +387,7 @@ export const  actionCreators  = {
     clearFlavor: (flavorCategory: string) => <ClearFlavor>{type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory},
 
     // Conclusion Actions
-    setBarrel: (time: string, wood: string, toast: string) => <SetBarrel>{type: 'SET_BARREL', time: time, wood: wood, toast: toast},
+    setBulk: (time: string, wood: string, toast: string) => <SetBulk>{type: 'SET_BULK', time: time, wood: wood, toast: toast},
     setAge: (min: number, max: number) => <SetAge>{type: 'SET_AGE', min: min, max: max},
 };
 
@@ -719,7 +719,7 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                     return tempState;
             }
 
-        case 'SET_BARREL':
+        case 'SET_BULK':
                 tempState.conclusions.SomBot.viniculture.bulkAging.barrel.time = action.time;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.wood = action.wood;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.toast = action.toast;

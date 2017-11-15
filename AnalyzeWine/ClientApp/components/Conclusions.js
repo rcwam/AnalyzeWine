@@ -11,15 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 import * as React from 'react';
 import { Component } from 'react';
 import Age from './Age';
-/*
-import * as BlindStore from '../store/Blind';
-import { ApplicationState } from '../store';
-
-type BlindProps =
-    BlindStore.BlindTastingState
-    & typeof BlindStore.actionCreators
-    & RouteComponentProps<{}>;
-*/
+import BulkAging from './BulkAging';
 var BotConclusions = (function (_super) {
     __extends(BotConclusions, _super);
     function BotConclusions() {
@@ -30,6 +22,7 @@ var BotConclusions = (function (_super) {
             React.createElement("h3", null, "Summary"),
             React.createElement("p", null, "Som-Bot can give suggested conclusions based on your tasting notes:"),
             React.createElement(Age, null),
+            React.createElement(BulkAging, null),
             React.createElement("p", null, "Climate? "),
             React.createElement("p", null, "Balance (alcohol, acid, tannin, sugar)? "),
             React.createElement("p", null, "Origin List "),

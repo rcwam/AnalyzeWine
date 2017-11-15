@@ -2,16 +2,7 @@
 import  {Component} from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import Age from './Age'
-
-/*
-import * as BlindStore from '../store/Blind';
-import { ApplicationState } from '../store';
-
-type BlindProps =
-    BlindStore.BlindTastingState
-    & typeof BlindStore.actionCreators
-    & RouteComponentProps<{}>;
-*/
+import BulkAging from './BulkAging'
 
 class BotConclusions extends Component{
 
@@ -25,6 +16,7 @@ class BotConclusions extends Component{
 
 
                 <Age />
+                <BulkAging />
 
 
 

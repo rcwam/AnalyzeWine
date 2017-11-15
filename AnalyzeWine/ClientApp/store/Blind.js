@@ -182,7 +182,7 @@ export var actionCreators = {
     addFlavor: function (flavor, flavorCategory) { return ({ type: 'ADD_FLAVOR', flavor: flavor, flavorCategory: flavorCategory }); },
     clearFlavor: function (flavorCategory) { return ({ type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory }); },
     // Conclusion Actions
-    setBarrel: function (time, wood, toast) { return ({ type: 'SET_BARREL', time: time, wood: wood, toast: toast }); },
+    setBulk: function (time, wood, toast) { return ({ type: 'SET_BULK', time: time, wood: wood, toast: toast }); },
     setAge: function (min, max) { return ({ type: 'SET_AGE', min: min, max: max }); },
 };
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
@@ -503,7 +503,7 @@ export var reducer = function (state, action) {
                 default:
                     return tempState;
             }
-        case 'SET_BARREL':
+        case 'SET_BULK':
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.time = action.time;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.wood = action.wood;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.toast = action.toast;

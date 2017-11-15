@@ -25,23 +25,18 @@ var Age = (function (_super) {
         return _this;
     }
     Age.prototype.render = function () {
-        /*
-        const {wineType, color, sediment} = this.props.notes.eye;
-        const {tannins} = this.props.notes.palate;
-        const {toast} = this.props.conclusions.SomBot.viniculture.bulkAging.barrel;
-        const {fruitFloral, earthMineral, biologicalChemical} = this.props.notes.nose.smellProfile;
-        */
+        var _a = this.props, wineType = _a.wineType, color = _a.color, sediment = _a.sediment, tannins = _a.tannins, toast = _a.toast, smellProfile = _a.smellProfile;
         var minAge = 0;
         var maxAge = 0;
-        if (this.props.sediment == ("Light" || "Heavy")) {
+        if (sediment == ("Light" || "Heavy")) {
             minAge = 5;
             maxAge = 99;
         }
         else {
             // Initial guess based on color
-            switch (this.props.wineType) {
+            switch (wineType) {
                 case "Red":
-                    switch (this.props.color) {
+                    switch (color) {
                         case "Purple":
                             minAge = 0;
                             maxAge = 2;
@@ -69,7 +64,7 @@ var Age = (function (_super) {
                     }
                     break;
                 case "White":
-                    switch (this.props.color) {
+                    switch (color) {
                         case "Clear" || "Greenish":
                             minAge = 0;
                             maxAge = 2;
@@ -93,7 +88,7 @@ var Age = (function (_super) {
                     }
                     break;
                 case "Rose":
-                    switch (this.props.color) {
+                    switch (color) {
                         case "Pink":
                             minAge = 0;
                             maxAge = 2;
@@ -119,23 +114,23 @@ var Age = (function (_super) {
             }
         }
         // Make adjustments based on Barrel Aging
-        if (this.props.toast == "Light") {
+        if (toast == "Light") {
             minAge = minAge - 1;
             maxAge = maxAge - 1;
         }
-        if (this.props.toast == "Heavy") {
+        if (toast == "Heavy") {
             minAge = minAge - 2;
             maxAge = maxAge - 2;
         }
         // Use aroma group to verify the final guess.
-        var smellFruitFloraCount = this.props.smellProfile.fruitFloral.length;
-        var smellEarthMineralCount = this.props.smellProfile.earthMineral.length;
-        var smellBiologicalChemicalCount = this.props.smellProfile.biologicalChemical.length;
+        var smellFruitFloraCount = smellProfile.fruitFloral.length;
+        var smellEarthMineralCount = smellProfile.earthMineral.length;
+        var smellBiologicalChemicalCount = smellProfile.biologicalChemical.length;
         // take into account the expected type of wine?
         if (smellFruitFloraCount > smellEarthMineralCount) {
             if (smellFruitFloraCount > smellBiologicalChemicalCount) {
                 minAge = Math.min(minAge, 3); // three years or less
-                if (this.props.tannins === "Harsh" || "Astringent" || "Aggressive") {
+                if (tannins === "Harsh" || "Astringent" || "Aggressive") {
                     maxAge = Math.min(maxAge, 5); // five years or less
                 }
             }
@@ -154,8 +149,6 @@ var Age = (function (_super) {
         maxAge = Math.min(99, maxAge);
         fromAge = minAge;
         toAge = maxAge;
-        //  this.updateAge(minAge,maxAge);
-        //  alert("Ran Age");
         return (React.createElement("div", null,
             "Age: ",
             minAge,
@@ -163,20 +156,6 @@ var Age = (function (_super) {
             maxAge,
             " years"));
     };
-    /*
-       shouldComponentUpdate(nextProps:any){
-           if(this.props.min != nextProps.min){
-               alert("Should  Run ");
-               this.updateAge(fromAge,toAge);
-           }
-
-           else {
-               alert("Should Not Run");
-
-           }
-
-       }
-      */
     Age.prototype.componentWillMount = function () {
         //       alert("Will Mount")
     };
@@ -206,17 +185,6 @@ var Age = (function (_super) {
     };
     return Age;
 }(Component));
-/*
-const AgeExport = connect((state: ApplicationState) =>(
-    state.blind.notes.eye.wineType  &&
-    state.blind.notes.eye.color &&
-    state.blind.notes.eye.sediment &&
-    state.blind.notes.palate.tannins &&
-    state.blind.conclusions.SomBot.viniculture.bulkAging.barrel.toast &&
-    state.blind.notes.nose.smellProfile
-    ), BlindStore.actionCreators )(Age) as typeof Age;
-
- */
 function mapStateToProps(ApplicationState) {
     return {
         wineType: ApplicationState.blind.notes.eye.wineType,
