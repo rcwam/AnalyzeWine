@@ -71,14 +71,13 @@ var initialBlindTastingState = {
                 bulkAging: {
                     inert: false,
                     barrel: {
-                        time: "None",
                         wood: "None",
                         toast: "None",
                     }
                 },
                 conditioning: {
                     acidification: false,
-                    surLie: false,
+                    lees: false,
                     battonage: false,
                     malolactic: true,
                 },
@@ -182,7 +181,7 @@ export var actionCreators = {
     addFlavor: function (flavor, flavorCategory) { return ({ type: 'ADD_FLAVOR', flavor: flavor, flavorCategory: flavorCategory }); },
     clearFlavor: function (flavorCategory) { return ({ type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory }); },
     // Conclusion Actions
-    setBulk: function (time, wood, toast) { return ({ type: 'SET_BULK', time: time, wood: wood, toast: toast }); },
+    setBulk: function (wood, toast) { return ({ type: 'SET_BULK', wood: wood, toast: toast }); },
     setAge: function (min, max) { return ({ type: 'SET_AGE', min: min, max: max }); },
 };
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
@@ -260,14 +259,13 @@ export var reducer = function (state, action) {
                     bulkAging: {
                         inert: false,
                         barrel: {
-                            time: state.conclusions.SomBot.viniculture.bulkAging.barrel.time,
                             wood: state.conclusions.SomBot.viniculture.bulkAging.barrel.wood,
                             toast: state.conclusions.SomBot.viniculture.bulkAging.barrel.toast,
                         }
                     },
                     conditioning: {
                         acidification: false,
-                        surLie: false,
+                        lees: false,
                         battonage: false,
                         malolactic: true,
                     },
@@ -504,7 +502,6 @@ export var reducer = function (state, action) {
                     return tempState;
             }
         case 'SET_BULK':
-            tempState.conclusions.SomBot.viniculture.bulkAging.barrel.time = action.time;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.wood = action.wood;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.toast = action.toast;
             return tempState;

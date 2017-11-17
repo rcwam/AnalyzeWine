@@ -25,7 +25,7 @@ var Color = (function (_super) {
     Color.prototype.render = function () {
         var _this = this;
         var _a = this.props, wineType = _a.wineType, color = _a.color;
-        // Sight Selections
+        var colorQuestion = "What color is the wine?";
         var redColorList = function () {
             return (React.createElement("select", { value: color, onChange: _this.changeColor },
                 React.createElement("option", { value: "Purple" }, "Purple"),
@@ -65,7 +65,10 @@ var Color = (function (_super) {
                     return redColorList();
             }
         };
-        return (React.createElement("div", null, pickColorList(wineType)));
+        return (React.createElement("div", null,
+            colorQuestion,
+            "    ",
+            pickColorList(wineType)));
     };
     return Color;
 }(Component));

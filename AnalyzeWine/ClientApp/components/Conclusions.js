@@ -10,8 +10,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from 'react';
 import { Component } from 'react';
-import Age from './Age';
-import BulkAging from './BulkAging';
+import Age from './somBot/Age';
+import BulkAging from './somBot/BulkAging';
 var BotConclusions = (function (_super) {
     __extends(BotConclusions, _super);
     function BotConclusions() {

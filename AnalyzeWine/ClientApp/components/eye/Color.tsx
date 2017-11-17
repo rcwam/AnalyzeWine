@@ -16,8 +16,7 @@ class Color extends Component <any, any> {
 
     render() {
         const {wineType, color} = this.props;
-
-        // Sight Selections
+        const colorQuestion = "What color is the wine?";
 
         const redColorList = () => {
             return (
@@ -74,9 +73,8 @@ class Color extends Component <any, any> {
 
         return (
             <div>
-                {pickColorList(wineType)}
+                {colorQuestion}    {pickColorList(wineType)}
             </div>
-
         )
     }
 }

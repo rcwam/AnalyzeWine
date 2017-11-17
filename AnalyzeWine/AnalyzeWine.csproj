@@ -26,18 +26,45 @@
     <None Remove="ClientApp\components\BulkAging.tsx" />
     <None Remove="ClientApp\components\Conclusions.tsx" />
     <None Remove="ClientApp\components\EyeAnalysis.tsx" />
+    <None Remove="ClientApp\components\eye\Carbonation.tsx" />
+    <None Remove="ClientApp\components\eye\Clarity.tsx" />
     <None Remove="ClientApp\components\eye\Color.tsx" />
+    <None Remove="ClientApp\components\eye\Depth.tsx" />
+    <None Remove="ClientApp\components\eye\Sediment.tsx" />
+    <None Remove="ClientApp\components\eye\Viscosity.tsx" />
+    <None Remove="ClientApp\components\NoseAnalysis.tsx" />
+    <None Remove="ClientApp\components\nose\SmellAlcohol.tsx" />
+    <None Remove="ClientApp\components\nose\SmellComplexity.tsx" />
+    <None Remove="ClientApp\components\nose\SmellIntensity.tsx" />
+    <None Remove="ClientApp\components\somBot\ChemicalAnalysis.tsx" />
+    <None Remove="ClientApp\components\somBot\GrapeAnalysis.tsx" />
     <None Remove="ClientApp\store\Blind.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\components\Age.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\NoseAnalysis.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\nose\SmellAlcohol.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\nose\SmellComplexity.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\nose\SmellIntensity.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\somBot\Age.tsx" />
     <TypeScriptCompile Include="ClientApp\components\BlindTasting.tsx" />
-    <TypeScriptCompile Include="ClientApp\components\BulkAging.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\somBot\BulkAging.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Conclusions.tsx" />
     <TypeScriptCompile Include="ClientApp\components\EyeAnalysis.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\eye\Carbonation.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\eye\Clarity.tsx" />
     <TypeScriptCompile Include="ClientApp\components\eye\Color.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\eye\Depth.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\eye\Sediment.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\eye\Viscosity.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\somBot\ChemicalAnalysis.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\somBot\GrapeAnalysis.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\somBot\PlaceAnalysis.tsx" />
     <TypeScriptCompile Include="ClientApp\store\Blind.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\components\nose\NewFolder\" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

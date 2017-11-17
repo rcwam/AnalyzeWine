@@ -73,14 +73,13 @@ export interface BlindTastingState {
                 bulkAging: {
                     inert: boolean,
                     barrel: {
-                        time: string;
                         wood: string;
                         toast: string;
                     }
                 }
                 conditioning: {
                     acidification: boolean,
-                    surLie: boolean,
+                    lees: boolean,
                     battonage: boolean,
                     malolactic: boolean,
                 }
@@ -231,14 +230,13 @@ const initialBlindTastingState: BlindTastingState = {
                 bulkAging: {
                     inert: false,
                     barrel: {
-                        time: "None",
                         wood: "None",
                         toast: "None",
                     }
                 },
                 conditioning: {
                     acidification: false,
-                    surLie: false,
+                    lees: false,
                     battonage: false,
                     malolactic: true,
                 },
@@ -387,7 +385,7 @@ export const  actionCreators  = {
     clearFlavor: (flavorCategory: string) => <ClearFlavor>{type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory},
 
     // Conclusion Actions
-    setBulk: (time: string, wood: string, toast: string) => <SetBulk>{type: 'SET_BULK', time: time, wood: wood, toast: toast},
+    setBulk: ( wood: string, toast: string) => <SetBulk>{type: 'SET_BULK',  wood: wood, toast: toast},
     setAge: (min: number, max: number) => <SetAge>{type: 'SET_AGE', min: min, max: max},
 };
 
@@ -466,14 +464,13 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                     bulkAging: {
                         inert: false,
                         barrel: {
-                            time: state.conclusions.SomBot.viniculture.bulkAging.barrel.time,
                             wood: state.conclusions.SomBot.viniculture.bulkAging.barrel.wood,
                             toast: state.conclusions.SomBot.viniculture.bulkAging.barrel.toast,
                         }
                     },
                     conditioning: {
                         acidification: false,
-                        surLie: false,
+                        lees: false,
                         battonage: false,
                         malolactic: true,
                     },
@@ -720,7 +717,6 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
             }
 
         case 'SET_BULK':
-                tempState.conclusions.SomBot.viniculture.bulkAging.barrel.time = action.time;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.wood = action.wood;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.toast = action.toast;
             return tempState;

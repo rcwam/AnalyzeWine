@@ -1,8 +1,8 @@
 ﻿import * as React from 'react';
 import  {Component} from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import Age from './Age'
-import BulkAging from './BulkAging'
+import Age from './somBot/Age'
+import BulkAging from './somBot/BulkAging'
 
 class BotConclusions extends Component{
 

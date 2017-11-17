@@ -1,37 +1,25 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+"use strict";
+/*
 import * as React from 'react';
-import { Component } from 'react';
-import { connect } from 'react-redux';
-import * as BlindStore from '../store/Blind';
-var aging = "";
-var wood = "";
-var toast = "";
-var BulkAging = (function (_super) {
-    __extends(BulkAging, _super);
-    function BulkAging() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        //   componentDidMount(){this.updateAge(fromAge,toAge)}
-        _this.updateBulkAging = function (aging, wood, toast) {
-            _this.props.setBulk(aging, wood, toast);
-        };
-        return _this;
-    }
-    BulkAging.prototype.render = function () {
-        var smellProfile = this.props.smellProfile;
-        var smell;
+import  {Component} from 'react';
+import {connect} from 'react-redux'
+import { Link, RouteComponentProps } from 'react-router-dom';
+import * as BlindStore from '../../store/Blind';
+
+let aging = "";
+let wood = "";
+let surLie = "";
+
+class Lees extends Component <any, any> {
+    render() {
+        const { smellProfile} = this.props;
+
+        let smell: string[];
         smell = [];
         smell = smell.concat(smellProfile.fruitFloral, smellProfile.earthMineral, smellProfile.biologicalChemical, smellProfile.woodSpice);
+
         // Light toasting toastedBread, Nuts
-        var lightToasting = 0;
+        let lightToasting = 0;
         if (smell.indexOf("Burnt Toast") > -1) {
             lightToasting++;
         }
@@ -43,7 +31,7 @@ var BulkAging = (function (_super) {
         }
         // alert(lightToasting);
         // heavy toasting roasted coffee beans, dark chocolate
-        var heavyToasting = 0;
+        let heavyToasting = 0;
         if (smell.indexOf("Coffee") > -1) {
             heavyToasting++;
         }
@@ -59,8 +47,9 @@ var BulkAging = (function (_super) {
         if (smell.indexOf("Charred Wood") > -1) {
             heavyToasting++;
         }
+
         // Oak Barrel
-        var oakBarrel = 0;
+        let oakBarrel = 0;
         if (smell.indexOf("Vanilla") > -1) {
             oakBarrel++;
         }
@@ -75,7 +64,7 @@ var BulkAging = (function (_super) {
         }
         // French Oak
         // elegantVanilla, cinnamon, cloves, nutmeg
-        var frenchOak = 0;
+        let frenchOak = 0;
         if (smell.indexOf("Cinnamon") > -1) {
             frenchOak++;
         }
@@ -85,18 +74,21 @@ var BulkAging = (function (_super) {
         if (smell.indexOf("Nutmeg") > -1) {
             frenchOak++;
         }
+
         // American Oak
         // aggressiveVanilla, toastedCoconut, dill
-        var americanOak = 0;
+        let americanOak = 0;
         if (smell.indexOf("Coconut") > -1) {
             americanOak++;
         }
         if (smell.indexOf("Dill") > -1) {
             americanOak++;
         }
-        var aging = "None";
-        var wood = "None";
-        var toast = "None";
+
+        let aging = "None";
+        let wood = "None";
+        let toast = "None";
+
         // Toast
         if (lightToasting + heavyToasting > 0) {
             wood = "Wood";
@@ -105,6 +97,7 @@ var BulkAging = (function (_super) {
                 toast = "Heavy";
             }
         }
+
         // Wood
         if (oakBarrel + frenchOak + americanOak > 0) {
             if (oakBarrel > 0) {
@@ -117,6 +110,7 @@ var BulkAging = (function (_super) {
                 wood = "American Oak";
             }
         }
+
         // Aging
         if (oakBarrel + frenchOak + americanOak + lightToasting + heavyToasting > 0) {
             aging = "Possible";
@@ -124,36 +118,37 @@ var BulkAging = (function (_super) {
                 aging = "Likely";
             }
         }
-        return (React.createElement("div", null,
-            React.createElement("p", null, "Bulk Aging:"),
-            " ",
-            React.createElement("ul", null,
-                React.createElement("li", null,
-                    "Barrel: ",
-                    aging),
-                React.createElement("li", null,
-                    "Wood: ",
-                    wood),
-                React.createElement("li", null,
-                    "Toast: ",
-                    toast))));
-    };
-    BulkAging.prototype.componentWillReceiveProps = function (nextProps) {
+
+        return (
+            <div><p>Bulk Aging:</p> <ul><li>Barrel: {aging}</li><li>Wood: {wood}</li><li>Toast: {toast}</li></ul></div>
+        )
+    }
+
+    componentWillReceiveProps(nextProps: any) {
         //     alert("Will Receive Props " + this.props.smellProfile.fruitFloral + " to " + nextProps.smellProfile.fruitFloral);
-        if ((this.props.smellProfile.fruitFloral != nextProps.smellProfile.fruitFloral) ||
+        if (
+            (this.props.smellProfile.fruitFloral != nextProps.smellProfile.fruitFloral) ||
             (this.props.smellProfile.earthMineral != nextProps.smellProfile.earthMineral) ||
             (this.props.smellProfile.biologicalChemical != nextProps.smellProfile.biologicalChemical) ||
-            (this.props.smellProfile.woodSpice != nextProps.smellProfile.woodSpice)) {
-            this.updateBulkAging(aging, wood, toast);
+            (this.props.smellProfile.woodSpice != nextProps.smellProfile.woodSpice)
+        ) {
+            this.updateBulkAging(aging,wood,toast)
         }
+    }
+
+    //   componentDidMount(){this.updateAge(fromAge,toAge)}
+    updateBulkAging = (aging: string, wood: string, toast: string) => {
+        this.props.setBulk(aging,wood,toast)
     };
-    return BulkAging;
-}(Component));
-function mapStateToProps(ApplicationState) {
+}
+
+function mapStateToProps (ApplicationState: any) {
     return {
         smellProfile: ApplicationState.blind.notes.nose.smellProfile,
     };
 }
-var BulkExport = connect(mapStateToProps, BlindStore.actionCreators)(BulkAging);
-export default BulkExport;
-//# sourceMappingURL=BulkAging.js.map
+
+export default connect(mapStateToProps, BlindStore.actionCreators )(Lees) as typeof Lees;
+
+*/ 
+//# sourceMappingURL=PlaceAnalysis.js.map

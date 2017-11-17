@@ -1,14 +1,15 @@
-﻿import * as React from 'react';
+﻿/*
+import * as React from 'react';
 import  {Component} from 'react';
 import {connect} from 'react-redux'
 import { Link, RouteComponentProps } from 'react-router-dom';
-import * as BlindStore from '../store/Blind';
+import * as BlindStore from '../../store/Blind';
 
 let aging = "";
 let wood = "";
-let toast = "";
+let surLie = "";
 
-class BulkAging extends Component <any, any> {
+class Lees extends Component <any, any> {
     render() {
         const { smellProfile} = this.props;
 
@@ -27,7 +28,7 @@ class BulkAging extends Component <any, any> {
         if (smell.indexOf("Roasted Nuts") > -1) {
             lightToasting++;
         }
-       // alert(lightToasting);
+        // alert(lightToasting);
         // heavy toasting roasted coffee beans, dark chocolate
         let heavyToasting = 0;
         if (smell.indexOf("Coffee") > -1) {
@@ -146,5 +147,6 @@ function mapStateToProps (ApplicationState: any) {
     };
 }
 
-const BulkExport = connect(mapStateToProps, BlindStore.actionCreators )(BulkAging) as typeof BulkAging;
-export default BulkExport
+export default connect(mapStateToProps, BlindStore.actionCreators )(Lees) as typeof Lees;
+
+*/
