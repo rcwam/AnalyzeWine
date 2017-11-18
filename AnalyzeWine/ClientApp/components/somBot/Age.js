@@ -18,7 +18,6 @@ var Age = (function (_super) {
     __extends(Age, _super);
     function Age() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        //   componentDidMount(){this.updateAge(fromAge,toAge)}
         _this.updateAge = function (fromAge, toAge) {
             _this.props.setAge(fromAge, toAge);
         };
@@ -114,14 +113,14 @@ var Age = (function (_super) {
             }
         }
         // Make adjustments based on Barrel Aging
-        if (toast == "Light") {
+        if (toast == true) {
             minAge = minAge - 1;
             maxAge = maxAge - 1;
         }
-        if (toast == "Heavy") {
-            minAge = minAge - 2;
-            maxAge = maxAge - 2;
-        }
+        //   if (toast == "Heavy") {
+        //       minAge = minAge - 2;
+        //       maxAge = maxAge - 2;
+        //   }
         // Use aroma group to verify the final guess.
         var smellFruitFloraCount = smellProfile.fruitFloral.length;
         var smellEarthMineralCount = smellProfile.earthMineral.length;
@@ -156,32 +155,15 @@ var Age = (function (_super) {
             maxAge,
             " years"));
     };
-    Age.prototype.componentWillMount = function () {
-        //       alert("Will Mount")
-    };
-    Age.prototype.componentDidMount = function () {
-        //      alert("Did Mount")
-    };
     Age.prototype.componentWillReceiveProps = function (nextProps) {
         //     alert("Will Receive Props " + this.props.smellProfile.fruitFloral + " to " + nextProps.smellProfile.fruitFloral);
         if ((this.props.wineType != nextProps.wineType) ||
             (this.props.color != nextProps.color) ||
             (this.props.sediment != nextProps.sediment) ||
             (this.props.tannins != nextProps.tannins) ||
-            (this.props.toast != nextProps.toast) ||
-            (this.props.smellProfile.fruitFloral != nextProps.smellProfile.fruitFloral) ||
-            (this.props.smellProfile.earthMineral != nextProps.smellProfile.earthMineral) ||
-            (this.props.smellProfile.biologicalChemical != nextProps.smellProfile.biologicalChemical) ||
-            (this.props.smellProfile.woodSpice != nextProps.smellProfile.woodSpice)) {
+            (this.props.toast != nextProps.toast)) {
             this.updateAge(fromAge, toAge);
         }
-    };
-    //   shouldComponentUpdate(nextProps: any, nextState: any, nextContext: any) {    }
-    Age.prototype.componentWillUpdate = function () {
-        //       alert("Will Update")
-    };
-    Age.prototype.componentDidUpdate = function () {
-        //       alert("Did Update")
     };
     return Age;
 }(Component));
@@ -192,7 +174,6 @@ function mapStateToProps(ApplicationState) {
         sediment: ApplicationState.blind.notes.eye.sediment,
         tannins: ApplicationState.blind.notes.palate.tannins,
         toast: ApplicationState.blind.conclusions.SomBot.viniculture.bulkAging.barrel.toast,
-        smellProfile: ApplicationState.blind.notes.nose.smellProfile,
     };
 }
 var AgeExport = connect(mapStateToProps, BlindStore.actionCreators)(Age);

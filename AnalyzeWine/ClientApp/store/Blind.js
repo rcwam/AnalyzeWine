@@ -98,6 +98,16 @@ var initialBlindTastingState = {
                     max: 2,
                 },
             },
+            chemicals: {
+                agingProfile: {
+                    youthful: 0,
+                    middleAged: 0,
+                    oldAged: 0,
+                },
+                malolacticProfileClue: false,
+                botrytisProfileClue: false,
+            },
+            faults: {},
             summary: {
                 quality: "",
                 potential: {
@@ -181,8 +191,18 @@ export var actionCreators = {
     addFlavor: function (flavor, flavorCategory) { return ({ type: 'ADD_FLAVOR', flavor: flavor, flavorCategory: flavorCategory }); },
     clearFlavor: function (flavorCategory) { return ({ type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory }); },
     // Conclusion Actions
+    // Bulk Aging Actions
     setBulk: function (wood, toast) { return ({ type: 'SET_BULK', wood: wood, toast: toast }); },
     setAge: function (min, max) { return ({ type: 'SET_AGE', min: min, max: max }); },
+    // Processing
+    setLees: function (lees) { return ({ type: 'SET_LEES', lees: lees }); },
+    setMalolactic: function (malolactic) { return ({ type: 'SET_MALOLACTIC', malolactic: malolactic }); },
+    // Chemicals
+    setYouthfulProfile: function (youthfulProfile) { return ({ type: 'SET_YOUTHFUL_PROFILE', youthfulProfile: youthfulProfile }); },
+    setMiddleAgedProfileProfile: function (middleAgedProfile) { return ({ type: 'SET_MIDDLE_AGED_PROFILE', middleAgedProfile: middleAgedProfile }); },
+    setOldAgedProfileProfile: function (oldAgedProfile) { return ({ type: 'SET_OLD_AGED_PROFILE', oldAgedProfile: oldAgedProfile }); },
+    setMalolacticProfileClue: function (malolacticProfileClue) { return ({ type: 'SET_MALOLACTIC_PROFILE_CLUE', malolacticProfileClue: malolacticProfileClue }); },
+    setBotrytisProfileClue: function (botrytisProfileClue) { return ({ type: 'SET_BOTRYTIS_PROFILE_CLUE', botrytisProfileClue: botrytisProfileClue }); },
 };
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export var reducer = function (state, action) {
@@ -265,9 +285,9 @@ export var reducer = function (state, action) {
                     },
                     conditioning: {
                         acidification: false,
-                        lees: false,
+                        lees: state.conclusions.SomBot.viniculture.conditioning.lees,
                         battonage: false,
-                        malolactic: true,
+                        malolactic: state.conclusions.SomBot.viniculture.conditioning.malolactic,
                     },
                     clarification: {
                         racking: true,
@@ -286,6 +306,16 @@ export var reducer = function (state, action) {
                         max: state.conclusions.SomBot.viniculture.bottleAging.max,
                     },
                 },
+                chemicals: {
+                    agingProfile: {
+                        youthful: state.conclusions.SomBot.chemicals.agingProfile.youthful,
+                        middleAged: state.conclusions.SomBot.chemicals.agingProfile.middleAged,
+                        oldAged: state.conclusions.SomBot.chemicals.agingProfile.oldAged,
+                    },
+                    malolacticProfileClue: state.conclusions.SomBot.chemicals.malolacticProfileClue,
+                    botrytisProfileClue: state.conclusions.SomBot.chemicals.botrytisProfileClue,
+                },
+                faults: {},
                 summary: {
                     quality: "",
                     potential: {
@@ -505,9 +535,30 @@ export var reducer = function (state, action) {
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.wood = action.wood;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.toast = action.toast;
             return tempState;
+        case "SET_LEES":
+            tempState.conclusions.SomBot.viniculture.conditioning.lees = action.lees;
+            return Object.assign({}, tempState);
+        case "SET_MALOLACTIC":
+            tempState.conclusions.SomBot.viniculture.conditioning.malolactic = action.malolactic;
+            return Object.assign({}, tempState);
         case 'SET_AGE':
             tempState.conclusions.SomBot.viniculture.bottleAging.min = action.min;
             tempState.conclusions.SomBot.viniculture.bottleAging.max = action.max;
+            return tempState;
+        case 'SET_YOUTHFUL_PROFILE':
+            tempState.conclusions.SomBot.chemicals.agingProfile.youthful = action.youthfulProfile;
+            return tempState;
+        case 'SET_MIDDLE_AGED_PROFILE':
+            tempState.conclusions.SomBot.chemicals.agingProfile.middleAged = action.middleAgedProfile;
+            return tempState;
+        case 'SET_OLD_AGED_PROFILE':
+            tempState.conclusions.SomBot.chemicals.agingProfile.oldAged = action.oldAgedProfile;
+            return tempState;
+        case 'SET_MALOLACTIC_PROFILE_CLUE':
+            tempState.conclusions.SomBot.chemicals.malolacticProfileClue = action.malolacticProfileClue;
+            return tempState;
+        case 'SET_BOTRYTIS_PROFILE_CLUE':
+            tempState.conclusions.SomBot.chemicals.botrytisProfileClue = action.botrytisProfileClue;
             return tempState;
         default:
             var exhaustiveCheck = action;

@@ -100,6 +100,16 @@ export interface BlindTastingState {
                     max: number;
                 }
             }
+            chemicals:{
+                agingProfile:{
+                    youthful:number;
+                    middleAged:number;
+                    oldAged:number;
+                }
+                malolacticProfileClue:boolean;
+                botrytisProfileClue:boolean;
+            }
+            faults:{}
             summary: {
                 quality: string;
                 potential:{
@@ -257,6 +267,16 @@ const initialBlindTastingState: BlindTastingState = {
                     max: 2,
                 },
             },
+            chemicals:{
+                agingProfile: {
+                    youthful: 0,
+                    middleAged: 0,
+                    oldAged: 0,
+                },
+                malolacticProfileClue:false,
+                botrytisProfileClue:false,
+            },
+            faults:{},
             summary: {
                 quality: "",
                 potential: {
@@ -345,14 +365,34 @@ interface AddFlavor{type: 'ADD_FLAVOR', flavorCategory: string, flavor: string}
 interface ClearFlavor{type: 'CLEAR_FLAVOR', flavorCategory: string}
 
 // Conclusion Interfaces
+
+// Bulk Aging Interface
 interface SetBulk {type: 'SET_BULK', time: string, wood: string, toast: string}
 interface SetAge{type: 'SET_AGE', min: number, max: number}
+
+// Chemical Interface
+interface SetYouthfulProfile{type: 'SET_YOUTHFUL_PROFILE', youthfulProfile: number}
+interface SetMiddleAgedProfile{type: 'SET_MIDDLE_AGED_PROFILE', middleAgedProfile: number}
+interface SetOldAgedProfile{type: 'SET_OLD_AGED_PROFILE', oldAgedProfile: number}
+
+interface SetLees{type: 'SET_LEES', lees: boolean}
+interface SetMalolacticProfileClue{type: 'SET_MALOLACTIC_PROFILE_CLUE', malolacticProfileClue:boolean}
+interface SetBotrytisProfileClue{type:'SET_BOTRYTIS_PROFILE_CLUE',botrytisProfileClue:boolean}
+
+
+// Malolactic Fermentation
+interface SetMalolactic{type: 'SET_MALOLACTIC', malolactic: boolean}
+
 
 
 type KnownAction = SetWineType | SetColor | SetDepth | SetClarity | SetSediment | SetViscosity | SetCarbonation
     | SetSmellIntensity | SetSmellComplexity | SetSmellAlcohol | AddAroma | ClearAroma
     | SetTasteIntensity | SetTasteComplexity | SetBody | SetSweetness | SetAcidity | SetTannins | SetTasteAlcohol | SetFinish | AddFlavor | ClearFlavor
-    | SetBulk | SetAge;
+    | SetBulk | SetAge
+    | SetLees | SetMalolactic
+    | SetYouthfulProfile | SetMiddleAgedProfile | SetOldAgedProfile
+    | SetMalolacticProfileClue | SetBotrytisProfileClue
+     ;
 
 export const  actionCreators  = {
     setWineType: (selectWineType: string) => <SetWineType>{type: 'SET_WINE_TYPE', selectWineType: selectWineType},
@@ -385,9 +425,28 @@ export const  actionCreators  = {
     clearFlavor: (flavorCategory: string) => <ClearFlavor>{type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory},
 
     // Conclusion Actions
+
+    // Bulk Aging Actions
     setBulk: ( wood: string, toast: string) => <SetBulk>{type: 'SET_BULK',  wood: wood, toast: toast},
     setAge: (min: number, max: number) => <SetAge>{type: 'SET_AGE', min: min, max: max},
+
+    // Processing
+    setLees: (lees: boolean) => <SetLees>{type: 'SET_LEES', lees: lees},
+    setMalolactic: (malolactic: boolean) => <SetMalolactic>{type: 'SET_MALOLACTIC', malolactic: malolactic},
+
+
+    // Chemicals
+    setYouthfulProfile:(youthfulProfile:number)=><SetYouthfulProfile>{type:'SET_YOUTHFUL_PROFILE', youthfulProfile:youthfulProfile},
+    setMiddleAgedProfileProfile:(middleAgedProfile:number)=><SetMiddleAgedProfile>{type:'SET_MIDDLE_AGED_PROFILE', middleAgedProfile:middleAgedProfile},
+    setOldAgedProfileProfile:(oldAgedProfile:number)=><SetOldAgedProfile>{type:'SET_OLD_AGED_PROFILE', oldAgedProfile:oldAgedProfile},
+
+    setMalolacticProfileClue:(malolacticProfileClue:boolean)=><SetMalolacticProfileClue>{type:'SET_MALOLACTIC_PROFILE_CLUE', malolacticProfileClue:malolacticProfileClue},
+    setBotrytisProfileClue:(botrytisProfileClue:boolean)=><SetBotrytisProfileClue>{type: 'SET_BOTRYTIS_PROFILE_CLUE', botrytisProfileClue:botrytisProfileClue},
+
+
 };
+
+
 
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export const reducer: any = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
@@ -470,9 +529,9 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                     },
                     conditioning: {
                         acidification: false,
-                        lees: false,
+                        lees: state.conclusions.SomBot.viniculture.conditioning.lees,
                         battonage: false,
-                        malolactic: true,
+                        malolactic: state.conclusions.SomBot.viniculture.conditioning.malolactic,
                     },
                     clarification: {
                         racking: true,
@@ -491,6 +550,16 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                         max: state.conclusions.SomBot.viniculture.bottleAging.max,
                     },
                 },
+                chemicals:{
+                    agingProfile:{
+                        youthful:state.conclusions.SomBot.chemicals.agingProfile.youthful,
+                        middleAged:state.conclusions.SomBot.chemicals.agingProfile.middleAged,
+                        oldAged:state.conclusions.SomBot.chemicals.agingProfile.oldAged,
+},
+                    malolacticProfileClue:state.conclusions.SomBot.chemicals.malolacticProfileClue,
+                    botrytisProfileClue:state.conclusions.SomBot.chemicals.botrytisProfileClue,
+                },
+                faults:{},
                 summary: {
                     quality: "",
                     potential: {
@@ -720,9 +789,33 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.wood = action.wood;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.toast = action.toast;
             return tempState;
+        case "SET_LEES":
+            tempState.conclusions.SomBot.viniculture.conditioning.lees = action.lees;
+            return Object.assign({}, tempState);
+        case "SET_MALOLACTIC":
+            tempState.conclusions.SomBot.viniculture.conditioning.malolactic = action.malolactic;
+            return Object.assign({}, tempState);
         case 'SET_AGE':
             tempState.conclusions.SomBot.viniculture.bottleAging.min     = action.min;
             tempState.conclusions.SomBot.viniculture.bottleAging.max = action.max;
+            return tempState;
+        case 'SET_YOUTHFUL_PROFILE':
+            tempState.conclusions.SomBot.chemicals.agingProfile.youthful = action.youthfulProfile;
+            return tempState;
+        case 'SET_MIDDLE_AGED_PROFILE':
+            tempState.conclusions.SomBot.chemicals.agingProfile.middleAged= action.middleAgedProfile;
+            return tempState;
+        case 'SET_OLD_AGED_PROFILE':
+            tempState.conclusions.SomBot.chemicals.agingProfile.oldAged=action.oldAgedProfile;
+            return tempState;
+
+
+
+        case 'SET_MALOLACTIC_PROFILE_CLUE':
+            tempState.conclusions.SomBot.chemicals.malolacticProfileClue=action.malolacticProfileClue;
+            return tempState;
+        case 'SET_BOTRYTIS_PROFILE_CLUE':
+            tempState.conclusions.SomBot.chemicals.botrytisProfileClue=action.botrytisProfileClue;
             return tempState;
 
         default:

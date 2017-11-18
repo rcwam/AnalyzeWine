@@ -4,32 +4,70 @@ import {connect} from 'react-redux'
 import { Link, RouteComponentProps } from 'react-router-dom';
 import * as BlindStore from '../../store/Blind';
 
+// AGING PROFILE
+let youthfulProfile: number=0;
+let middleAgedProfile: number=0;
+let oldAgedProfile:number=0;
+
 // BULK AGING
-let wood:string= "None";
- let   toast:string= "None";
-    let esters: boolean = false;
+
 let oak: boolean = false;
 let oakFrench: boolean = false;
 let oakAmerican: boolean = false;
 let toasted: boolean = false;
 
+// METHODS
+let malolacticProfileClue: boolean = false;
+let lees: boolean = false;
+let botrytisProfileClue: boolean = false;
+let oxidation: boolean = false;
 
+// CHEMICALS
+let esters: boolean = false;
+let brettanomyces: boolean = false;
+let geosmin: boolean = false;
+let rotundone: boolean = false;
+let lactones: boolean = false;
+let thiolsHeavy: boolean = false;
+let volatileAcidity: boolean = false;
+let sulphur: boolean = false;
+let thiolsLight: boolean = false;
+let terpenes: boolean = false;
+let pyrazines: boolean = false;
 
+// FAULTS
+let acetaldehyde: boolean=false;
+let aceticAcid:boolean=false;
+let brettanomycesFault: boolean = false;
+let corkTaint: boolean = false;
+let dimethylSulfide:boolean=false;
+let butyricAcid: boolean = false;
+let ethylAcetate: boolean = false;
+let hydrogenSulfide: boolean = false;
+let iodine: boolean = false;
+let lacticAcidBacteria: boolean = false;  // too much malolactic
+let mercaptans: boolean = false;
+let oxidationFault: boolean = false;
+let sorbicAcid: boolean = false;
+let sulfurDioxide: boolean = false;
 
+let wood:string= "None";
+let toast:string= "None";
 
 class ChemicalAnalysis extends Component <any, any> {
-    constructor(props:any) {
+    /*
+    constructor(props: any) {
         super(props);
         this.state = {
             // BULK AGING
-         //   oak: false,
-         //   oakFrench: false,
-         //   oakAmerican: false,
-        //    toasted: false,
+            //   oak: false,
+            //   oakFrench: false,
+            //   oakAmerican: false,
+            //    toasted: false,
 
             // METHODS
             malolactic: false,
-            lees: false,
+            //   lees: false,
             botrytis: false,
             oxidation: false,
 
@@ -44,7 +82,7 @@ class ChemicalAnalysis extends Component <any, any> {
             thiolsLight: false,
             terpenes: false,
             pyrazines: false,
-  //          esters: false,
+            //          esters: false,
 
             // FAULTS
             brettanomycesFault: false,
@@ -60,22 +98,24 @@ class ChemicalAnalysis extends Component <any, any> {
             sulfurDioxide: false,
 
             // BULK AGING
-      //      wood: "None",
-      //      toast: "None",
+            //      wood: "None",
+            //      toast: "None",
 
         };
     }
-
+    */
 
 
     render() {
         const {smellProfile, flavorProfile} = this.props;
 
+        /*
         let {
-            oak, oakFrench, oakAmerican, toasted, malolactic, lees, botrytis, oxidation, brettanomyces, geosmin,
-            rotundone, lactones, thiolsHeavy, volatileAcidity, sulphur, thiolsLight, terpenes, pyrazines, brettanomycesFault, cork, butyricAcid, ethylAcetate,
+            oak, oakFrench, oakAmerican, toasted, malolactic, botrytis, oxidation, brettanomyces, geosmin,
+            rotundone, lactones, thiolsHeavy, volatileAcidity, sulphur, thiolsLight, terpenes, pyrazines, brettanomycesFault, cork: corkTaint, butyricAcid, ethylAcetate,
             hydrogenSulfide, iodine, lacticAcidBacteria, mercaptans, oxidationFault, sorbicAcid, sulfurDioxide
         } = this.props;
+        */
 
         //  let{wood,toast}=this.props;
 
@@ -89,109 +129,67 @@ class ChemicalAnalysis extends Component <any, any> {
 
         // CATEGORIES
 
-        /*
-        let fruitFloralList: string[] = [].concat(smellProfile.fruitFloral, flavorProfile.flavorProfile);
-        let earthMineralList: string[] = [].concat(smellProfile.earthMineral, flavorProfile.earthMineral);
-        let biologicalChemicalList: string[] = [].concat(smellProfile.biologicalChemical, flavorProfile.biologicalChemical);
-        let woodSpiceList: string[] = [].concat(smellProfile.woodSpice, flavorProfile.woodSpice);
-        let fruitFloralCount: number = fruitFloralList.length;
-        let earthMineralCount: number = earthMineralList.length;
-        let biologicalChemicalCount: number = biologicalChemicalList.length;
-        let woodSpiceCount: number = woodSpiceList.length;
-        */
-
-        /*
-        // BULK AGING
-        let oak: boolean = false;
-        let oakFrench: boolean = false;
-        let oakAmerican: boolean = false;
-        let toast: boolean = false;
-
-        // METHODS
-        let malolactic: boolean = false;
-        let lees: boolean = false;
-        let botrytis: boolean = false;
-        let oxidation: boolean = false;
-
-        // CHEMICALS
-        let brettanomyces: boolean = false;
-        let geosmin: boolean = false;
-        let rotundone: boolean = false;
-        let lactones: boolean = false;
-        let thiolsHeavy: boolean = false;
-        let volatileAcidity: boolean = false;
-        let sulphur: boolean = false;
-        let thiolsLight: boolean = false;
-        let terpenes: boolean = false;
-        let pyrazines: boolean = false;
-        let esters: boolean = false;
-
-        // FAULTS
-        let brettanomycesFault: boolean = false;
-        let corkFault: boolean = false;
-        let butyricAcid: boolean = false;
-        let ethylAcetate: boolean = false;
-        let hydrogenSulfide: boolean = false;
-        let iodine: boolean = false;
-        let lacticAcidBacteria: boolean = false;
-        let mercaptans: boolean = false;
-        let oxidationFault: boolean = false;
-        let sorbicAcid: boolean = false;
-        let sulfurDioxide: boolean = false;
-        */
-
 
         chemical.forEach(function (chem) {
 
 
-          //  alert(chem + " of " + chemical);
+            //  alert(chem + " of " + chemical);
+
+            // AGING PROFILE
+            if(['Dried Apricot', 'Marmalade', 'Dried Apples', 'Dried Bananas','Fig','Prune','Dried Blackberry', 'Dried Cranberry'].indexOf(chem) != -1) {youthfulProfile++}
+            if(['Cooked Blackberry', 'Cooked Red Plum', 'Earth', 'Mushroom','Hay'].indexOf(chem) != -1) {middleAgedProfile++}
+            if(['Petrol', 'Kerosene', 'Leather', 'Barnyard'].indexOf(chem) != -1) {oldAgedProfile++}
+
+
 
             // BULK AGING
-            oak = ['Vanilla', 'Cedar', 'Toast', 'Resin'].indexOf(chem) != -1|| oak;
-            oakFrench = ['Nutmeg', 'Cloves'].indexOf(chem) != -1|| oakFrench;
+            oak = ['Vanilla', 'Cedar', 'Toast', 'Resin'].indexOf(chem) != -1 || oak;
+            oakFrench = ['Nutmeg', 'Cloves'].indexOf(chem) != -1 || oakFrench;
             oakAmerican = ['Coconut', 'Dill', 'Coffee', 'Toasted Coconut', 'Roasted'].indexOf(chem) != -1 || oakAmerican;
-
-           // alert("1) "+ chem + " " + String(oakAmerican));
-
-            toasted = ['Charred Wood', 'Smoke', 'Smokey', 'Campfire'].indexOf(chem) != -1|| toasted;
+            toasted = ['Charred Wood', 'Smoke', 'Smokey', 'Campfire'].indexOf(chem) != -1 || toasted;
 
             // METHODS
-            malolactic = ['Butter', 'Cream', 'Butterscotch'].indexOf(chem) != -1;
-            lees = ['Biscuit', 'Bread', 'Toast', 'Pantry', 'Bread Dough', 'Cheese', 'Yogurt'].indexOf(chem) != -1;
-            botrytis = ['Honey', 'Ginger'].indexOf(chem) != -1;
-            oxidation = ['Almond', 'Marzipan', 'Coconut', 'Hazelnut', 'Walnut', 'Chocolate', 'Coffee', 'Toffee', 'Caramel'].indexOf(chem) != -1;
+            malolacticProfileClue = ['Butter', 'Cream', 'Butterscotch'].indexOf(chem) != -1 || malolacticProfileClue;
+            lees = ['Biscuit', 'Bread', 'Toast', 'Pantry', 'Bread Dough', 'Cheese', 'Yogurt'].indexOf(chem) != -1 || lees;
+            botrytisProfileClue = ['Honey', 'Ginger'].indexOf(chem) != -1 || botrytisProfileClue;
+            oxidation = ['Almond', 'Marzipan', 'Coconut', 'Hazelnut', 'Walnut', 'Chocolate', 'Coffee', 'Toffee', 'Caramel'].indexOf(chem) != -1 || oxidation;
 
             // CHEMICALS
-            brettanomyces = ['Cloves', 'Bacon', 'Band-Aid', 'Horse', 'Sesame Seeds', 'Cannabis'].indexOf(chem) != -1;
-            geosmin = ['Mushroom', 'Beet', 'Soil', 'Petrichor'].indexOf(chem) != -1;
-            rotundone = ['Peppercorn', 'Basil', 'Rosemary', 'Thyme', 'Oregano', 'Marjoram'].indexOf(chem) != -1;
-            lactones = ['Honey Wheat Bread', 'Peach', 'Coconut', 'Roasted Hazelnut', 'Butter', 'Vanilla', 'Caramel'].indexOf(chem) != -1;
-            thiolsLight = ['Grapefruit', 'Gooseberry', 'Passion Fruit', 'Black Current'].indexOf(chem) != -1;
-            thiolsHeavy = ['Smoke', 'Skunk', 'Tar', 'Chocolate', 'Coffee'].indexOf(chem) != -1;
-            volatileAcidity = ['Pickles', 'Balsamic', 'Sauerkraut', 'Kombucha'].indexOf(chem) != -1;
-            sulphur = ['Chalk', 'Flint', 'Metallic', 'Wet Wood'].indexOf(chem) != -1;
-            terpenes = ['Pine Tree', 'Sage', 'Lychee', 'Rose', 'Lavender', 'Eucalyptus', 'Orange Blossom'].indexOf(chem) != -1;
-            pyrazines = ['Bell Pepper', 'Grass', 'Dark Chocolate', 'Elderflower', 'Peas'].indexOf(chem) != -1;
-            esters = ['White Flowers', 'Apple', 'Banana', 'Strawberry', 'Raspberry'].indexOf(chem) != -1;
+            brettanomyces = ['Cloves', 'Bacon', 'Band-Aid', 'Horse', 'Sesame Seeds', 'Cannabis'].indexOf(chem) != -1 || brettanomyces;
+            geosmin = ['Mushroom', 'Beet', 'Soil', 'Petrichor'].indexOf(chem) != -1 || geosmin;
+            rotundone = ['Peppercorn', 'Basil', 'Rosemary', 'Thyme', 'Oregano', 'Marjoram'].indexOf(chem) != -1 || rotundone;
+            lactones = ['Honey Wheat Bread', 'Peach', 'Coconut', 'Roasted Hazelnut', 'Butter', 'Vanilla', 'Caramel'].indexOf(chem) != -1 || lactones;
+            thiolsLight = ['Grapefruit', 'Gooseberry', 'Passion Fruit', 'Black Current'].indexOf(chem) != -1 || thiolsLight;
+            thiolsHeavy = ['Smoke', 'Skunk', 'Tar', 'Chocolate', 'Coffee'].indexOf(chem) != -1 || thiolsHeavy;
+            volatileAcidity = ['Pickles', 'Balsamic', 'Sauerkraut', 'Kombucha'].indexOf(chem) != -1 || volatileAcidity;
+            sulphur = ['Chalk', 'Flint', 'Metallic', 'Wet Wood'].indexOf(chem) != -1 || sulphur;
+            terpenes = ['Pine Tree', 'Sage', 'Lychee', 'Rose', 'Lavender', 'Eucalyptus', 'Orange Blossom'].indexOf(chem) != -1 || terpenes;
+            pyrazines = ['Bell Pepper', 'Grass', 'Dark Chocolate', 'Elderflower', 'Peas'].indexOf(chem) != -1 || pyrazines;
+            esters = ['White Flowers', 'Apple', 'Banana', 'Strawberry', 'Raspberry'].indexOf(chem) != -1 || esters;
 
 
             // FAULTS
-            brettanomycesFault = ['Barnyard', 'Fecal', 'Horse'].indexOf(chem) != -1;
-            cork = ['Damp Basement', 'Wet Cardboard', 'Newspaper', 'Mushroom'].indexOf(chem) != -1;
-            butyricAcid = ['Rancid Butter'].indexOf(chem) != -1;
-            ethylAcetate = ['Vinegar', 'Paint Thinner', 'Nail Polish Remover'].indexOf(chem) != -1;
-            hydrogenSulfide = ['Rotten Eggs', 'Garlic', 'Tar', 'Chocolate', 'Coffee'].indexOf(chem) != -1;
-            iodine = ['Moldy Grapes'].indexOf(chem) != -1;
-            lacticAcidBacteria = ['Sauerkraut'].indexOf(chem) != -1;
-            mercaptans = ['Burnt Garlic', 'Onion'].indexOf(chem) != -1;
-            oxidationFault = ['Cooked Fruit', 'Walnuts'].indexOf(chem) != -1;
+            acetaldehyde=['Green Apple', 'Sour','Metallic'].indexOf(chem)!=-1||acetaldehyde;
+            aceticAcid=['Vinegar'].indexOf(chem)!=-1||sorbicAcid;
+            brettanomycesFault = ['Barnyard', 'Fecal', 'Horse'].indexOf(chem) != -1 || brettanomycesFault;
+            butyricAcid = ['Rancid Butter'].indexOf(chem) != -1 || butyricAcid;
+            corkTaint = ['Damp Basement', 'Wet Cardboard', 'Newspaper', 'Mushroom'].indexOf(chem) != -1 || corkTaint;
+            dimethylSulfide=['Cooked Cabbage', 'Canned Corn', 'Asparagus','Truffles'].indexOf(chem)!=-1||dimethylSulfide;
+            ethylAcetate = ['Vinegar', 'Paint Thinner', 'Nail Polish Remover'].indexOf(chem) != -1 || ethylAcetate;
+            hydrogenSulfide = ['Rotten Eggs', 'Garlic', 'Tar', 'Chocolate', 'Coffee'].indexOf(chem) != -1 || hydrogenSulfide;
+            iodine = ['Moldy Grapes'].indexOf(chem) != -1 || iodine;
+            lacticAcidBacteria = ['Sauerkraut'].indexOf(chem) != -1 || lacticAcidBacteria;
+            mercaptans = ['Burnt Garlic', 'Onion','Skunk'].indexOf(chem) != -1 || mercaptans;
+            oxidationFault = ['Cooked Fruit', 'Walnuts'].indexOf(chem) != -1 || oxidationFault;
             sorbicAcid = false;
-            sulfurDioxide = ['Burnt Matches'].indexOf(chem) != -1;
+            sulfurDioxide = ['Burnt Matches','Matchsticks','Burnt Rubber','Mothballs'].indexOf(chem) != -1 || sulfurDioxide;
         });
 
         // if(oak){wood="Oak"}
         // if(oakFrench){wood="French Oak"; oak=true}
-     //   alert("2) " + " " + String(oakAmerican));
+        //   alert("2) " + " " + String(oakAmerican));
+
+
         if (oakAmerican) {
             wood = "American Oak"
         } else {
@@ -200,7 +198,7 @@ class ChemicalAnalysis extends Component <any, any> {
             } else {
                 if (oak) {
                     wood = "Oak"
-               //     alert("Got to Oak")
+                    //     alert("Got to Oak")
                 } else {
                     wood = "None"
                 }
@@ -211,24 +209,20 @@ class ChemicalAnalysis extends Component <any, any> {
             toast = "Toast"
         }
 
+        malolacticProfileClue=malolacticProfileClue&&chemical.indexOf('Green Apple')!=-1;
 
         return (
             <div><h3>Chemical Analysis:</h3>
                 <p>Bulk Aging</p>
                 <ul>
-                    <li>Lees: {String(lees)}</li>
-                    <li>Oak: {String(oak)}</li>
-                    <li>French Oak: {String(oakFrench)}</li>
-                    <li>American Oak: {String(oakAmerican)}</li>
-                    <li>Toasted Barrel: {String(toasted)}</li>
                     <li>Wood: {wood}</li>
-                    <li>Toast: {toast}</li>
+                    <li>Toasted: {toast}</li>
                 </ul>
                 <p>Processing</p>
                 <ul>
-                    <li>Malolactic: {String(malolactic)}</li>
+                    <li>Malolactic: {String(malolacticProfileClue)}</li>
                     <li>Lees: {String(lees)}</li>
-                    <li>Botrytis: {String(botrytis)}</li>
+                    <li>Botrytis: {String(botrytisProfileClue)}</li>
                     <li>Oxidation: {String(oxidation)}</li>
                 </ul>
                 <p>Chemicals</p>
@@ -248,7 +242,7 @@ class ChemicalAnalysis extends Component <any, any> {
                 <p>Faults</p>
                 <ul>
                     <li>Brettanomyces: {String(brettanomycesFault)}</li>
-                    <li>Cork: {String(cork)}</li>
+                    <li>Cork: {String(corkTaint)}</li>
                     <li>Butyric: {String(butyricAcid)}</li>
                     <li>Ethyl Acetate: {String(ethylAcetate)}</li>
                     <li>Hydrogen Sulfide: {String(hydrogenSulfide)}</li>
@@ -275,14 +269,38 @@ class ChemicalAnalysis extends Component <any, any> {
             (this.props.flavorProfile.woodSpice != nextProps.flavorProfile.woodSpice)
 
         ) {
-          //  alert(wood);
-            this.updateBulkAging( wood, toast)
+            //  alert(wood);
+            this.updateYouthfulProfile(youthfulProfile);
+            this.updateMiddleAgedProfile(middleAgedProfile);
+            this.updateOldAgedProfile(oldAgedProfile);
+            this.updateBulkAging(wood, toast);
+            this.updateLees(lees);
+            this.updateMalolacticProfileClue(malolacticProfileClue);
+            this.updateBotrytisProfileClue(botrytisProfileClue);
         }
     }
 
+    updateYouthfulProfile  = (youthfulProfile:number)=>{
+        this.props.setYouthuflProfile(youthfulProfile)
+    };
+    updateMiddleAgedProfile  = (middleAgedProfile:number)=>{
+        this.props.setMiddleAgedProfile(middleAgedProfile)
+    };
+    updateOldAgedProfile  = (oldAgedProfile:number)=>{
+        this.props.setOldAgedProfile(oldAgedProfile)
+    };
 
-    updateBulkAging = ( wood: string, toast: string) => {
-        this.props.setBulk( wood, toast)
+    updateBulkAging = (wood: string, toast: string) => {
+        this.props.setBulk(wood, toast)
+    };
+    updateLees = (lees: boolean) => {
+        this.props.setLees(lees)
+    };
+    updateMalolacticProfileClue = (malolacticProfileClue: boolean) => {
+        this.props.setMalolacticProfileClue(malolacticProfileClue)
+    };
+    updateBotrytisProfileClue = (botrytisProfileClue: boolean) => {
+        this.props.setBotrytisProfileClue(botrytisProfileClue)
     };
 }
 
