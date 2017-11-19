@@ -15,7 +15,6 @@ import * as BlindStore from '../store/Blind';
 import BotConclusions from './Conclusions';
 import EyeAnalysis from './EyeAnalysis';
 import NoseAnalysis from './NoseAnalysis';
-import ChemicalAnalysis from "./somBot/ChemicalAnalysis";
 var Blind = (function (_super) {
     __extends(Blind, _super);
     function Blind() {
@@ -248,7 +247,7 @@ var Blind = (function (_super) {
                     this.addChemicalFlavor())),
             React.createElement("hr", null),
             React.createElement(BotConclusions, null),
-            React.createElement(ChemicalAnalysis, null));
+            "\"ChemicalAnalysis />\"");
     };
     Blind.prototype.selectTypeList = function () {
         return (React.createElement("select", { name: "WineTypeSelector", value: this.props.notes.eye.wineType, onChange: this.changeWineType },

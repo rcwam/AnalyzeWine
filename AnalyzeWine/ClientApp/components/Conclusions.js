@@ -12,6 +12,8 @@ import * as React from 'react';
 import { Component } from 'react';
 import Age from './somBot/Age';
 import BulkAging from './somBot/BulkAging';
+import ChemicalAnalysis from './somBot/ChemicalAnalysis';
+import Malolactic from './somBot/Malolactic';
 var BotConclusions = (function (_super) {
     __extends(BotConclusions, _super);
     function BotConclusions() {
@@ -23,6 +25,10 @@ var BotConclusions = (function (_super) {
             React.createElement("p", null, "Som-Bot can give suggested conclusions based on your tasting notes:"),
             React.createElement(Age, null),
             React.createElement(BulkAging, null),
+            React.createElement(ChemicalAnalysis, null),
+            React.createElement("h4", null, "Processing"),
+            React.createElement(Malolactic, null),
+            "\"",
             React.createElement("p", null, "Climate? "),
             React.createElement("p", null, "Balance (alcohol, acid, tannin, sugar)? "),
             React.createElement("p", null, "Origin List "),

@@ -172,23 +172,52 @@ export var actionCreators = {
     setClarity: function (selectClarity) { return ({ type: 'SET_CLARITY', selectClarity: selectClarity }); },
     setSediment: function (selectSediment) { return ({ type: 'SET_SEDIMENT', selectSediment: selectSediment }); },
     setViscosity: function (selectViscosity) { return ({ type: 'SET_VISCOSITY', selectViscosity: selectViscosity }); },
-    setCarbonation: function (selectCarbonation) { return ({ type: 'SET_CARBONATION', selectCarbonation: selectCarbonation }); },
+    setCarbonation: function (selectCarbonation) { return ({
+        type: 'SET_CARBONATION',
+        selectCarbonation: selectCarbonation
+    }); },
     // Smell Actions
-    setSmellIntensity: function (selectSmellIntensity) { return ({ type: 'SET_SMELL_INTENSITY', selectSmellIntensity: selectSmellIntensity }); },
-    setSmellComplexity: function (selectSmellComplexity) { return ({ type: 'SET_SMELL_COMPLEXITY', selectSmellComplexity: selectSmellComplexity }); },
-    setSmellAlcohol: function (selectSmellAlcohol) { return ({ type: 'SET_SMELL_ALCOHOL', selectSmellAlcohol: selectSmellAlcohol }); },
-    addAroma: function (aroma, aromaCategory) { return ({ type: 'ADD_AROMA', aroma: aroma, aromaCategory: aromaCategory }); },
+    setSmellIntensity: function (selectSmellIntensity) { return ({
+        type: 'SET_SMELL_INTENSITY',
+        selectSmellIntensity: selectSmellIntensity
+    }); },
+    setSmellComplexity: function (selectSmellComplexity) { return ({
+        type: 'SET_SMELL_COMPLEXITY',
+        selectSmellComplexity: selectSmellComplexity
+    }); },
+    setSmellAlcohol: function (selectSmellAlcohol) { return ({
+        type: 'SET_SMELL_ALCOHOL',
+        selectSmellAlcohol: selectSmellAlcohol
+    }); },
+    addAroma: function (aroma, aromaCategory) { return ({
+        type: 'ADD_AROMA',
+        aroma: aroma,
+        aromaCategory: aromaCategory
+    }); },
     clearAroma: function (aromaCategory) { return ({ type: 'CLEAR_AROMA', aromaCategory: aromaCategory }); },
     // Taste Actions
-    setTasteIntensity: function (selectTasteIntensity) { return ({ type: 'SET_TASTE_INTENSITY', selectTasteIntensity: selectTasteIntensity }); },
-    setTasteComplexity: function (selectTasteComplexity) { return ({ type: 'SET_TASTE_COMPLEXITY', selectTasteComplexity: selectTasteComplexity }); },
+    setTasteIntensity: function (selectTasteIntensity) { return ({
+        type: 'SET_TASTE_INTENSITY',
+        selectTasteIntensity: selectTasteIntensity
+    }); },
+    setTasteComplexity: function (selectTasteComplexity) { return ({
+        type: 'SET_TASTE_COMPLEXITY',
+        selectTasteComplexity: selectTasteComplexity
+    }); },
     setBody: function (selectBody) { return ({ type: 'SET_BODY', selectBody: selectBody }); },
     setSweetness: function (selectSweetness) { return ({ type: 'SET_SWEETNESS', selectSweetness: selectSweetness }); },
     setAcidity: function (selectAcidity) { return ({ type: 'SET_ACIDITY', selectAcidity: selectAcidity }); },
     setTannins: function (selectTannins) { return ({ type: 'SET_TANNINS', selectTannins: selectTannins }); },
-    setTasteAlcohol: function (selectTasteAlcohol) { return ({ type: 'SET_TASTE_ALCOHOL', selectTasteAlcohol: selectTasteAlcohol }); },
+    setTasteAlcohol: function (selectTasteAlcohol) { return ({
+        type: 'SET_TASTE_ALCOHOL',
+        selectTasteAlcohol: selectTasteAlcohol
+    }); },
     setFinish: function (selectFinish) { return ({ type: 'SET_FINISH', selectFinish: selectFinish }); },
-    addFlavor: function (flavor, flavorCategory) { return ({ type: 'ADD_FLAVOR', flavor: flavor, flavorCategory: flavorCategory }); },
+    addFlavor: function (flavor, flavorCategory) { return ({
+        type: 'ADD_FLAVOR',
+        flavor: flavor,
+        flavorCategory: flavorCategory
+    }); },
     clearFlavor: function (flavorCategory) { return ({ type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory }); },
     // Conclusion Actions
     // Bulk Aging Actions
@@ -198,11 +227,20 @@ export var actionCreators = {
     setLees: function (lees) { return ({ type: 'SET_LEES', lees: lees }); },
     setMalolactic: function (malolactic) { return ({ type: 'SET_MALOLACTIC', malolactic: malolactic }); },
     // Chemicals
-    setYouthfulProfile: function (youthfulProfile) { return ({ type: 'SET_YOUTHFUL_PROFILE', youthfulProfile: youthfulProfile }); },
-    setMiddleAgedProfileProfile: function (middleAgedProfile) { return ({ type: 'SET_MIDDLE_AGED_PROFILE', middleAgedProfile: middleAgedProfile }); },
-    setOldAgedProfileProfile: function (oldAgedProfile) { return ({ type: 'SET_OLD_AGED_PROFILE', oldAgedProfile: oldAgedProfile }); },
-    setMalolacticProfileClue: function (malolacticProfileClue) { return ({ type: 'SET_MALOLACTIC_PROFILE_CLUE', malolacticProfileClue: malolacticProfileClue }); },
-    setBotrytisProfileClue: function (botrytisProfileClue) { return ({ type: 'SET_BOTRYTIS_PROFILE_CLUE', botrytisProfileClue: botrytisProfileClue }); },
+    setAgeProfile: function (youthfulProfile, middleAgedProfile, oldAgedProfile) { return ({
+        type: 'SET_AGE_PROFILE',
+        youthfulProfile: youthfulProfile,
+        middleAgedProfile: middleAgedProfile,
+        oldAgedProfile: oldAgedProfile
+    }); },
+    setMalolacticProfileClue: function (malolacticProfileClue) { return ({
+        type: 'SET_MALOLACTIC_PROFILE_CLUE',
+        malolacticProfileClue: malolacticProfileClue
+    }); },
+    setBotrytisProfileClue: function (botrytisProfileClue) { return ({
+        type: 'SET_BOTRYTIS_PROFILE_CLUE',
+        botrytisProfileClue: botrytisProfileClue
+    }); },
 };
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export var reducer = function (state, action) {
@@ -532,6 +570,7 @@ export var reducer = function (state, action) {
                     return tempState;
             }
         case 'SET_BULK':
+            //   alert("Case Set Barrel");
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.wood = action.wood;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.toast = action.toast;
             return tempState;
@@ -545,13 +584,10 @@ export var reducer = function (state, action) {
             tempState.conclusions.SomBot.viniculture.bottleAging.min = action.min;
             tempState.conclusions.SomBot.viniculture.bottleAging.max = action.max;
             return tempState;
-        case 'SET_YOUTHFUL_PROFILE':
+        case 'SET_AGE_PROFILE':
+            //  alert("Case Age Profile");
             tempState.conclusions.SomBot.chemicals.agingProfile.youthful = action.youthfulProfile;
-            return tempState;
-        case 'SET_MIDDLE_AGED_PROFILE':
             tempState.conclusions.SomBot.chemicals.agingProfile.middleAged = action.middleAgedProfile;
-            return tempState;
-        case 'SET_OLD_AGED_PROFILE':
             tempState.conclusions.SomBot.chemicals.agingProfile.oldAged = action.oldAgedProfile;
             return tempState;
         case 'SET_MALOLACTIC_PROFILE_CLUE':

@@ -23,6 +23,7 @@ var oakAmerican = false;
 var toasted = false;
 // METHODS
 var malolacticProfileClue = false;
+var notMalolactic = false;
 var lees = false;
 var botrytisProfileClue = false;
 var oxidation = false;
@@ -108,19 +109,17 @@ var ChemicalAnalysis = (function (_super) {
         }
         */
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.updateYouthfulProfile = function (youthfulProfile) {
-            _this.props.setYouthuflProfile(youthfulProfile);
-        };
-        _this.updateMiddleAgedProfile = function (middleAgedProfile) {
-            _this.props.setMiddleAgedProfile(middleAgedProfile);
-        };
-        _this.updateOldAgedProfile = function (oldAgedProfile) {
-            _this.props.setOldAgedProfile(oldAgedProfile);
+        _this.updateAgeProfile = function (youthfulProfile, middleAgedProfile, oldAgedProfile) {
+            //    alert("Age Profile");
+            //   alert("young: "+youthfulProfile+" middle: "+middleAgedProfile+ " old: "+oldAgedProfile);
+            _this.props.setAgeProfile(youthfulProfile, middleAgedProfile, oldAgedProfile);
         };
         _this.updateBulkAging = function (wood, toast) {
+            //     alert("Barrel");
             _this.props.setBulk(wood, toast);
         };
         _this.updateLees = function (lees) {
+            //    alert("Lees")
             _this.props.setLees(lees);
         };
         _this.updateMalolacticProfileClue = function (malolacticProfileClue) {
@@ -146,12 +145,15 @@ var ChemicalAnalysis = (function (_super) {
         var chemical = smell.concat(flavor).filter(function (val, id, array) {
             return array.indexOf(val) == id;
         });
-        // CATEGORIES
+        youthfulProfile = 0;
+        middleAgedProfile = 0;
+        oldAgedProfile = 0;
         chemical.forEach(function (chem) {
-            //  alert(chem + " of " + chemical);
+            //    alert(chem + " of " + chemical);
             // AGING PROFILE
             if (['Dried Apricot', 'Marmalade', 'Dried Apples', 'Dried Bananas', 'Fig', 'Prune', 'Dried Blackberry', 'Dried Cranberry'].indexOf(chem) != -1) {
                 youthfulProfile++;
+                //    alert("YOUTH "+chem);
             }
             if (['Cooked Blackberry', 'Cooked Red Plum', 'Earth', 'Mushroom', 'Hay'].indexOf(chem) != -1) {
                 middleAgedProfile++;
@@ -166,6 +168,7 @@ var ChemicalAnalysis = (function (_super) {
             toasted = ['Charred Wood', 'Smoke', 'Smokey', 'Campfire'].indexOf(chem) != -1 || toasted;
             // METHODS
             malolacticProfileClue = ['Butter', 'Cream', 'Butterscotch'].indexOf(chem) != -1 || malolacticProfileClue;
+            notMalolactic = ['Green Apple', 'Tart'].indexOf(chem) != -1 || notMalolactic;
             lees = ['Biscuit', 'Bread', 'Toast', 'Pantry', 'Bread Dough', 'Cheese', 'Yogurt'].indexOf(chem) != -1 || lees;
             botrytisProfileClue = ['Honey', 'Ginger'].indexOf(chem) != -1 || botrytisProfileClue;
             oxidation = ['Almond', 'Marzipan', 'Coconut', 'Hazelnut', 'Walnut', 'Chocolate', 'Coffee', 'Toffee', 'Caramel'].indexOf(chem) != -1 || oxidation;
@@ -220,7 +223,9 @@ var ChemicalAnalysis = (function (_super) {
         if (toasted) {
             toast = "Toast";
         }
-        malolacticProfileClue = malolacticProfileClue && chemical.indexOf('Green Apple') != -1;
+        //   alert(malolacticProfileClue+" not "+notMalolactic);
+        malolacticProfileClue = malolacticProfileClue && !notMalolactic;
+        //   alert("Update Malolactic: "+malolacticProfileClue+"  "+notMalolactic);
         return (React.createElement("div", null,
             React.createElement("h3", null, "Chemical Analysis:"),
             React.createElement("p", null, "Bulk Aging"),
@@ -234,7 +239,7 @@ var ChemicalAnalysis = (function (_super) {
             React.createElement("p", null, "Processing"),
             React.createElement("ul", null,
                 React.createElement("li", null,
-                    "Malolactic: ",
+                    "Malolactic Clue: ",
                     String(malolacticProfileClue)),
                 React.createElement("li", null,
                     "Lees: ",
@@ -248,73 +253,22 @@ var ChemicalAnalysis = (function (_super) {
             React.createElement("p", null, "Chemicals"),
             React.createElement("ul", null,
                 React.createElement("li", null,
-                    "Esters: ",
-                    String(esters)),
+                    "Chemical 1: ",
+                    String(youthfulProfile)),
                 React.createElement("li", null,
-                    "Brettanomyces: ",
-                    String(brettanomyces)),
+                    "Chemical 2: ",
+                    String(middleAgedProfile)),
                 React.createElement("li", null,
-                    "Geosmin: ",
-                    String(geosmin)),
-                React.createElement("li", null,
-                    "Rotundone: ",
-                    String(rotundone)),
-                React.createElement("li", null,
-                    "Lactones: ",
-                    String(lactones)),
-                React.createElement("li", null,
-                    "Thiols (Light): ",
-                    String(thiolsLight)),
-                React.createElement("li", null,
-                    "Thiols (Heavy): ",
-                    String(thiolsHeavy)),
-                React.createElement("li", null,
-                    "Volatile Acidity: ",
-                    String(volatileAcidity)),
-                React.createElement("li", null,
-                    "Sulphur: ",
-                    String(sulphur)),
-                React.createElement("li", null,
-                    "Terpenes: ",
-                    String(terpenes)),
-                React.createElement("li", null,
-                    "Pyrazines: ",
-                    String(pyrazines))),
+                    "Chemical 3: ",
+                    String(middleAgedProfile))),
             React.createElement("p", null, "Faults"),
             React.createElement("ul", null,
                 React.createElement("li", null,
-                    "Brettanomyces: ",
-                    String(brettanomycesFault)),
+                    "Fault 1: ",
+                    String(false)),
                 React.createElement("li", null,
-                    "Cork: ",
-                    String(corkTaint)),
-                React.createElement("li", null,
-                    "Butyric: ",
-                    String(butyricAcid)),
-                React.createElement("li", null,
-                    "Ethyl Acetate: ",
-                    String(ethylAcetate)),
-                React.createElement("li", null,
-                    "Hydrogen Sulfide: ",
-                    String(hydrogenSulfide)),
-                React.createElement("li", null,
-                    "Iodine: ",
-                    String(iodine)),
-                React.createElement("li", null,
-                    "Lactic Acid Bacteria: ",
-                    String(lacticAcidBacteria)),
-                React.createElement("li", null,
-                    "Merceptans: ",
-                    String(mercaptans)),
-                React.createElement("li", null,
-                    "Oxidation: ",
-                    String(oxidationFault)),
-                React.createElement("li", null,
-                    "Sorbic Acid: ",
-                    String(sorbicAcid)),
-                React.createElement("li", null,
-                    "Sulfur Dioxide: ",
-                    String(sulfurDioxide)))));
+                    "Fault 2: ",
+                    String(false)))));
     };
     ChemicalAnalysis.prototype.componentWillReceiveProps = function (nextProps) {
         if ((this.props.smellProfile.fruitFloral != nextProps.smellProfile.fruitFloral) ||
@@ -325,14 +279,17 @@ var ChemicalAnalysis = (function (_super) {
             (this.props.flavorProfile.earthMineral != nextProps.flavorProfile.earthMineral) ||
             (this.props.flavorProfile.biologicalChemical != nextProps.flavorProfile.biologicalChemical) ||
             (this.props.flavorProfile.woodSpice != nextProps.flavorProfile.woodSpice)) {
-            //  alert(wood);
-            this.updateYouthfulProfile(youthfulProfile);
-            this.updateMiddleAgedProfile(middleAgedProfile);
-            this.updateOldAgedProfile(oldAgedProfile);
+            //     alert("Saw a Change");
+            //      alert("Update Malolactic: "+malolacticProfileClue+"  "+notMalolactic);
+            this.updateAgeProfile(youthfulProfile, middleAgedProfile, oldAgedProfile);
             this.updateBulkAging(wood, toast);
             this.updateLees(lees);
             this.updateMalolacticProfileClue(malolacticProfileClue);
             this.updateBotrytisProfileClue(botrytisProfileClue);
+            /*
+
+
+            */
         }
     };
     return ChemicalAnalysis;

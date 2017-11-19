@@ -9,7 +9,7 @@ let toAge = 0;
 
 class Age extends Component <any, any> {
     render() {
-        const {wineType, color, sediment, tannins, toast, smellProfile} = this.props;
+        const {wineType, color, sediment, sweetness, tannins, toast, agingProfile} = this.props;
 
         let minAge = 0;
         let maxAge = 0;
@@ -39,11 +39,11 @@ class Age extends Component <any, any> {
                             break;
                         case "Brick":
                             minAge = 5;
-                            maxAge = 99;
+                            maxAge = 199;
                             break;
                         case "Brown":
-                            minAge = 99;
-                            maxAge = 99;
+                            minAge = 199;
+                            maxAge = 199;
                             break;
                     }
                     break;
@@ -63,11 +63,11 @@ class Age extends Component <any, any> {
                             break;
                         case "Amber":
                             minAge = 5;
-                            maxAge = 99;
+                            maxAge = 199;
                             break;
                         case "Brown":
-                            minAge = 99;
-                            maxAge = 99;
+                            minAge = 199;
+                            maxAge = 199;
                             break;
                     }
                     break;
@@ -87,11 +87,11 @@ class Age extends Component <any, any> {
                             break;
                         case "Copper":
                             minAge = 5;
-                            maxAge = 99;
+                            maxAge = 199;
                             break;
                         case "Brown":
-                            minAge = 99;
-                            maxAge = 99;
+                            minAge = 199;
+                            maxAge = 199;
                             break;
                     }
                     break;
@@ -109,9 +109,9 @@ class Age extends Component <any, any> {
      //   }
 
         // Use aroma group to verify the final guess.
-        const smellFruitFloraCount = smellProfile.fruitFloral.length;
-        const smellEarthMineralCount = smellProfile.earthMineral.length;
-        const smellBiologicalChemicalCount = smellProfile.biologicalChemical.length;
+        const smellFruitFloraCount = agingProfile.youthfulProfile;
+        const smellEarthMineralCount = agingProfile.middleAgedProfile;
+        const smellBiologicalChemicalCount =agingProfile.oldAgedProfile;
 
         // take into account the expected type of wine?
         if (smellFruitFloraCount > smellEarthMineralCount) {
@@ -129,6 +129,11 @@ class Age extends Component <any, any> {
             }
         }
 
+        if(sweetness=="Dessert"){
+            minAge=minAge-2;
+          //  maxAge=maxAge-1;
+        }
+
         // Expand Results
         // minAge--;
         // maxAge++;
@@ -141,6 +146,7 @@ class Age extends Component <any, any> {
         fromAge = minAge;
         toAge = maxAge;
 
+       // alert(minAge +" to "+maxAge);
         return (
             <div>Age: {minAge} to {maxAge} years</div>
 
@@ -153,8 +159,12 @@ class Age extends Component <any, any> {
             (this.props.wineType != nextProps.wineType) ||
             (this.props.color != nextProps.color) ||
             (this.props.sediment != nextProps.sediment) ||
+                this.props.sweetness !- nextProps.sweetness ||
             (this.props.tannins != nextProps.tannins) ||
             (this.props.toast != nextProps.toast)
+            || this.props.agingProfile.youthfulProfile != nextProps.youthfulProfile
+            || this.props.agingProfile.middleAgedProfile != nextProps.middleAgedProfile
+            || this.props.agingProfile.oldAgedProfile != nextProps.oldAgedProfile
         //    ||   (this.props.smellProfile.fruitFloral != nextProps.smellProfile.fruitFloral) ||
         //    (this.props.smellProfile.earthMineral != nextProps.smellProfile.earthMineral) ||
         //    (this.props.smellProfile.biologicalChemical != nextProps.smellProfile.biologicalChemical) ||
@@ -174,11 +184,11 @@ function mapStateToProps (ApplicationState: any) {
         wineType: ApplicationState.blind.notes.eye.wineType,
         color: ApplicationState.blind.notes.eye.color,
         sediment: ApplicationState.blind.notes.eye.sediment,
+        sweetness: ApplicationState.blind.notes.palate.sweetness,
         tannins: ApplicationState.blind.notes.palate.tannins,
         toast: ApplicationState.blind.conclusions.SomBot.viniculture.bulkAging.barrel.toast,
-      //  smellProfile: ApplicationState.blind.notes.nose.smellProfile,
+        agingProfile: ApplicationState.blind.conclusions.SomBot.chemicals.agingProfile,
     };
 }
 
-const AgeExport = connect(mapStateToProps, BlindStore.actionCreators )(Age) as typeof Age;
-export default AgeExport
+export default connect(mapStateToProps, BlindStore.actionCreators )(Age) as typeof Age;

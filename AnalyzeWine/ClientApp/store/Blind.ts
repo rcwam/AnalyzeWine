@@ -100,14 +100,14 @@ export interface BlindTastingState {
                     max: number;
                 }
             }
-            chemicals:{
-                agingProfile:{
-                    youthful:number;
-                    middleAged:number;
-                    oldAged:number;
+            chemicals: {
+                agingProfile: {
+                    youthful: number;
+                    middleAged: number;
+                    oldAged: number;
                 }
-                malolacticProfileClue:boolean;
-                botrytisProfileClue:boolean;
+                malolacticProfileClue: boolean;
+                botrytisProfileClue: boolean;
             }
             faults:{}
             summary: {
@@ -267,14 +267,14 @@ const initialBlindTastingState: BlindTastingState = {
                     max: 2,
                 },
             },
-            chemicals:{
+            chemicals: {
                 agingProfile: {
                     youthful: 0,
                     middleAged: 0,
                     oldAged: 0,
                 },
-                malolacticProfileClue:false,
-                botrytisProfileClue:false,
+                malolacticProfileClue: false,
+                botrytisProfileClue: false,
             },
             faults:{},
             summary: {
@@ -371,10 +371,7 @@ interface SetBulk {type: 'SET_BULK', time: string, wood: string, toast: string}
 interface SetAge{type: 'SET_AGE', min: number, max: number}
 
 // Chemical Interface
-interface SetYouthfulProfile{type: 'SET_YOUTHFUL_PROFILE', youthfulProfile: number}
-interface SetMiddleAgedProfile{type: 'SET_MIDDLE_AGED_PROFILE', middleAgedProfile: number}
-interface SetOldAgedProfile{type: 'SET_OLD_AGED_PROFILE', oldAgedProfile: number}
-
+interface SetAgeProfile{type: 'SET_AGE_PROFILE', youthfulProfile: number, middleAgedProfile: number, oldAgedProfile: number}
 interface SetLees{type: 'SET_LEES', lees: boolean}
 interface SetMalolacticProfileClue{type: 'SET_MALOLACTIC_PROFILE_CLUE', malolacticProfileClue:boolean}
 interface SetBotrytisProfileClue{type:'SET_BOTRYTIS_PROFILE_CLUE',botrytisProfileClue:boolean}
@@ -390,7 +387,7 @@ type KnownAction = SetWineType | SetColor | SetDepth | SetClarity | SetSediment 
     | SetTasteIntensity | SetTasteComplexity | SetBody | SetSweetness | SetAcidity | SetTannins | SetTasteAlcohol | SetFinish | AddFlavor | ClearFlavor
     | SetBulk | SetAge
     | SetLees | SetMalolactic
-    | SetYouthfulProfile | SetMiddleAgedProfile | SetOldAgedProfile
+    | SetAgeProfile
     | SetMalolacticProfileClue | SetBotrytisProfileClue
      ;
 
@@ -403,31 +400,60 @@ export const  actionCreators  = {
     setClarity: (selectClarity: string) => <SetClarity>{type: 'SET_CLARITY', selectClarity: selectClarity},
     setSediment: (selectSediment: string) => <SetSediment>{type: 'SET_SEDIMENT', selectSediment: selectSediment},
     setViscosity: (selectViscosity: string) => <SetViscosity>{type: 'SET_VISCOSITY', selectViscosity: selectViscosity},
-    setCarbonation: (selectCarbonation: string) => <SetCarbonation>{type: 'SET_CARBONATION', selectCarbonation: selectCarbonation},
+    setCarbonation: (selectCarbonation: string) => <SetCarbonation>{
+        type: 'SET_CARBONATION',
+        selectCarbonation: selectCarbonation
+    },
 
     // Smell Actions
-    setSmellIntensity: (selectSmellIntensity: string) => <SetSmellIntensity>{type: 'SET_SMELL_INTENSITY', selectSmellIntensity: selectSmellIntensity},
-    setSmellComplexity: (selectSmellComplexity: string) => <SetSmellComplexity>{type: 'SET_SMELL_COMPLEXITY', selectSmellComplexity: selectSmellComplexity},
-    setSmellAlcohol: (selectSmellAlcohol: string) => <SetSmellAlcohol>{type: 'SET_SMELL_ALCOHOL', selectSmellAlcohol: selectSmellAlcohol},
-    addAroma: (aroma: string, aromaCategory: string) => <AddAroma>{type: 'ADD_AROMA', aroma: aroma, aromaCategory: aromaCategory},
+    setSmellIntensity: (selectSmellIntensity: string) => <SetSmellIntensity>{
+        type: 'SET_SMELL_INTENSITY',
+        selectSmellIntensity: selectSmellIntensity
+    },
+    setSmellComplexity: (selectSmellComplexity: string) => <SetSmellComplexity>{
+        type: 'SET_SMELL_COMPLEXITY',
+        selectSmellComplexity: selectSmellComplexity
+    },
+    setSmellAlcohol: (selectSmellAlcohol: string) => <SetSmellAlcohol>{
+        type: 'SET_SMELL_ALCOHOL',
+        selectSmellAlcohol: selectSmellAlcohol
+    },
+    addAroma: (aroma: string, aromaCategory: string) => <AddAroma>{
+        type: 'ADD_AROMA',
+        aroma: aroma,
+        aromaCategory: aromaCategory
+    },
     clearAroma: (aromaCategory: string) => <ClearAroma>{type: 'CLEAR_AROMA', aromaCategory: aromaCategory},
 
     // Taste Actions
-    setTasteIntensity: (selectTasteIntensity: string) => <SetTasteIntensity>{type: 'SET_TASTE_INTENSITY', selectTasteIntensity: selectTasteIntensity},
-    setTasteComplexity: (selectTasteComplexity: string) => <SetTasteComplexity>{type: 'SET_TASTE_COMPLEXITY', selectTasteComplexity: selectTasteComplexity},
+    setTasteIntensity: (selectTasteIntensity: string) => <SetTasteIntensity>{
+        type: 'SET_TASTE_INTENSITY',
+        selectTasteIntensity: selectTasteIntensity
+    },
+    setTasteComplexity: (selectTasteComplexity: string) => <SetTasteComplexity>{
+        type: 'SET_TASTE_COMPLEXITY',
+        selectTasteComplexity: selectTasteComplexity
+    },
     setBody: (selectBody: string) => <SetBody>{type: 'SET_BODY', selectBody: selectBody},
     setSweetness: (selectSweetness: string) => <SetSweetness>{type: 'SET_SWEETNESS', selectSweetness: selectSweetness},
     setAcidity: (selectAcidity: string) => <SetAcidity>{type: 'SET_ACIDITY', selectAcidity: selectAcidity},
     setTannins: (selectTannins: string) => <SetTannins>{type: 'SET_TANNINS', selectTannins: selectTannins},
-    setTasteAlcohol: (selectTasteAlcohol: string) => <SetTasteAlcohol>{type: 'SET_TASTE_ALCOHOL', selectTasteAlcohol: selectTasteAlcohol},
+    setTasteAlcohol: (selectTasteAlcohol: string) => <SetTasteAlcohol>{
+        type: 'SET_TASTE_ALCOHOL',
+        selectTasteAlcohol: selectTasteAlcohol
+    },
     setFinish: (selectFinish: string) => <SetFinish>{type: 'SET_FINISH', selectFinish: selectFinish},
-    addFlavor: (flavor: string, flavorCategory: string) => <AddFlavor>{type: 'ADD_FLAVOR', flavor: flavor, flavorCategory: flavorCategory},
+    addFlavor: (flavor: string, flavorCategory: string) => <AddFlavor>{
+        type: 'ADD_FLAVOR',
+        flavor: flavor,
+        flavorCategory: flavorCategory
+    },
     clearFlavor: (flavorCategory: string) => <ClearFlavor>{type: 'CLEAR_FLAVOR', flavorCategory: flavorCategory},
 
     // Conclusion Actions
 
     // Bulk Aging Actions
-    setBulk: ( wood: string, toast: string) => <SetBulk>{type: 'SET_BULK',  wood: wood, toast: toast},
+    setBulk: (wood: string, toast: string) => <SetBulk>{type: 'SET_BULK', wood: wood, toast: toast},
     setAge: (min: number, max: number) => <SetAge>{type: 'SET_AGE', min: min, max: max},
 
     // Processing
@@ -436,12 +462,21 @@ export const  actionCreators  = {
 
 
     // Chemicals
-    setYouthfulProfile:(youthfulProfile:number)=><SetYouthfulProfile>{type:'SET_YOUTHFUL_PROFILE', youthfulProfile:youthfulProfile},
-    setMiddleAgedProfileProfile:(middleAgedProfile:number)=><SetMiddleAgedProfile>{type:'SET_MIDDLE_AGED_PROFILE', middleAgedProfile:middleAgedProfile},
-    setOldAgedProfileProfile:(oldAgedProfile:number)=><SetOldAgedProfile>{type:'SET_OLD_AGED_PROFILE', oldAgedProfile:oldAgedProfile},
+    setAgeProfile: (youthfulProfile: number, middleAgedProfile: number, oldAgedProfile: number) => <SetAgeProfile>{
+        type: 'SET_AGE_PROFILE',
+        youthfulProfile: youthfulProfile,
+        middleAgedProfile: middleAgedProfile,
+        oldAgedProfile: oldAgedProfile
+    },
 
-    setMalolacticProfileClue:(malolacticProfileClue:boolean)=><SetMalolacticProfileClue>{type:'SET_MALOLACTIC_PROFILE_CLUE', malolacticProfileClue:malolacticProfileClue},
-    setBotrytisProfileClue:(botrytisProfileClue:boolean)=><SetBotrytisProfileClue>{type: 'SET_BOTRYTIS_PROFILE_CLUE', botrytisProfileClue:botrytisProfileClue},
+    setMalolacticProfileClue: (malolacticProfileClue: boolean) => <SetMalolacticProfileClue>{
+        type: 'SET_MALOLACTIC_PROFILE_CLUE',
+        malolacticProfileClue: malolacticProfileClue
+    },
+    setBotrytisProfileClue: (botrytisProfileClue: boolean) => <SetBotrytisProfileClue>{
+        type: 'SET_BOTRYTIS_PROFILE_CLUE',
+        botrytisProfileClue: botrytisProfileClue
+    },
 
 
 };
@@ -450,7 +485,7 @@ export const  actionCreators  = {
 
 //export const reducer: Reducer<BlindTastingState> = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
 export const reducer: any = (state: BlindTastingState=initialBlindTastingState, action: KnownAction) => {
- //   const tempState2 = { ...state };
+    //   const tempState2 = { ...state };
 
     let tempState: BlindTastingState = {
         notes: {
@@ -467,7 +502,7 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                 smellIntensity: state.notes.nose.smellIntensity,
                 smellComplexity: state.notes.nose.smellComplexity,
                 smellAlcohol: state.notes.nose.smellAlcohol,
-                smellProfile : {
+                smellProfile: {
                     fruitFloral: state.notes.nose.smellProfile.fruitFloral,
                     earthMineral: state.notes.nose.smellProfile.earthMineral,
                     woodSpice: state.notes.nose.smellProfile.woodSpice,
@@ -483,7 +518,7 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                 tannins: state.notes.palate.tannins,
                 tasteAlcohol: state.notes.palate.tasteAlcohol,
                 finish: state.notes.palate.finish,
-                flavorProfile : {
+                flavorProfile: {
                     fruitFloral: state.notes.palate.flavorProfile.fruitFloral,
                     earthMineral: state.notes.palate.flavorProfile.earthMineral,
                     woodSpice: state.notes.palate.flavorProfile.woodSpice,
@@ -550,16 +585,16 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                         max: state.conclusions.SomBot.viniculture.bottleAging.max,
                     },
                 },
-                chemicals:{
-                    agingProfile:{
-                        youthful:state.conclusions.SomBot.chemicals.agingProfile.youthful,
-                        middleAged:state.conclusions.SomBot.chemicals.agingProfile.middleAged,
-                        oldAged:state.conclusions.SomBot.chemicals.agingProfile.oldAged,
-},
-                    malolacticProfileClue:state.conclusions.SomBot.chemicals.malolacticProfileClue,
-                    botrytisProfileClue:state.conclusions.SomBot.chemicals.botrytisProfileClue,
+                chemicals: {
+                    agingProfile: {
+                        youthful: state.conclusions.SomBot.chemicals.agingProfile.youthful,
+                        middleAged: state.conclusions.SomBot.chemicals.agingProfile.middleAged,
+                        oldAged: state.conclusions.SomBot.chemicals.agingProfile.oldAged,
+                    },
+                    malolacticProfileClue: state.conclusions.SomBot.chemicals.malolacticProfileClue,
+                    botrytisProfileClue: state.conclusions.SomBot.chemicals.botrytisProfileClue,
                 },
-                faults:{},
+                faults: {},
                 summary: {
                     quality: "",
                     potential: {
@@ -650,8 +685,8 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
             tempState.notes.eye.clarity = action.selectClarity;
             return Object.assign({}, tempState);
         case 'SET_SEDIMENT':
-        tempState.notes.eye.sediment = action.selectSediment;
-        return Object.assign({}, tempState);
+            tempState.notes.eye.sediment = action.selectSediment;
+            return Object.assign({}, tempState);
         case 'SET_VISCOSITY':
             tempState.notes.eye.viscosity = action.selectViscosity;
             return Object.assign({}, tempState);
@@ -671,24 +706,24 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
             tempState.notes.nose.smellAlcohol = action.selectSmellAlcohol;
             return Object.assign({}, tempState);
         case 'ADD_AROMA':
-            switch (action.aromaCategory){
+            switch (action.aromaCategory) {
                 case 'fruitFloral':
-                    if(tempState.notes.nose.smellProfile.fruitFloral.indexOf(action.aroma)==-1) {
+                    if (tempState.notes.nose.smellProfile.fruitFloral.indexOf(action.aroma) == -1) {
                         tempState.notes.nose.smellProfile.fruitFloral = tempState.notes.nose.smellProfile.fruitFloral.concat(action.aroma);
                     }
-                   return tempState;
+                    return tempState;
                 case 'earthMineral':
-                    if(tempState.notes.nose.smellProfile.earthMineral.indexOf(action.aroma)==-1) {
+                    if (tempState.notes.nose.smellProfile.earthMineral.indexOf(action.aroma) == -1) {
                         tempState.notes.nose.smellProfile.earthMineral = tempState.notes.nose.smellProfile.earthMineral.concat(action.aroma);
                     }
                     return tempState;
                 case 'woodSpice':
-                    if(tempState.notes.nose.smellProfile.woodSpice.indexOf(action.aroma)==-1) {
+                    if (tempState.notes.nose.smellProfile.woodSpice.indexOf(action.aroma) == -1) {
                         tempState.notes.nose.smellProfile.woodSpice = tempState.notes.nose.smellProfile.woodSpice.concat(action.aroma);
                     }
                     return tempState;
                 case 'biologicalChemical':
-                    if(tempState.notes.nose.smellProfile.biologicalChemical.indexOf(action.aroma)==-1) {
+                    if (tempState.notes.nose.smellProfile.biologicalChemical.indexOf(action.aroma) == -1) {
                         tempState.notes.nose.smellProfile.biologicalChemical = tempState.notes.nose.smellProfile.biologicalChemical.concat(action.aroma);
                     }
                     return tempState;
@@ -698,7 +733,7 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
 
 
         case 'CLEAR_AROMA':
-            switch (action.aromaCategory){
+            switch (action.aromaCategory) {
                 case 'fruitFloral':
                     tempState.notes.nose.smellProfile.fruitFloral = [];
                     return tempState;
@@ -741,24 +776,24 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
             tempState.notes.palate.finish = action.selectFinish;
             return Object.assign({}, tempState);
         case 'ADD_FLAVOR':
-            switch (action.flavorCategory){
+            switch (action.flavorCategory) {
                 case 'fruitFloral':
-                    if(tempState.notes.palate.flavorProfile.fruitFloral.indexOf(action.flavor)==-1) {
+                    if (tempState.notes.palate.flavorProfile.fruitFloral.indexOf(action.flavor) == -1) {
                         tempState.notes.palate.flavorProfile.fruitFloral = tempState.notes.palate.flavorProfile.fruitFloral.concat(action.flavor);
                     }
                     return tempState;
                 case 'earthMineral':
-                    if(tempState.notes.palate.flavorProfile.earthMineral.indexOf(action.flavor)==-1) {
+                    if (tempState.notes.palate.flavorProfile.earthMineral.indexOf(action.flavor) == -1) {
                         tempState.notes.palate.flavorProfile.earthMineral = tempState.notes.palate.flavorProfile.earthMineral.concat(action.flavor);
                     }
                     return tempState;
                 case 'woodSpice':
-                    if(tempState.notes.palate.flavorProfile.woodSpice.indexOf(action.flavor)==-1) {
+                    if (tempState.notes.palate.flavorProfile.woodSpice.indexOf(action.flavor) == -1) {
                         tempState.notes.palate.flavorProfile.woodSpice = tempState.notes.palate.flavorProfile.woodSpice.concat(action.flavor);
                     }
                     return tempState;
                 case 'biologicalChemical':
-                    if(tempState.notes.palate.flavorProfile.biologicalChemical.indexOf(action.flavor)==-1) {
+                    if (tempState.notes.palate.flavorProfile.biologicalChemical.indexOf(action.flavor) == -1) {
                         tempState.notes.palate.flavorProfile.biologicalChemical = tempState.notes.palate.flavorProfile.biologicalChemical.concat(action.flavor);
                     }
                     return tempState;
@@ -768,7 +803,7 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
 
 
         case 'CLEAR_FLAVOR':
-            switch (action.flavorCategory){
+            switch (action.flavorCategory) {
                 case 'fruitFloral':
                     tempState.notes.palate.flavorProfile.fruitFloral = [];
                     return tempState;
@@ -786,6 +821,7 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
             }
 
         case 'SET_BULK':
+         //   alert("Case Set Barrel");
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.wood = action.wood;
             tempState.conclusions.SomBot.viniculture.bulkAging.barrel.toast = action.toast;
             return tempState;
@@ -796,26 +832,20 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
             tempState.conclusions.SomBot.viniculture.conditioning.malolactic = action.malolactic;
             return Object.assign({}, tempState);
         case 'SET_AGE':
-            tempState.conclusions.SomBot.viniculture.bottleAging.min     = action.min;
+            tempState.conclusions.SomBot.viniculture.bottleAging.min = action.min;
             tempState.conclusions.SomBot.viniculture.bottleAging.max = action.max;
             return tempState;
-        case 'SET_YOUTHFUL_PROFILE':
+        case 'SET_AGE_PROFILE':
+          //  alert("Case Age Profile");
             tempState.conclusions.SomBot.chemicals.agingProfile.youthful = action.youthfulProfile;
+            tempState.conclusions.SomBot.chemicals.agingProfile.middleAged = action.middleAgedProfile;
+            tempState.conclusions.SomBot.chemicals.agingProfile.oldAged = action.oldAgedProfile;
             return tempState;
-        case 'SET_MIDDLE_AGED_PROFILE':
-            tempState.conclusions.SomBot.chemicals.agingProfile.middleAged= action.middleAgedProfile;
-            return tempState;
-        case 'SET_OLD_AGED_PROFILE':
-            tempState.conclusions.SomBot.chemicals.agingProfile.oldAged=action.oldAgedProfile;
-            return tempState;
-
-
-
         case 'SET_MALOLACTIC_PROFILE_CLUE':
-            tempState.conclusions.SomBot.chemicals.malolacticProfileClue=action.malolacticProfileClue;
+            tempState.conclusions.SomBot.chemicals.malolacticProfileClue = action.malolacticProfileClue;
             return tempState;
         case 'SET_BOTRYTIS_PROFILE_CLUE':
-            tempState.conclusions.SomBot.chemicals.botrytisProfileClue=action.botrytisProfileClue;
+            tempState.conclusions.SomBot.chemicals.botrytisProfileClue = action.botrytisProfileClue;
             return tempState;
 
         default:

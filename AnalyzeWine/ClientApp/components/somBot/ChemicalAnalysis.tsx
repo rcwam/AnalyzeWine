@@ -18,6 +18,7 @@ let toasted: boolean = false;
 
 // METHODS
 let malolacticProfileClue: boolean = false;
+let notMalolactic : boolean=false;
 let lees: boolean = false;
 let botrytisProfileClue: boolean = false;
 let oxidation: boolean = false;
@@ -127,19 +128,29 @@ class ChemicalAnalysis extends Component <any, any> {
         });
 
 
-        // CATEGORIES
+        youthfulProfile=0;
+        middleAgedProfile=0;
+        oldAgedProfile=0;
 
 
         chemical.forEach(function (chem) {
 
 
-            //  alert(chem + " of " + chemical);
+          //    alert(chem + " of " + chemical);
 
             // AGING PROFILE
-            if(['Dried Apricot', 'Marmalade', 'Dried Apples', 'Dried Bananas','Fig','Prune','Dried Blackberry', 'Dried Cranberry'].indexOf(chem) != -1) {youthfulProfile++}
-            if(['Cooked Blackberry', 'Cooked Red Plum', 'Earth', 'Mushroom','Hay'].indexOf(chem) != -1) {middleAgedProfile++}
-            if(['Petrol', 'Kerosene', 'Leather', 'Barnyard'].indexOf(chem) != -1) {oldAgedProfile++}
+           if( ['Dried Apricot', 'Marmalade', 'Dried Apples', 'Dried Bananas', 'Fig', 'Prune', 'Dried Blackberry', 'Dried Cranberry'].indexOf(chem) != -1 ) {
 
+
+                youthfulProfile++;
+            //    alert("YOUTH "+chem);
+            }
+            if (['Cooked Blackberry', 'Cooked Red Plum', 'Earth', 'Mushroom', 'Hay'].indexOf(chem) != -1) {
+                middleAgedProfile++
+            }
+            if (['Petrol', 'Kerosene', 'Leather', 'Barnyard'].indexOf(chem) != -1) {
+                oldAgedProfile++
+            }
 
 
             // BULK AGING
@@ -150,6 +161,7 @@ class ChemicalAnalysis extends Component <any, any> {
 
             // METHODS
             malolacticProfileClue = ['Butter', 'Cream', 'Butterscotch'].indexOf(chem) != -1 || malolacticProfileClue;
+            notMalolactic = ['Green Apple', 'Tart'].indexOf(chem) != -1 || notMalolactic;
             lees = ['Biscuit', 'Bread', 'Toast', 'Pantry', 'Bread Dough', 'Cheese', 'Yogurt'].indexOf(chem) != -1 || lees;
             botrytisProfileClue = ['Honey', 'Ginger'].indexOf(chem) != -1 || botrytisProfileClue;
             oxidation = ['Almond', 'Marzipan', 'Coconut', 'Hazelnut', 'Walnut', 'Chocolate', 'Coffee', 'Toffee', 'Caramel'].indexOf(chem) != -1 || oxidation;
@@ -169,20 +181,20 @@ class ChemicalAnalysis extends Component <any, any> {
 
 
             // FAULTS
-            acetaldehyde=['Green Apple', 'Sour','Metallic'].indexOf(chem)!=-1||acetaldehyde;
-            aceticAcid=['Vinegar'].indexOf(chem)!=-1||sorbicAcid;
+            acetaldehyde = ['Green Apple', 'Sour', 'Metallic'].indexOf(chem) != -1 || acetaldehyde;
+            aceticAcid = ['Vinegar'].indexOf(chem) != -1 || sorbicAcid;
             brettanomycesFault = ['Barnyard', 'Fecal', 'Horse'].indexOf(chem) != -1 || brettanomycesFault;
             butyricAcid = ['Rancid Butter'].indexOf(chem) != -1 || butyricAcid;
             corkTaint = ['Damp Basement', 'Wet Cardboard', 'Newspaper', 'Mushroom'].indexOf(chem) != -1 || corkTaint;
-            dimethylSulfide=['Cooked Cabbage', 'Canned Corn', 'Asparagus','Truffles'].indexOf(chem)!=-1||dimethylSulfide;
+            dimethylSulfide = ['Cooked Cabbage', 'Canned Corn', 'Asparagus', 'Truffles'].indexOf(chem) != -1 || dimethylSulfide;
             ethylAcetate = ['Vinegar', 'Paint Thinner', 'Nail Polish Remover'].indexOf(chem) != -1 || ethylAcetate;
             hydrogenSulfide = ['Rotten Eggs', 'Garlic', 'Tar', 'Chocolate', 'Coffee'].indexOf(chem) != -1 || hydrogenSulfide;
             iodine = ['Moldy Grapes'].indexOf(chem) != -1 || iodine;
             lacticAcidBacteria = ['Sauerkraut'].indexOf(chem) != -1 || lacticAcidBacteria;
-            mercaptans = ['Burnt Garlic', 'Onion','Skunk'].indexOf(chem) != -1 || mercaptans;
+            mercaptans = ['Burnt Garlic', 'Onion', 'Skunk'].indexOf(chem) != -1 || mercaptans;
             oxidationFault = ['Cooked Fruit', 'Walnuts'].indexOf(chem) != -1 || oxidationFault;
             sorbicAcid = false;
-            sulfurDioxide = ['Burnt Matches','Matchsticks','Burnt Rubber','Mothballs'].indexOf(chem) != -1 || sulfurDioxide;
+            sulfurDioxide = ['Burnt Matches', 'Matchsticks', 'Burnt Rubber', 'Mothballs'].indexOf(chem) != -1 || sulfurDioxide;
         });
 
         // if(oak){wood="Oak"}
@@ -209,7 +221,9 @@ class ChemicalAnalysis extends Component <any, any> {
             toast = "Toast"
         }
 
-        malolacticProfileClue=malolacticProfileClue&&chemical.indexOf('Green Apple')!=-1;
+     //   alert(malolacticProfileClue+" not "+notMalolactic);
+        malolacticProfileClue = malolacticProfileClue && !notMalolactic;
+     //   alert("Update Malolactic: "+malolacticProfileClue+"  "+notMalolactic);
 
         return (
             <div><h3>Chemical Analysis:</h3>
@@ -220,39 +234,25 @@ class ChemicalAnalysis extends Component <any, any> {
                 </ul>
                 <p>Processing</p>
                 <ul>
-                    <li>Malolactic: {String(malolacticProfileClue)}</li>
+                    <li>Malolactic Clue: {String(malolacticProfileClue)}</li>
                     <li>Lees: {String(lees)}</li>
                     <li>Botrytis: {String(botrytisProfileClue)}</li>
                     <li>Oxidation: {String(oxidation)}</li>
                 </ul>
                 <p>Chemicals</p>
                 <ul>
-                    <li>Esters: {String(esters)}</li>
-                    <li>Brettanomyces: {String(brettanomyces)}</li>
-                    <li>Geosmin: {String(geosmin)}</li>
-                    <li>Rotundone: {String(rotundone)}</li>
-                    <li>Lactones: {String(lactones)}</li>
-                    <li>Thiols (Light): {String(thiolsLight)}</li>
-                    <li>Thiols (Heavy): {String(thiolsHeavy)}</li>
-                    <li>Volatile Acidity: {String(volatileAcidity)}</li>
-                    <li>Sulphur: {String(sulphur)}</li>
-                    <li>Terpenes: {String(terpenes)}</li>
-                    <li>Pyrazines: {String(pyrazines)}</li>
+                    <li>Chemical 1: {String(youthfulProfile)}</li>
+                    <li>Chemical 2: {String(middleAgedProfile)}</li>
+                    <li>Chemical 3: {String(middleAgedProfile)}</li>
+
                 </ul>
                 <p>Faults</p>
                 <ul>
-                    <li>Brettanomyces: {String(brettanomycesFault)}</li>
-                    <li>Cork: {String(corkTaint)}</li>
-                    <li>Butyric: {String(butyricAcid)}</li>
-                    <li>Ethyl Acetate: {String(ethylAcetate)}</li>
-                    <li>Hydrogen Sulfide: {String(hydrogenSulfide)}</li>
-                    <li>Iodine: {String(iodine)}</li>
-                    <li>Lactic Acid Bacteria: {String(lacticAcidBacteria)}</li>
-                    <li>Merceptans: {String(mercaptans)}</li>
-                    <li>Oxidation: {String(oxidationFault)}</li>
-                    <li>Sorbic Acid: {String(sorbicAcid)}</li>
-                    <li>Sulfur Dioxide: {String(sulfurDioxide)}</li>
+                    <li>Fault 1: {String(false)}</li>
+                    <li>Fault 2: {String(false)}</li>
+
                 </ul>
+
             </div>
         )
     }
@@ -269,31 +269,32 @@ class ChemicalAnalysis extends Component <any, any> {
             (this.props.flavorProfile.woodSpice != nextProps.flavorProfile.woodSpice)
 
         ) {
-            //  alert(wood);
-            this.updateYouthfulProfile(youthfulProfile);
-            this.updateMiddleAgedProfile(middleAgedProfile);
-            this.updateOldAgedProfile(oldAgedProfile);
+       //     alert("Saw a Change");
+       //      alert("Update Malolactic: "+malolacticProfileClue+"  "+notMalolactic);
+
+          this.updateAgeProfile(youthfulProfile,middleAgedProfile,oldAgedProfile);
             this.updateBulkAging(wood, toast);
             this.updateLees(lees);
             this.updateMalolacticProfileClue(malolacticProfileClue);
             this.updateBotrytisProfileClue(botrytisProfileClue);
+            /*
+
+
+            */
         }
     }
 
-    updateYouthfulProfile  = (youthfulProfile:number)=>{
-        this.props.setYouthuflProfile(youthfulProfile)
+    updateAgeProfile  = (youthfulProfile:number,middleAgedProfile:number, oldAgedProfile:number)=>{
+    //    alert("Age Profile");
+     //   alert("young: "+youthfulProfile+" middle: "+middleAgedProfile+ " old: "+oldAgedProfile);
+        this.props.setAgeProfile(youthfulProfile,middleAgedProfile,oldAgedProfile)
     };
-    updateMiddleAgedProfile  = (middleAgedProfile:number)=>{
-        this.props.setMiddleAgedProfile(middleAgedProfile)
-    };
-    updateOldAgedProfile  = (oldAgedProfile:number)=>{
-        this.props.setOldAgedProfile(oldAgedProfile)
-    };
-
     updateBulkAging = (wood: string, toast: string) => {
+   //     alert("Barrel");
         this.props.setBulk(wood, toast)
     };
     updateLees = (lees: boolean) => {
+    //    alert("Lees")
         this.props.setLees(lees)
     };
     updateMalolacticProfileClue = (malolacticProfileClue: boolean) => {

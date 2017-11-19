@@ -3,6 +3,8 @@ import  {Component} from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import Age from './somBot/Age'
 import BulkAging from './somBot/BulkAging'
+import ChemicalAnalysis from './somBot/ChemicalAnalysis'
+import Malolactic from './somBot/Malolactic'
 
 class BotConclusions extends Component{
 
@@ -15,8 +17,12 @@ class BotConclusions extends Component{
                 <p>Som-Bot can give suggested conclusions based on your tasting notes:</p>
 
 
-                <Age />
+               <Age />
                 <BulkAging />
+                <ChemicalAnalysis/>
+
+                <h4>Processing</h4>
+            <Malolactic/>"
 
 
 

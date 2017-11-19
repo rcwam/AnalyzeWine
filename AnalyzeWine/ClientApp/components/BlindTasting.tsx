@@ -285,7 +285,7 @@ class Blind extends Component<BlindProps, {}> {
             <hr/>
 
             <BotConclusions />
-            <ChemicalAnalysis />
+            "ChemicalAnalysis />"
 
         </div>;
     }
