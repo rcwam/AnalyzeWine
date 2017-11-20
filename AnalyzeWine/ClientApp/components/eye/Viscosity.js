@@ -29,9 +29,9 @@ var Viscosity = (function (_super) {
         var viscositySelection = function () {
             return (React.createElement("select", { value: viscosity, onChange: _this.changeViscosity },
                 React.createElement("option", { value: "None" }, "None"),
-                React.createElement("option", { value: "Light" }, "Light"),
+                React.createElement("option", { value: "Thin" }, "Light"),
                 React.createElement("option", { value: "Medium" }, "Medium"),
-                React.createElement("option", { value: "Heavy" }, "Heavy")));
+                React.createElement("option", { value: "Thick" }, "Heavy")));
         };
         return (React.createElement("div", null,
             viscosityQuestion,

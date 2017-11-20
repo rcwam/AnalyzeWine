@@ -106,6 +106,11 @@ export interface BlindTastingState {
                     middleAged: number;
                     oldAged: number;
                 }
+                climateProfile:{
+                    cool:number,
+                    intermediate:number,
+                    warm:number,
+                }
                 malolacticProfileClue: boolean;
                 botrytisProfileClue: boolean;
             }
@@ -273,6 +278,11 @@ const initialBlindTastingState: BlindTastingState = {
                     middleAged: 0,
                     oldAged: 0,
                 },
+                climateProfile:{
+                    cool:0,
+                    intermediate:0,
+                    warm:0,
+                },
                 malolacticProfileClue: false,
                 botrytisProfileClue: false,
             },
@@ -371,6 +381,7 @@ interface SetBulk {type: 'SET_BULK', time: string, wood: string, toast: string}
 interface SetAge{type: 'SET_AGE', min: number, max: number}
 
 // Chemical Interface
+interface SetClimateProfile{type: 'SET_CLIMATE_PROFILE', cool: number, intermediate: number, warm: number}
 interface SetAgeProfile{type: 'SET_AGE_PROFILE', youthfulProfile: number, middleAgedProfile: number, oldAgedProfile: number}
 interface SetLees{type: 'SET_LEES', lees: boolean}
 interface SetMalolacticProfileClue{type: 'SET_MALOLACTIC_PROFILE_CLUE', malolacticProfileClue:boolean}
@@ -387,7 +398,7 @@ type KnownAction = SetWineType | SetColor | SetDepth | SetClarity | SetSediment 
     | SetTasteIntensity | SetTasteComplexity | SetBody | SetSweetness | SetAcidity | SetTannins | SetTasteAlcohol | SetFinish | AddFlavor | ClearFlavor
     | SetBulk | SetAge
     | SetLees | SetMalolactic
-    | SetAgeProfile
+    | SetAgeProfile | SetClimateProfile
     | SetMalolacticProfileClue | SetBotrytisProfileClue
      ;
 
@@ -466,7 +477,13 @@ export const  actionCreators  = {
         type: 'SET_AGE_PROFILE',
         youthfulProfile: youthfulProfile,
         middleAgedProfile: middleAgedProfile,
-        oldAgedProfile: oldAgedProfile
+        oldAgedProfile: oldAgedProfile,
+    },
+    setClimateProfile: (cool: number, intermediate: number, warm: number) => <SetClimateProfile>{
+        type: 'SET_CLIMATE_PROFILE',
+        cool: cool,
+        intermediate: intermediate,
+        warm: warm,
     },
 
     setMalolacticProfileClue: (malolacticProfileClue: boolean) => <SetMalolacticProfileClue>{
@@ -590,6 +607,11 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
                         youthful: state.conclusions.SomBot.chemicals.agingProfile.youthful,
                         middleAged: state.conclusions.SomBot.chemicals.agingProfile.middleAged,
                         oldAged: state.conclusions.SomBot.chemicals.agingProfile.oldAged,
+                    },
+                    climateProfile:{
+                        cool:state.conclusions.SomBot.chemicals.climateProfile.cool,
+                        intermediate:state.conclusions.SomBot.chemicals.climateProfile.intermediate,
+                        warm:state.conclusions.SomBot.chemicals.climateProfile.warm,
                     },
                     malolacticProfileClue: state.conclusions.SomBot.chemicals.malolacticProfileClue,
                     botrytisProfileClue: state.conclusions.SomBot.chemicals.botrytisProfileClue,
@@ -840,6 +862,12 @@ export const reducer: any = (state: BlindTastingState=initialBlindTastingState, 
             tempState.conclusions.SomBot.chemicals.agingProfile.youthful = action.youthfulProfile;
             tempState.conclusions.SomBot.chemicals.agingProfile.middleAged = action.middleAgedProfile;
             tempState.conclusions.SomBot.chemicals.agingProfile.oldAged = action.oldAgedProfile;
+            return tempState;
+        case 'SET_CLIMATE_PROFILE':
+            //  alert("Case Age Profile");
+            tempState.conclusions.SomBot.chemicals.climateProfile.cool = action.cool;
+            tempState.conclusions.SomBot.chemicals.climateProfile.intermediate = action.intermediate;
+            tempState.conclusions.SomBot.chemicals.climateProfile.warm = action.warm;
             return tempState;
         case 'SET_MALOLACTIC_PROFILE_CLUE':
             tempState.conclusions.SomBot.chemicals.malolacticProfileClue = action.malolacticProfileClue;

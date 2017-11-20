@@ -104,6 +104,11 @@ var initialBlindTastingState = {
                     middleAged: 0,
                     oldAged: 0,
                 },
+                climateProfile: {
+                    cool: 0,
+                    intermediate: 0,
+                    warm: 0,
+                },
                 malolacticProfileClue: false,
                 botrytisProfileClue: false,
             },
@@ -231,7 +236,13 @@ export var actionCreators = {
         type: 'SET_AGE_PROFILE',
         youthfulProfile: youthfulProfile,
         middleAgedProfile: middleAgedProfile,
-        oldAgedProfile: oldAgedProfile
+        oldAgedProfile: oldAgedProfile,
+    }); },
+    setClimateProfile: function (cool, intermediate, warm) { return ({
+        type: 'SET_CLIMATE_PROFILE',
+        cool: cool,
+        intermediate: intermediate,
+        warm: warm,
     }); },
     setMalolacticProfileClue: function (malolacticProfileClue) { return ({
         type: 'SET_MALOLACTIC_PROFILE_CLUE',
@@ -349,6 +360,11 @@ export var reducer = function (state, action) {
                         youthful: state.conclusions.SomBot.chemicals.agingProfile.youthful,
                         middleAged: state.conclusions.SomBot.chemicals.agingProfile.middleAged,
                         oldAged: state.conclusions.SomBot.chemicals.agingProfile.oldAged,
+                    },
+                    climateProfile: {
+                        cool: state.conclusions.SomBot.chemicals.climateProfile.cool,
+                        intermediate: state.conclusions.SomBot.chemicals.climateProfile.intermediate,
+                        warm: state.conclusions.SomBot.chemicals.climateProfile.warm,
                     },
                     malolacticProfileClue: state.conclusions.SomBot.chemicals.malolacticProfileClue,
                     botrytisProfileClue: state.conclusions.SomBot.chemicals.botrytisProfileClue,
@@ -589,6 +605,12 @@ export var reducer = function (state, action) {
             tempState.conclusions.SomBot.chemicals.agingProfile.youthful = action.youthfulProfile;
             tempState.conclusions.SomBot.chemicals.agingProfile.middleAged = action.middleAgedProfile;
             tempState.conclusions.SomBot.chemicals.agingProfile.oldAged = action.oldAgedProfile;
+            return tempState;
+        case 'SET_CLIMATE_PROFILE':
+            //  alert("Case Age Profile");
+            tempState.conclusions.SomBot.chemicals.climateProfile.cool = action.cool;
+            tempState.conclusions.SomBot.chemicals.climateProfile.intermediate = action.intermediate;
+            tempState.conclusions.SomBot.chemicals.climateProfile.warm = action.warm;
             return tempState;
         case 'SET_MALOLACTIC_PROFILE_CLUE':
             tempState.conclusions.SomBot.chemicals.malolacticProfileClue = action.malolacticProfileClue;

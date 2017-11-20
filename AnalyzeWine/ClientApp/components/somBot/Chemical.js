@@ -12,6 +12,10 @@ import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as BlindStore from '../../store/Blind';
+// CLIMATE CLUE
+var cool = 0;
+var intermediate = 0;
+var warm = 0;
 // AGING PROFILE
 var youthfulProfile = 0;
 var middleAgedProfile = 0;
@@ -114,6 +118,11 @@ var ChemicalAnalysis = (function (_super) {
             //   alert("young: "+youthfulProfile+" middle: "+middleAgedProfile+ " old: "+oldAgedProfile);
             _this.props.setAgeProfile(youthfulProfile, middleAgedProfile, oldAgedProfile);
         };
+        _this.updateClimateProfile = function (cool, intermediate, warm) {
+            //    alert("Age Profile");
+            //   alert("young: "+youthfulProfile+" middle: "+middleAgedProfile+ " old: "+oldAgedProfile);
+            _this.props.setClimateProfile(cool, intermediate, warm);
+        };
         _this.updateBulkAging = function (wood, toast) {
             //     alert("Barrel");
             _this.props.setBulk(wood, toast);
@@ -145,6 +154,9 @@ var ChemicalAnalysis = (function (_super) {
         var chemical = smell.concat(flavor).filter(function (val, id, array) {
             return array.indexOf(val) == id;
         });
+        warm = 0;
+        intermediate = 0;
+        cool = 0;
         youthfulProfile = 0;
         middleAgedProfile = 0;
         oldAgedProfile = 0;
@@ -160,6 +172,17 @@ var ChemicalAnalysis = (function (_super) {
             }
             if (['Petrol', 'Kerosene', 'Leather', 'Barnyard'].indexOf(chem) != -1) {
                 oldAgedProfile++;
+            }
+            // CLIMATE PROFILE
+            if (['Tart', 'Apple', 'Pear', 'Cranberry', 'Cherry'].indexOf(chem) != -1) {
+                cool++;
+            }
+            if (['Ripe Fruit', 'Juicy', 'Peach', 'Mellon', 'Berry', 'Plumb'].indexOf(chem) != -1) {
+                intermediate++;
+            }
+            if (['Over Ripe Fruit', 'Lush', 'Mango', 'Pineapple', 'Fig', 'Prune'].indexOf(chem) != -1) {
+                //  alert("added warm because of "+chem);
+                warm++;
             }
             // BULK AGING
             oak = ['Vanilla', 'Cedar', 'Toast', 'Resin'].indexOf(chem) != -1 || oak;
@@ -281,7 +304,9 @@ var ChemicalAnalysis = (function (_super) {
             (this.props.flavorProfile.woodSpice != nextProps.flavorProfile.woodSpice)) {
             //     alert("Saw a Change");
             //      alert("Update Malolactic: "+malolacticProfileClue+"  "+notMalolactic);
+            // COULD PULL IN PROPS AND CHECK FOR A CHANGE BEFORE UPDATING
             this.updateAgeProfile(youthfulProfile, middleAgedProfile, oldAgedProfile);
+            this.updateClimateProfile(cool, intermediate, warm);
             this.updateBulkAging(wood, toast);
             this.updateLees(lees);
             this.updateMalolacticProfileClue(malolacticProfileClue);
@@ -301,4 +326,4 @@ function mapStateToProps(ApplicationState) {
     };
 }
 export default connect(mapStateToProps, BlindStore.actionCreators)(ChemicalAnalysis);
-//# sourceMappingURL=ChemicalAnalysis.js.map
+//# sourceMappingURL=Chemical.js.map

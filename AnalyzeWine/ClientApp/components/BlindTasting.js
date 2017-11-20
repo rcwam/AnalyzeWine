@@ -273,9 +273,9 @@ var Blind = (function (_super) {
     Blind.prototype.selectBody = function () {
         return (React.createElement("select", { value: this.props.notes.palate.body, onChange: this.changeBody },
             React.createElement("option", { value: "None" }, "None"),
-            React.createElement("option", { value: "Low" }, "Low"),
+            React.createElement("option", { value: "Thin" }, "Thin"),
             React.createElement("option", { value: "Medium" }, "Medium"),
-            React.createElement("option", { value: "High" }, "High")));
+            React.createElement("option", { value: "Thick" }, "Thick")));
     };
     Blind.prototype.selectSweetness = function () {
         return (React.createElement("select", { value: this.props.notes.palate.sweetness, onChange: this.changeSweetness },

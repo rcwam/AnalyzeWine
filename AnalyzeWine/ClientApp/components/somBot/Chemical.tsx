@@ -4,6 +4,11 @@ import {connect} from 'react-redux'
 import { Link, RouteComponentProps } from 'react-router-dom';
 import * as BlindStore from '../../store/Blind';
 
+// CLIMATE CLUE
+let cool:number=0;
+let intermediate:number=0;
+let warm:number=0;
+
 // AGING PROFILE
 let youthfulProfile: number=0;
 let middleAgedProfile: number=0;
@@ -127,6 +132,9 @@ class ChemicalAnalysis extends Component <any, any> {
             return array.indexOf(val) == id;
         });
 
+        warm=0;
+        intermediate=0;
+        cool=0;
 
         youthfulProfile=0;
         middleAgedProfile=0;
@@ -139,11 +147,11 @@ class ChemicalAnalysis extends Component <any, any> {
           //    alert(chem + " of " + chemical);
 
             // AGING PROFILE
-           if( ['Dried Apricot', 'Marmalade', 'Dried Apples', 'Dried Bananas', 'Fig', 'Prune', 'Dried Blackberry', 'Dried Cranberry'].indexOf(chem) != -1 ) {
+            if( ['Dried Apricot', 'Marmalade', 'Dried Apples', 'Dried Bananas', 'Fig', 'Prune', 'Dried Blackberry', 'Dried Cranberry'].indexOf(chem) != -1 ) {
 
 
                 youthfulProfile++;
-            //    alert("YOUTH "+chem);
+                //    alert("YOUTH "+chem);
             }
             if (['Cooked Blackberry', 'Cooked Red Plum', 'Earth', 'Mushroom', 'Hay'].indexOf(chem) != -1) {
                 middleAgedProfile++
@@ -151,6 +159,21 @@ class ChemicalAnalysis extends Component <any, any> {
             if (['Petrol', 'Kerosene', 'Leather', 'Barnyard'].indexOf(chem) != -1) {
                 oldAgedProfile++
             }
+
+            // CLIMATE PROFILE
+            if (['Tart', 'Apple', 'Pear', 'Cranberry','Cherry'].indexOf(chem) != -1) {
+                cool++
+            }
+            if (['Ripe Fruit', 'Juicy', 'Peach', 'Mellon', 'Berry', 'Plumb'].indexOf(chem) != -1) {
+                intermediate++
+            }
+            if (['Over Ripe Fruit', 'Lush', 'Mango', 'Pineapple', 'Fig','Prune'].indexOf(chem) != -1) {
+              //  alert("added warm because of "+chem);
+                warm++
+            }
+
+
+
 
 
             // BULK AGING
@@ -272,7 +295,10 @@ class ChemicalAnalysis extends Component <any, any> {
        //     alert("Saw a Change");
        //      alert("Update Malolactic: "+malolacticProfileClue+"  "+notMalolactic);
 
+            // COULD PULL IN PROPS AND CHECK FOR A CHANGE BEFORE UPDATING
+
           this.updateAgeProfile(youthfulProfile,middleAgedProfile,oldAgedProfile);
+this.updateClimateProfile(cool,intermediate,warm);
             this.updateBulkAging(wood, toast);
             this.updateLees(lees);
             this.updateMalolacticProfileClue(malolacticProfileClue);
@@ -288,6 +314,11 @@ class ChemicalAnalysis extends Component <any, any> {
     //    alert("Age Profile");
      //   alert("young: "+youthfulProfile+" middle: "+middleAgedProfile+ " old: "+oldAgedProfile);
         this.props.setAgeProfile(youthfulProfile,middleAgedProfile,oldAgedProfile)
+    };
+    updateClimateProfile  = (cool:number,intermediate:number, warm:number)=>{
+        //    alert("Age Profile");
+        //   alert("young: "+youthfulProfile+" middle: "+middleAgedProfile+ " old: "+oldAgedProfile);
+        this.props.setClimateProfile(cool,intermediate,warm)
     };
     updateBulkAging = (wood: string, toast: string) => {
    //     alert("Barrel");

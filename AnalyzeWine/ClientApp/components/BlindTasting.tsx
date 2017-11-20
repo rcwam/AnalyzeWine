@@ -7,8 +7,6 @@ import * as BlindStore from '../store/Blind';
 import BotConclusions from './Conclusions'
 import EyeAnalysis from './EyeAnalysis'
 import NoseAnalysis from './NoseAnalysis'
-import ChemicalAnalysis from "./somBot/ChemicalAnalysis";
-
 
 type BlindProps =
     BlindStore.BlindTastingState
@@ -329,9 +327,9 @@ class Blind extends Component<BlindProps, {}> {
         return (
             <select value={this.props.notes.palate.body} onChange={this.changeBody}>
                 <option value="None">None</option>
-                <option value="Low">Low</option>
+                <option value="Thin">Thin</option>
                 <option value="Medium">Medium</option>
-                <option value="High">High</option>
+                <option value="Thick">Thick</option>
             </select>
         );
     }
@@ -408,7 +406,7 @@ addCitrusSmell(){
                 <option value="Orange">Orange</option>
                 <option value="Tangerine">Tangerine</option>
             </select>
-        )
+        );
 }
 addTreeFruitSmell(){
     return (
@@ -424,7 +422,7 @@ addTreeFruitSmell(){
             <option value="Persimmon">Persimmon</option>
             <option value="Plum">Plum</option>
         </select>
-    )
+    );
 }
     addBerriesSmell(){
         return (
@@ -441,7 +439,7 @@ addTreeFruitSmell(){
                 <option value="Raspberry">Raspberry</option>
                 <option value="Strawberry">Strawberry</option>
             </select>
-        )
+        );
     }
     addTropicalFruitSmell(){
         return (
@@ -461,7 +459,7 @@ addTreeFruitSmell(){
                 <option value="Plantain">Plantain</option>
                 <option value="Star Fruit">Star Fruit</option>
             </select>
-        )
+        );
     }
     addDriedFruitSmell(){
         return (
@@ -475,7 +473,7 @@ addTreeFruitSmell(){
                 <option value="Prune">Prune</option>
                 <option value="Raisin">Raisin</option>
             </select>
-        )
+        );
     }
     addArtificialSmell(){
         return (
@@ -489,7 +487,7 @@ addTreeFruitSmell(){
                 <option value="Hard Candy">Hard Candy</option>
                 <option value="Red Licorice">Red Licorice</option>
             </select>
-        )
+        );
     }
     addFloralSmell(){
         return ( // onClick={() => this.clearAroma("fruitFloral")
@@ -509,7 +507,7 @@ addTreeFruitSmell(){
                 <option value="Rose">Rose</option>
                 <option value="Violet">Violet</option>
             </select>
-        )
+        );
     }
 
 
@@ -527,7 +525,7 @@ addTreeFruitSmell(){
                 <option value="Mushroom">Mushroom</option>
 
             </select>
-        )
+        );
     }
     addMineralSmell(){
         return (
@@ -563,7 +561,7 @@ addTreeFruitSmell(){
                 <option value="Tea Leaves">Tea Leaves</option>
                 <option value="Tobacco">Tobacco</option>
             </select>
-        )
+        );
     }
     addHerbalSmell(){
         return (
@@ -579,7 +577,7 @@ addTreeFruitSmell(){
                 <option value="Rosemary">Rosemary</option>
                 <option value="Tarragon">Tarragon</option>
             </select>
-        )
+        );
     }
     addVegetableSmell(){
         return (
@@ -594,7 +592,7 @@ addTreeFruitSmell(){
                 <option value="Green Olive">Green Olive</option>
                 <option value="Pepper">Pepper</option>
             </select>
-        )
+        );
     }
     addWoodSmell(){
         return (
@@ -608,7 +606,7 @@ addTreeFruitSmell(){
                 <option value="Sawdust">Sawdust</option>
                 <option value="Tree Bark">Tree Bark</option>
             </select>
-        )
+        );
     }
     addRoastedSmell(){
         return (
@@ -625,7 +623,7 @@ addTreeFruitSmell(){
                 <option value="Toast">Toast</option>
                 <option value="Toasted Coconut">Toasted Coconut</option>
             </select>
-        )
+        );
     }
     addSmokeySmell(){
         return (
@@ -637,7 +635,7 @@ addTreeFruitSmell(){
                 <option value="Bacon">Bacon</option>
                 <option value="Peat">Peat</option>
             </select>
-        )
+        );
     }
     addSpiceSmell(){
         return (
@@ -654,7 +652,7 @@ addTreeFruitSmell(){
                 <option value="Star Anise">Star Anise</option>
                 <option value="Vanilla">Vanilla</option>
             </select>
-        )
+        );
     }
     addOxidationSmell(){
         return (
@@ -671,7 +669,7 @@ addTreeFruitSmell(){
                 <option value="Molasses">Molasses</option>
                 <option value="Soy Sauce">Soy Sauce</option>
             </select>
-        )
+        );
     }
     addBiologicalSmell(){
         return (
@@ -696,7 +694,7 @@ addTreeFruitSmell(){
                 <option value="Wet Wool">Wet Wool</option>
                 <option value="Yeast">Yeast</option>
             </select>
-        )
+        );
     }
     addChemicalSmell(){
         return (
@@ -723,7 +721,7 @@ addTreeFruitSmell(){
                 <option value="Sulphur">Sulphur</option>
                 <option value="Wet Newspaper">Wet Newspaper</option>
             </select>
-        )
+        );
     }
 
 

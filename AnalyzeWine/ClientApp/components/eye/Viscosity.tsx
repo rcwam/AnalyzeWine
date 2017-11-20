@@ -22,9 +22,9 @@ class Viscosity extends Component <any, any> {
             return(
                 <select value={viscosity} onChange={this.changeViscosity}>
                     <option value="None">None</option>
-                    <option value="Light">Light</option>
+                    <option value="Thin">Light</option>
                     <option value="Medium">Medium</option>
-                    <option value="Heavy">Heavy</option>
+                    <option value="Thick">Heavy</option>
                 </select>
             )
         };

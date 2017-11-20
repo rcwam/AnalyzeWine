@@ -36,8 +36,6 @@
     <None Remove="ClientApp\components\nose\SmellAlcohol.tsx" />
     <None Remove="ClientApp\components\nose\SmellComplexity.tsx" />
     <None Remove="ClientApp\components\nose\SmellIntensity.tsx" />
-    <None Remove="ClientApp\components\somBot\ChemicalAnalysis.tsx" />
-    <None Remove="ClientApp\components\somBot\GrapeAnalysis.tsx" />
     <None Remove="ClientApp\components\somBot\Malolactic.tsx" />
     <None Remove="ClientApp\store\Blind.ts" />
   </ItemGroup>
@@ -58,10 +56,10 @@
     <TypeScriptCompile Include="ClientApp\components\eye\Depth.tsx" />
     <TypeScriptCompile Include="ClientApp\components\eye\Sediment.tsx" />
     <TypeScriptCompile Include="ClientApp\components\eye\Viscosity.tsx" />
-    <TypeScriptCompile Include="ClientApp\components\somBot\ChemicalAnalysis.tsx" />
-    <TypeScriptCompile Include="ClientApp\components\somBot\GrapeAnalysis.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\somBot\Chemical.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\somBot\Grape.tsx" />
     <TypeScriptCompile Include="ClientApp\components\somBot\Malolactic.tsx" />
-    <TypeScriptCompile Include="ClientApp\components\somBot\PlaceAnalysis.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\somBot\Place.tsx" />
     <TypeScriptCompile Include="ClientApp\store\Blind.ts" />
   </ItemGroup>
 

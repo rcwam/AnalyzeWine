@@ -150,7 +150,7 @@ class Age extends Component <any, any> {
         return (
             <div>Age: {minAge} to {maxAge} years</div>
 
-        )
+        );
     }
 
     componentWillReceiveProps(nextProps: any) {
