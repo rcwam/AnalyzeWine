@@ -32,6 +32,9 @@
     <None Remove="ClientApp\components\eye\Depth.tsx" />
     <None Remove="ClientApp\components\eye\Sediment.tsx" />
     <None Remove="ClientApp\components\eye\Viscosity.tsx" />
+    <None Remove="ClientApp\components\Grapes\CabernetSauvignon.tsx" />
+    <None Remove="ClientApp\components\Grapes\Chardonnay.tsx" />
+    <None Remove="ClientApp\components\Grapes\GrapeInterface.tsx" />
     <None Remove="ClientApp\components\NoseAnalysis.tsx" />
     <None Remove="ClientApp\components\nose\SmellAlcohol.tsx" />
     <None Remove="ClientApp\components\nose\SmellComplexity.tsx" />
@@ -41,6 +44,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\Grapes\CabernetSauvignon.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Grapes\Chardonnay.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Grapes\GrapeInterface.tsx" />
     <TypeScriptCompile Include="ClientApp\components\NoseAnalysis.tsx" />
     <TypeScriptCompile Include="ClientApp\components\nose\SmellAlcohol.tsx" />
     <TypeScriptCompile Include="ClientApp\components\nose\SmellComplexity.tsx" />

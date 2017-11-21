@@ -10,11 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from 'react';
 import { Component } from 'react';
-import Age from './somBot/Age';
-import BulkAging from './somBot/BulkAging';
-import Chemical from './somBot/Chemical';
-import Malolactic from './somBot/Malolactic';
-import Place from './SomBot/Place';
+import Grape from './SomBot/Grape';
 var BotConclusions = (function (_super) {
     __extends(BotConclusions, _super);
     function BotConclusions() {
@@ -24,11 +20,7 @@ var BotConclusions = (function (_super) {
         return (React.createElement("div", null,
             React.createElement("h3", null, "Summary"),
             React.createElement("p", null, "Som-Bot can give suggested conclusions based on your tasting notes:"),
-            React.createElement(Age, null),
-            React.createElement(Place, null),
-            React.createElement(BulkAging, null),
-            React.createElement(Malolactic, null),
-            React.createElement(Chemical, null),
+            React.createElement(Grape, null),
             React.createElement("p", null, "Climate? "),
             React.createElement("p", null, "Balance (alcohol, acid, tannin, sugar)? "),
             React.createElement("p", null, "Origin List "),

@@ -6,6 +6,7 @@ import BulkAging from './somBot/BulkAging'
 import Chemical from './somBot/Chemical'
 import Malolactic from './somBot/Malolactic'
 import  Place from './SomBot/Place'
+import  Grape from './SomBot/Grape'
 
 class BotConclusions extends Component{
 
@@ -17,11 +18,8 @@ class BotConclusions extends Component{
                 <h3>Summary</h3>
                 <p>Som-Bot can give suggested conclusions based on your tasting notes:</p>
 
-             <Age/>
-                <Place/>
-                <BulkAging/>
-                <Malolactic/>
-                <Chemical/>
+             <Grape/>
+
 
 
 
