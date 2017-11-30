@@ -35,6 +35,12 @@
     <None Remove="ClientApp\components\Grapes\CabernetSauvignon.tsx" />
     <None Remove="ClientApp\components\Grapes\Chardonnay.tsx" />
     <None Remove="ClientApp\components\Grapes\GrapeInterface.tsx" />
+    <None Remove="ClientApp\components\Grapes\Merlot.tsx" />
+    <None Remove="ClientApp\components\Grapes\PinotGris.tsx" />
+    <None Remove="ClientApp\components\Grapes\PinotNoir.tsx" />
+    <None Remove="ClientApp\components\Grapes\Riesling.tsx" />
+    <None Remove="ClientApp\components\Grapes\SauvignonBlanc.tsx" />
+    <None Remove="ClientApp\components\Grapes\Syrah.tsx" />
     <None Remove="ClientApp\components\NoseAnalysis.tsx" />
     <None Remove="ClientApp\components\nose\SmellAlcohol.tsx" />
     <None Remove="ClientApp\components\nose\SmellComplexity.tsx" />
@@ -47,6 +53,12 @@
     <TypeScriptCompile Include="ClientApp\components\Grapes\CabernetSauvignon.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Grapes\Chardonnay.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Grapes\GrapeInterface.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Grapes\Merlot.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Grapes\PinotGris.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Grapes\PinotNoir.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Grapes\Riesling.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Grapes\SauvignonBlanc.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Grapes\Syrah.tsx" />
     <TypeScriptCompile Include="ClientApp\components\NoseAnalysis.tsx" />
     <TypeScriptCompile Include="ClientApp\components\nose\SmellAlcohol.tsx" />
     <TypeScriptCompile Include="ClientApp\components\nose\SmellComplexity.tsx" />

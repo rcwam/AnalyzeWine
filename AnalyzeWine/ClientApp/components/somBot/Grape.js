@@ -13,7 +13,13 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as BlindStore from '../../store/Blind';
 import CabernetSauvignon from '../Grapes/CabernetSauvignon';
+import Merlot from '../Grapes/Merlot';
 import Chardonnay from '../Grapes/Chardonnay';
+import Syrah from '../Grapes/Syrah';
+import SauvignonBlanc from '../Grapes/SauvignonBlanc';
+import PinotNoir from '../Grapes/PinotNoir';
+import Riesling from '../Grapes/Riesling';
+import PinotGris from '../Grapes/PinotGris';
 var climate = "";
 var country = [];
 var region = [];
@@ -21,7 +27,13 @@ var appellation = [];
 //let grapeList :grapeList[] =[];
 var grapeList = [
     { score: 1, grape: CabernetSauvignon },
-    { score: 1, grape: Chardonnay }
+    { score: 1, grape: Merlot },
+    { score: 1, grape: Chardonnay },
+    { score: 1, grape: Syrah },
+    { score: 1, grape: SauvignonBlanc },
+    { score: 1, grape: PinotNoir },
+    { score: 1, grape: Riesling },
+    { score: 1, grape: PinotGris },
 ];
 var Grape = (function (_super) {
     __extends(Grape, _super);
@@ -36,7 +48,13 @@ var Grape = (function (_super) {
         var warmScore = 0;
         grapeList = [
             { score: 1, grape: CabernetSauvignon },
-            { score: 1, grape: Chardonnay }
+            { score: 1, grape: Merlot },
+            { score: 1, grape: Chardonnay },
+            { score: 1, grape: Syrah },
+            { score: 1, grape: SauvignonBlanc },
+            { score: 1, grape: PinotNoir },
+            { score: 1, grape: Riesling },
+            { score: 1, grape: PinotGris },
         ];
         /**/
         // TYPE

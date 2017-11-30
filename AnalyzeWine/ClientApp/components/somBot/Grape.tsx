@@ -5,7 +5,13 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import * as BlindStore from '../../store/Blind';
 import GrapeInterface from '../Grapes/GrapeInterface'
 import CabernetSauvignon from '../Grapes/CabernetSauvignon'
+import Merlot from '../Grapes/Merlot'
 import Chardonnay from '../Grapes/Chardonnay'
+import Syrah from '../Grapes/Syrah'
+import SauvignonBlanc from '../Grapes/SauvignonBlanc'
+import PinotNoir from '../Grapes/PinotNoir'
+import Riesling from '../Grapes/Riesling'
+import PinotGris from '../Grapes/PinotGris'
 
 let climate:string = "";
 let country:string[] = [];
@@ -19,7 +25,13 @@ interface grapeScore{
 
 let grapeList =[
     {score:1,grape:CabernetSauvignon},
-    {score:1,grape:Chardonnay}
+    {score:1, grape:Merlot},
+    {score:1,grape:Chardonnay},
+    {score:1,grape:Syrah},
+    {score:1,grape:SauvignonBlanc},
+    {score:1,grape:PinotNoir},
+    {score:1,grape:Riesling},
+    {score:1,grape:PinotGris},
 ];
 
 class Grape extends Component <any, any> {
@@ -35,7 +47,13 @@ class Grape extends Component <any, any> {
 
         grapeList =[
             {score:1,grape:CabernetSauvignon},
-            {score:1,grape:Chardonnay}
+            {score:1, grape:Merlot},
+            {score:1,grape:Chardonnay},
+            {score:1,grape:Syrah},
+            {score:1,grape:SauvignonBlanc},
+            {score:1,grape:PinotNoir},
+            {score:1,grape:Riesling},
+            {score:1,grape:PinotGris},
         ];
 
         /**/
