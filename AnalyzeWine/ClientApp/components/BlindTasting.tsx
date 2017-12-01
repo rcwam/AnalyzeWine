@@ -350,6 +350,7 @@ class Blind extends Component<BlindProps, {}> {
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
+                <option value="Very High">Very High</option>
             </select>
         );
     }
@@ -357,14 +358,11 @@ class Blind extends Component<BlindProps, {}> {
         return (
             <select value={this.props.notes.palate.tannins} onChange={this.changeTannins}>
                 <option value="None">None</option>
-                <option value="Refined">Refined</option>
-                <option value="Soft">Soft</option>
+                <option value="Very Low">Very Low</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
-                <option value="Harsh">Harsh</option>
-                <option value="Astringent">Astringent</option>
-                <option value="Aggressive">Aggressive</option>
+                <option value="Very High">Very High</option>
             </select>
         );
     }

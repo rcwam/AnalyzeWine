@@ -1,19 +1,24 @@
 ﻿import * as React from 'react';
 import GrapeInterface from './GrapeInterface'
+import {findAllInRenderedTree} from "react-dom/test-utils";
 
 const PinotGris:GrapeInterface = {
     varietal: 'Pinot Gris',
     wineType: 'White',
     production: 43563,
-    climate: {
-        cool: true,
-        medium: true,
-        warm: false,
+    climate:{
+        cold:false,
+        cool:true,
+        medium:true,
+        warm:false,
+        hot:false,
     },
     acidity: {
+        veryHigh:false,
         high: true,
         medium: true,
         low: false,
+        none:false,
     },
     viscosity: {
         high: false,

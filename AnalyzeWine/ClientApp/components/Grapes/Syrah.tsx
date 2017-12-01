@@ -6,29 +6,38 @@ const Syrah:GrapeInterface ={
     wineType:'Red',
     production:185568,
     climate:{
+        cold:false,
         cool:false,
         medium:true,
         warm:true,
+        hot:true,
     },
     skin: {
+        veryThick:false,
         thick:true,
         medium:true,
         thin:false,
+        veryThin:false,
     },
     acidity:{
+        veryHigh:false,
         high:false,
         medium:true,
         low:true,
+        none:false,
     },
     viscosity: {
         high: false,
         medium: true,
         low: false,
     },
-    tannins: {  // not typically needed for white whine
+    tannins: {
+        veryHigh:false,
         high: false,
         medium: true,
         low: false,
+        veryLow:false,
+        none:false,
     },
     characteristics:{
         general:['Blackberry','Raspberry','Jam','Leather','Black Pepper','Smoke','Meat','Gamey'],

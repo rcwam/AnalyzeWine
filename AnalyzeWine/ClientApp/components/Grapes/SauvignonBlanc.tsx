@@ -5,15 +5,19 @@ const SauvignonBlanc:GrapeInterface = {
     varietal: 'Sauvignon Blanc',
     wineType: 'White',
     production: 110138,
-    climate: {
-        cool: true,
-        medium: true,
-        warm: false,
+    climate:{
+        cold:false,
+        cool:true,
+        medium:true,
+        warm:false,
+        hot:false,
     },
     acidity: {
+        veryHigh:true,
         high: true,
         medium: true,
         low: false,
+        none:false,
     },
     viscosity: {
         high: false,

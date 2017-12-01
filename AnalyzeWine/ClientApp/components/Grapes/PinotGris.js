@@ -3,14 +3,18 @@ var PinotGris = {
     wineType: 'White',
     production: 43563,
     climate: {
+        cold: false,
         cool: true,
         medium: true,
         warm: false,
+        hot: false,
     },
     acidity: {
+        veryHigh: false,
         high: true,
         medium: true,
         low: false,
+        none: false,
     },
     viscosity: {
         high: false,

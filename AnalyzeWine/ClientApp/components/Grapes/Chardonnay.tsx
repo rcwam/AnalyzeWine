@@ -6,14 +6,18 @@ const Chardonnay:GrapeInterface ={
     wineType:'White',
     production: 198793,
     climate:{
+        cold:true,
         cool:true,
         medium:true,
         warm:true,
+        hot:true,
     },
     acidity:{
+        veryHigh:false,
         high:false,
         medium:true,
         low:true,
+        none:false,
     },
     viscosity:{
         high:true,

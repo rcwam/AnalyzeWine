@@ -5,29 +5,38 @@ interface GrapeInterface {
     wineType: string,
     production: number, // 2010 hectares
     climate: {
+        cold:boolean,
         cool: boolean,
         medium: boolean,
         warm: boolean,
+        hot:boolean,
     },
     skin?: {  // not typically needed for white whine
+        veryThick:boolean,
         thick: boolean,
         medium: boolean,
         thin: boolean,
+       veryThin: boolean,
     },
     acidity: {
+        veryHigh:boolean,
         high: boolean,
         medium: boolean,
         low: boolean,
+        none:boolean,
     },
     viscosity: {
         high: boolean,
         medium: boolean,
         low: boolean,
     },
-    tannins?: {  // not typically needed for white whine
+    tannins?: {
+        veryHigh:boolean,
         high: boolean,
         medium: boolean,
         low: boolean,
+        veryLow:boolean,
+        none:boolean,
     },
     characteristics:{
         general:string[],

@@ -6,14 +6,18 @@ const Riesling:GrapeInterface ={
     wineType:'White',
     production: 50060,
     climate:{
-        cool:true, // if dessert
+        cold:true,
+        cool:true,
         medium:false,
         warm:false,
+        hot:false,
     },
     acidity:{
+        veryHigh:true,
         high:true,
         medium:false,
         low:false,
+        none:false,
     },
     viscosity:{
         high: true, // can be high if dessert

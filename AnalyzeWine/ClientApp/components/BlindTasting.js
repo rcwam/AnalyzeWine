@@ -289,19 +289,17 @@ var Blind = (function (_super) {
             React.createElement("option", { value: "None" }, "None"),
             React.createElement("option", { value: "Low" }, "Low"),
             React.createElement("option", { value: "Medium" }, "Medium"),
-            React.createElement("option", { value: "High" }, "High")));
+            React.createElement("option", { value: "High" }, "High"),
+            React.createElement("option", { value: "Very High" }, "Very High")));
     };
     Blind.prototype.selectTannins = function () {
         return (React.createElement("select", { value: this.props.notes.palate.tannins, onChange: this.changeTannins },
             React.createElement("option", { value: "None" }, "None"),
-            React.createElement("option", { value: "Refined" }, "Refined"),
-            React.createElement("option", { value: "Soft" }, "Soft"),
+            React.createElement("option", { value: "Very Low" }, "Very Low"),
             React.createElement("option", { value: "Low" }, "Low"),
             React.createElement("option", { value: "Medium" }, "Medium"),
             React.createElement("option", { value: "High" }, "High"),
-            React.createElement("option", { value: "Harsh" }, "Harsh"),
-            React.createElement("option", { value: "Astringent" }, "Astringent"),
-            React.createElement("option", { value: "Aggressive" }, "Aggressive")));
+            React.createElement("option", { value: "Very High" }, "Very High")));
     };
     Blind.prototype.selectTasteAlcohol = function () {
         return (React.createElement("select", { value: this.props.notes.palate.tasteAlcohol, onChange: this.changeTasteAlcohol },

@@ -3,14 +3,18 @@ var Riesling = {
     wineType: 'White',
     production: 50060,
     climate: {
+        cold: true,
         cool: true,
         medium: false,
         warm: false,
+        hot: false,
     },
     acidity: {
+        veryHigh: true,
         high: true,
         medium: false,
         low: false,
+        none: false,
     },
     viscosity: {
         high: true,
