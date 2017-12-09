@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+//import { Link, RouteComponentProps } from 'react-router-dom';
 import * as BlindStore from '../../store/Blind';
 // CLIMATE CLUE
 var cool = 0;

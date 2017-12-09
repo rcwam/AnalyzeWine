@@ -67,6 +67,7 @@ interface GrapeInterface {
         },
         region?:{
             regions?:[string, string][], // country, region
+            regionClimate?:[string,string,boolean,boolean,boolean,boolean,boolean],
             alias?: [string,string][], // Region, Grape Name
             production?: [string,number][], // Region, Production
             climate?: [string, string][], // Region, [Cool, Intermediate, Warm]

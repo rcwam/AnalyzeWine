@@ -1,3 +1,4 @@
+//import { ApplicationState } from '../../store';
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -12,6 +13,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as BlindStore from '../../store/Blind';
+//import GrapeInterface from '../Grapes/GrapeInterface'
 import CabernetSauvignon from '../Grapes/CabernetSauvignon';
 import Merlot from '../Grapes/Merlot';
 import Chardonnay from '../Grapes/Chardonnay';
@@ -23,16 +25,23 @@ import PinotGris from '../Grapes/PinotGris';
 var viscosityBody = "";
 var country = [];
 var region = [];
-var appellation = [];
+//let appellation:string[] = [];
+/**
+interface grapeScore{
+    score:number,
+    grape:GrapeInterface
+}
+ */
+//let grapeList :grapeList[] =[];
 var grapeList = [
-    { score: 1, grape: CabernetSauvignon },
-    { score: 1, grape: Merlot },
-    { score: 1, grape: Chardonnay },
-    { score: 1, grape: Syrah },
-    { score: 1, grape: SauvignonBlanc },
-    { score: 1, grape: PinotNoir },
-    { score: 1, grape: Riesling },
-    { score: 1, grape: PinotGris },
+    CabernetSauvignon,
+    Merlot,
+    Chardonnay,
+    Syrah,
+    SauvignonBlanc,
+    PinotNoir,
+    Riesling,
+    PinotGris,
 ];
 var climate = {
     cold: false,
@@ -49,14 +58,14 @@ var Grape = (function (_super) {
     Grape.prototype.render = function () {
         var _a = this.props, acidity = _a.acidity, body = _a.body, smellAlcohol = _a.smellAlcohol, tasteAlcohol = _a.tasteAlcohol, viscosity = _a.viscosity, wineType = _a.wineType, depth = _a.depth, tannins = _a.tannins;
         grapeList = [
-            { score: 1, grape: CabernetSauvignon },
-            { score: 1, grape: Merlot },
-            { score: 1, grape: Chardonnay },
-            { score: 1, grape: Syrah },
-            { score: 1, grape: SauvignonBlanc },
-            { score: 1, grape: PinotNoir },
-            { score: 1, grape: Riesling },
-            { score: 1, grape: PinotGris },
+            CabernetSauvignon,
+            Merlot,
+            Chardonnay,
+            Syrah,
+            SauvignonBlanc,
+            PinotNoir,
+            Riesling,
+            PinotGris,
         ];
         climate = {
             cold: false,
@@ -65,6 +74,8 @@ var Grape = (function (_super) {
             warm: false,
             hot: false,
         };
+        country = [];
+        region = [];
         /*
                let test = grapeList.filter(function (list) {
                   return list.grape.varietal=="Chardonnay";
@@ -75,17 +86,17 @@ var Grape = (function (_super) {
         switch (wineType) {
             case "Red":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.wineType == 'Red';
+                    return grape.wineType == 'Red';
                 });
                 break;
             case "White":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.wineType == 'White';
+                    return grape.wineType == 'White';
                 });
                 break;
             case "Rose":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.wineType == 'Rose';
+                    return grape.wineType == 'Rose';
                 });
                 break;
             default:
@@ -102,8 +113,8 @@ var Grape = (function (_super) {
         switch (depth) {
             case "Watery":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.skin != null) {
-                        return grape.grape.skin.veryThin == true;
+                    if (grape.skin != null) {
+                        return grape.skin.veryThin == true;
                     }
                     else {
                         return grapeList;
@@ -112,8 +123,8 @@ var Grape = (function (_super) {
                 break;
             case "Pale":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.skin != null) {
-                        return grape.grape.skin.thin == true;
+                    if (grape.skin != null) {
+                        return grape.skin.thin == true;
                     }
                     else {
                         return grapeList;
@@ -122,8 +133,8 @@ var Grape = (function (_super) {
                 break;
             case "Medium":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.skin != null) {
-                        return grape.grape.skin.medium == true;
+                    if (grape.skin != null) {
+                        return grape.skin.medium == true;
                     }
                     else {
                         return grapeList;
@@ -132,8 +143,8 @@ var Grape = (function (_super) {
                 break;
             case "Deep":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.skin != null) {
-                        return grape.grape.skin.thick == true;
+                    if (grape.skin != null) {
+                        return grape.skin.thick == true;
                     }
                     else {
                         return grapeList;
@@ -142,8 +153,8 @@ var Grape = (function (_super) {
                 break;
             case "Dark":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.skin != null) {
-                        return grape.grape.skin.veryThick == true;
+                    if (grape.skin != null) {
+                        return grape.skin.veryThick == true;
                     }
                     else {
                         return grapeList;
@@ -162,27 +173,27 @@ var Grape = (function (_super) {
         switch (acidity) {
             case "Very High":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.acidity.veryHigh == true;
+                    return grape.acidity.veryHigh == true;
                 });
                 break;
             case "High":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.acidity.high == true;
+                    return grape.acidity.high == true;
                 });
                 break;
             case "Medium":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.acidity.medium == true;
+                    return grape.acidity.medium == true;
                 });
                 break;
             case "Low":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.acidity.low == true;
+                    return grape.acidity.low == true;
                 });
                 break;
             case "None":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.acidity.none == true;
+                    return grape.acidity.none == true;
                 });
                 break;
         }
@@ -213,17 +224,17 @@ var Grape = (function (_super) {
         switch (viscosityBody) {
             case "Thick":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.viscosity.high == true;
+                    return grape.viscosity.high == true;
                 });
                 break;
             case "Medium":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.viscosity.medium == true;
+                    return grape.viscosity.medium == true;
                 });
                 break;
             case "Thin":
                 grapeList = grapeList.filter(function (grape) {
-                    return grape.grape.viscosity.low == true;
+                    return grape.viscosity.low == true;
                 });
                 break;
         }
@@ -231,8 +242,8 @@ var Grape = (function (_super) {
         switch (tannins) {
             case "Very High":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.tannins != null) {
-                        return grape.grape.tannins.veryHigh == true;
+                    if (grape.tannins != null) {
+                        return grape.tannins.veryHigh == true;
                     }
                     else {
                         return grapeList;
@@ -241,8 +252,8 @@ var Grape = (function (_super) {
                 break;
             case "High":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.tannins != null) {
-                        return grape.grape.tannins.high == true;
+                    if (grape.tannins != null) {
+                        return grape.tannins.high == true;
                     }
                     else {
                         return grapeList;
@@ -251,8 +262,8 @@ var Grape = (function (_super) {
                 break;
             case "Medium":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.tannins != null) {
-                        return grape.grape.tannins.medium == true;
+                    if (grape.tannins != null) {
+                        return grape.tannins.medium == true;
                     }
                     else {
                         return grapeList;
@@ -261,8 +272,8 @@ var Grape = (function (_super) {
                 break;
             case "Low":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.tannins != null) {
-                        return grape.grape.tannins.low == true;
+                    if (grape.tannins != null) {
+                        return grape.tannins.low == true;
                     }
                     else {
                         return grapeList;
@@ -271,8 +282,8 @@ var Grape = (function (_super) {
                 break;
             case "Very Low":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.tannins != null) {
-                        return grape.grape.tannins.veryLow == true;
+                    if (grape.tannins != null) {
+                        return grape.tannins.veryLow == true;
                     }
                     else {
                         return grapeList;
@@ -281,8 +292,8 @@ var Grape = (function (_super) {
                 break;
             case "None":
                 grapeList = grapeList.filter(function (grape) {
-                    if (grape.grape.tannins != null) {
-                        return grape.grape.tannins.none == true;
+                    if (grape.tannins != null) {
+                        return grape.tannins.none == true;
                     }
                     else {
                         return grapeList;
@@ -306,6 +317,106 @@ var Grape = (function (_super) {
                 climate.cold = true;
             }
         }
+        // COUNTRY
+        grapeList.forEach(function (place) {
+            if (place.style != null) {
+                if (place.style.country != null) {
+                    if (place.style.country.countries != null) {
+                        country = country.concat(place.style.country.countries);
+                    }
+                }
+            }
+        });
+        country = country.filter(function (val, id, array) {
+            return array.indexOf(val) == id;
+        });
+        // Create Country Score
+        var countryScore = country.map(function (country) {
+            return { country: country, score: 0 };
+        });
+        var _loop_1 = function (i) {
+            grapeList.map(function (grape) {
+                if (grape.style != null) {
+                    if (grape.style.country != null) {
+                        if (grape.style.country.production != null) {
+                            var grapeCountry = grape.style.country.production.map(function (item) {
+                                return item[0];
+                            });
+                            var grapeCountryIndex = grapeCountry.indexOf(countryScore[i].country, 0);
+                            if (grapeCountryIndex != -1) {
+                                var countryProduction = grape.style.country.production[grapeCountryIndex][1];
+                                //    alert(displayCountry.country+" "+countryProduction);
+                                //  if (grape.style.country.production[grapeCountryIndex][0] == displayCountry.country) {
+                                // alert(countryWS.country+" "+grape.varietal+" "+grape.style.country.production[countryIndex][1] / grape.production);
+                                if (countryScore[i].country == grapeCountry[grapeCountryIndex]) {
+                                    countryScore[i].score = countryScore[i].score + countryProduction / grape.production;
+                                    //       alert("Inner Loop " + countryScore[i].country + " " + countryScore[i].score)
+                                }
+                            }
+                            //    }
+                        }
+                    }
+                    // alert(grape.varietal)
+                }
+                //   alert(countryScore[i].country +" for "+grape.varietal +" "+(i+1)+" of "+countryScore.length)
+            });
+        };
+        // Score On Popularity
+        for (var i = 0; i < countryScore.length; i++) {
+            _loop_1(i);
+        }
+        //     alert('Done');
+        /*
+        let displayCountryIndex =-1;
+        countryScore.map(function (displayCountry) {
+            displayCountryIndex++;
+            grapeList.map(function (grape) {
+            //    alert(grape.varietal);
+
+                if (grape.style != null) {
+
+                    if (grape.style.country != null) {
+
+                        if (grape.style.country.production != null) {
+
+                            let grapeCountryOnly = grape.style.country.production.map(function (item) {
+                                return item[0]
+                            });
+                            let grapeCountryIndex = grapeCountryOnly.indexOf(displayCountry.country, 0);
+                            //let displayCountryIndex =
+                            let countryProduction = grape.style.country.production[grapeCountryIndex][1];
+
+                            //    alert(displayCountry.country+" "+countryProduction);
+                            //  if (grape.style.country.production[grapeCountryIndex][0] == displayCountry.country) {
+                                // alert(countryWS.country+" "+grape.varietal+" "+grape.style.country.production[countryIndex][1] / grape.production);
+                                countryScore[displayCountryIndex].score =countryScore[displayCountryIndex].score+  countryProduction / grape.production;
+                              alert("1 "+countryScore[displayCountryIndex].country + " " + countryScore[displayCountryIndex].score)
+                        //    }
+                        }
+                    }
+                }
+            })
+        });
+        */
+        // REGION
+        grapeList.forEach(function (place) {
+            if (place.style != null) {
+                if (place.style.region != null) {
+                    if (place.style.region.regions != null) {
+                        region = region.concat(place.style.region.regions);
+                    }
+                }
+            }
+        });
+        // Combine Country and Region
+        var regionList = region.map(function (region) {
+            return region[0] + ": " + region[1];
+        });
+        // Filter by unique combo
+        regionList = regionList.filter(function (val, id, array) {
+            return array.indexOf(val) == id;
+        });
+        regionList = regionList.sort();
         /*
 
         if(!climate.cold){grapeList=grapeList.filter(function (grape) {
@@ -330,11 +441,42 @@ var Grape = (function (_super) {
         // <div><p>Place:</p> <ul><li>Climate: {climate}</li><li>Country: {country}</li><li>Region: {region}</li><li>Appellation: {appellation}</li></ul></div>
         // <div><p>Climate:</p> <ul><li>Cool: {coolScore}</li><li>Intermediate: {intermediateScore}</li><li>Warm: {warmScore}</li></ul></div>
         return (React.createElement("div", null,
-            React.createElement("p", null, "Varietal:"),
-            " ",
-            React.createElement("ul", null, grapeList.map(function (grape) {
-                return React.createElement("li", null, grape.grape.varietal);
-            }))));
+            React.createElement("div", null,
+                React.createElement("p", null, "Varietal:"),
+                " ",
+                React.createElement("ul", null, grapeList.map(function (grape) {
+                    return React.createElement("li", null, grape.varietal);
+                }))),
+            React.createElement("div", null,
+                React.createElement("p", null, "Climate:"),
+                React.createElement("ul", null,
+                    React.createElement("li", null,
+                        "Hot: ",
+                        String(climate.hot)),
+                    React.createElement("li", null,
+                        "Warm: ",
+                        String(climate.warm)),
+                    React.createElement("li", null,
+                        "Medium: ",
+                        String(climate.medium)),
+                    React.createElement("li", null,
+                        "Cool: ",
+                        String(climate.cool)),
+                    React.createElement("li", null,
+                        "Cold: ",
+                        String(climate.cold)))),
+            React.createElement("div", null,
+                React.createElement("p", null, "Countries:"),
+                " ",
+                React.createElement("ul", null, countryScore.sort(function (a, b) { return b.score - a.score; }).map(function (place) {
+                    return React.createElement("li", null, String(place.country));
+                }))),
+            React.createElement("div", null,
+                React.createElement("p", null, "Regions:"),
+                " ",
+                React.createElement("ul", null, regionList.map(function (place) {
+                    return React.createElement("li", null, place);
+                })))));
     };
     Grape.prototype.componentWillReceiveProps = function (nextProps) {
         //     alert("Will Receive Props " + this.props.smellProfile.fruitFloral + " to " + nextProps.smellProfile.fruitFloral);
